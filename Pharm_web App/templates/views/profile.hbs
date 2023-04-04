@@ -1,0 +1,121 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma App User Profile</title>
+     <link rel="stylesheet" href="/css/profile/profile.css" />
+     <link rel="stylesheet" href="/css/shared/log_shared.css" />
+     <link rel="stylesheet" href="/css/shared/shared.css" />
+    <script defer src="/client-side/styles/styles.js"></script>
+    <script defer type="module" src="/client-side/user/user_shared.js"></script>
+    <script defer type="module" src="/client-side/user/profile.js"></script>
+  </head>
+  <body>
+     {{>loader}}
+    {{>log_header}}
+    <main>
+     
+       <div class="backdrop"></div>
+      <div class="container">
+        {{>profile}}
+        <div class="user__profile__page display__feature">
+          {{>site}}
+          
+          <div class="edit__profile__container">
+            <h3>Edit Profile</h3>
+            <form class="edit__form" method="post">
+            {{>notification}}
+            <div class="user__profile_img">
+            <img src="/images/avatar.png" class="profile_image" alt="user-display picture" />
+             <input
+            type="file"
+            name="avatar"
+            class="profile_image_src"
+            accept="image/x-png,image/gif,image/jpeg,image/jpg"
+          />
+          <span class="error_message"></span>
+          </div>
+            <div class="label__input">
+              <label for="title">Choose a title: </label>
+              <select name="title" class="user__title">
+                <option value="MR">MR</option>
+                <option value="MRS">MRS</option>
+                <option value="PHARM">PHARM</option>
+              </select>
+            </div>
+            <div class="user__profile__fullname">
+              <div class="user__first_name fullname__container">
+                <label for="first_name">First Name</label>
+                <input
+                  type="text"
+                  name="first_name"
+                  class="first_name_input"
+                  required
+                />
+              </div>
+              <div class="user__last_name fullname__container">
+                <label for="last_name">Last Name</label>
+                <input
+                  type="text"
+                  name="last_name"
+                  class="last_name_input"
+                  required
+                />
+              </div>
+            </div>
+            <div class="label__input">
+              <label for="email">Email</label>
+              <input type="text" name="email" class="email_input" required />
+            </div>
+            <div class="label__input">
+              <label for="username">Username</label>
+              <input
+                type="text"
+                name="username"
+                class="username_input"
+                required
+              />
+              <span class="username__check_error"></span>
+            </div>
+            <div class="label__input">
+              <label for="phone_number">Phone Number</label>
+              <input
+                type="tel"
+                name="phone_number"
+                class="phone_number_input"
+                required
+              />
+            </div>
+            <div><button id="edit__save">Save</button></div>
+          </form>
+          </div>
+          
+        </div>
+
+      </div>
+    </main>
+    {{>footer}}
+  </body>
+  {{!-- <div class="no_display">
+              <div class="label__input">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                name="password"
+                class="password_input"
+                required
+              />
+            </div>
+            <br>
+            <div class="label__input">
+              <label for="password">Retype Password</label>
+              <input
+                type="retype_password"
+                name="retype_password"
+                class="retype_password_input"
+                required
+              />
+            </div>
+            </div> --}}
+</html>

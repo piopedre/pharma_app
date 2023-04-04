@@ -1,0 +1,200 @@
+.delete__stock-container {
+  width: 100%;
+  height: 100%;
+  background-color: whitesmoke;
+}
+
+.interaction__chamber {
+  display: flex;
+  flex-direction: column-reverse;
+}
+input {
+  margin: 1rem auto;
+  width: 80%;
+  padding: 1.2rem;
+  outline: none;
+  border: 0.2px solid black;
+  border-radius: 5px;
+  text-transform: capitalize;
+  font-size: smaller;
+}
+input::placeholder {
+  font-variant: small-caps;
+}
+.filters {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 1rem 0;
+  position: relative;
+}
+.main__filters {
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 0.3rem;
+}
+select {
+  padding: 0.6rem 0;
+  margin: 0 0.2rem;
+  outline: none;
+  border-radius: 20px;
+}
+.toggle__filters {
+  padding: 0.6rem;
+  margin: 2rem 0.5rem;
+  outline: none;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+}
+
+.toggle__filters:hover ~ .hover__description {
+  display: block;
+}
+.hover__description {
+  position: absolute;
+  font-size: small;
+  top: 2px;
+  background-color: rgb(3, 75, 121);
+  color: white;
+  padding: 5px;
+  display: none;
+}
+.hover__description p {
+  margin: 0;
+}
+
+.items__body__container {
+  width: 100%;
+  background-color: rgb(245, 252, 255);
+  text-align: center;
+}
+
+.item__container {
+  display: flex;
+  justify-content: space-around;
+  margin: 2rem 0;
+  padding: 10px;
+  font-variant: small-caps;
+  font-size: small;
+  font-weight: bold;
+}
+
+.main__items {
+  overflow: auto;
+  max-height: 400px;
+  padding: 10px;
+}
+/* .drug__items::-webkit-scrollbar-thumb {
+  background: #1abcc4;
+} */
+.main__item {
+  position: relative;
+  color: rgb(0, 0, 0);
+  margin: 10px 0;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 20px 0;
+  background-color: #ededed;
+  font-size: small;
+  text-transform: uppercase;
+}
+.main__item:nth-child(odd) {
+  background-color: rgb(211, 253, 235);
+}
+.delete_item {
+  cursor: pointer;
+}
+.main__item:hover {
+  background-color: rgb(144, 255, 248);
+}
+.item_name {
+  cursor: pointer;
+  width: 70px;
+  overflow: hidden;
+}
+
+.item_name:hover .item_details {
+  display: block;
+}
+i:hover .item_details {
+  display: block;
+}
+.item_details {
+  position: absolute;
+  top: 10px;
+  background-color: rgb(239, 250, 251);
+  padding: 5px;
+  display: none;
+}
+.modal__window {
+  position: fixed;
+  max-width: 50%;
+  background-color: #f1f0f0;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  right: 20%;
+  top: 50%;
+  z-index: 5;
+  display: none;
+}
+.modal__message {
+  text-align: center;
+  width: auto;
+}
+.delete {
+  display: flex;
+  justify-content: space-evenly;
+}
+.delete button {
+  padding: 15px;
+  width: 60px;
+  color: white;
+  outline: none;
+  cursor: pointer;
+}
+.no_button {
+  background-color: rgb(255, 95, 95);
+  border: 0.2px solid red;
+}
+.no_button:active,
+.no_button:hover {
+  color: rgb(255, 95, 95);
+  background-color: white;
+}
+.yes_button {
+  background-color: rgb(95, 255, 154);
+  border: 0.2px solid green;
+}
+.yes_button:active,
+.yes_button:hover {
+  color: rgb(95, 255, 154);
+  background-color: white;
+}
+
+.main__item a:hover,
+.main__item a:active {
+  color: red;
+}
+.empty__drug__item {
+  margin: 1rem 0;
+  background-color: rgba(203, 201, 201, 0.185);
+  padding: 40px 0;
+  /* display: none; */
+  text-transform: uppercase;
+  font-size: small;
+}
+.show_filter {
+  border: 0.2px solid rgb(36, 124, 255);
+}
+.hide_filter {
+  border: 0.2px solid rgb(255, 51, 51);
+}
+.remove {
+  display: none;
+}
+@media (min-width: 40rem) {
+}

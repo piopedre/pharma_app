@@ -1,0 +1,98 @@
+main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+.signin__container {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+  display: flex;
+  flex-flow: column wrap;
+  align-items: center;
+  justify-content: center;
+}
+.signin__form {
+  color: #1abcc4;
+  min-height: 50%;
+  padding: 0.2rem 1rem;
+  background-color: #f6f6f6;
+  border-radius: 20px;
+  text-align: center;
+}
+.signin__form p {
+  margin: 0;
+  margin-top: 1rem;
+}
+.signin {
+  padding: 0.5rem;
+  margin: 0.5rem auto;
+}
+.sigin__select {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+.sigin__select select {
+  margin: 0.5rem 0;
+  padding: 0.5rem 0;
+  outline-color: #1abcc4;
+}
+.signin__input input {
+  padding: 0.5rem;
+  margin: 0.5rem 0;
+  width: 100%;
+  outline-color: #1abcc4;
+}
+.submit {
+  margin-top: 0.2rem;
+  background-color: #63ccf9;
+  padding: 0.5rem;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  min-width: 10rem;
+  color: white;
+}
+.submit:active,
+.submit:hover {
+  color: white;
+  background-color: rgb(86, 239, 86);
+}
+.register__link {
+  text-decoration: none;
+  color: inherit;
+}
+.register__link span {
+  color: #1abcc4;
+  text-decoration: none;
+}
+.register__link span:hover,
+.register__link span:active {
+  color: #2102e7;
+  text-decoration: underline;
+}
+/* .error_label {
+  text-transform: capitalize;
+  text-align: center;
+  background-color: #f6f6f6;
+  transform: translate(0);
+  animation: error_label 3s ease-in-out;
+  color: rgb(255, 99, 99);
+}
+
+@keyframes error_label {
+  0% {
+    transform: translate(10px, 0);
+    opacity: 0.3;
+  }
+  50% {
+    transform: translate(0, 0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(0, 0);
+    opacity: 1;
+  }
+} */

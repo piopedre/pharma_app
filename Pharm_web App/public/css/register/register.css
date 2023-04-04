@@ -1,0 +1,125 @@
+* {
+  box-sizing: border-box;
+  font-family: "Gill Sans", "Gill Sans MT", Calibri, "Trebuchet MS", sans-serif,
+    sans-serif;
+}
+
+main {
+  min-height: 700px;
+  margin: 2rem 0;
+}
+
+/* register  */
+#register__form input {
+  font-family: "Comic Neue", cursive;
+}
+
+.register__notification {
+  flex-direction: column;
+  margin: auto;
+  display: none;
+  width: 80vw;
+  text-align: center;
+  background-color: #5dffa6;
+  padding: 10px;
+  box-shadow: 2px 2px 2px 2px rgba(36, 36, 36, 0.5);
+}
+
+.notification__sign a {
+  text-decoration: none;
+  color: white;
+}
+.notification__sign a:hover {
+  color: blueviolet;
+  text-decoration: underline;
+}
+.tele_error__label {
+  display: block;
+  margin-top: 0.4rem;
+}
+
+/* styling for the homepage form */
+.signup__container {
+  display: flex;
+  flex-direction: column;
+  align-content: center;
+  align-items: center;
+}
+#signup__form {
+  background-color: #f6f6f6;
+  width: 100%;
+  height: 80%;
+  padding: 1.2rem;
+  margin-bottom: 1rem;
+  min-width: 20rem;
+  max-width: 28rem;
+  text-align: center;
+  border-radius: 30px;
+}
+#signup__form h4 a {
+  text-decoration: none;
+  color: #63ccf9;
+}
+#signup__form h4 a:hover,
+#signup__form h4 a:active {
+  text-decoration: underline;
+  color: rgb(18, 18, 210);
+}
+label[for="title"] {
+  width: auto;
+  margin: 0.7rem 0;
+  text-transform: capitalize;
+}
+#admin__title {
+  width: auto;
+  outline: none;
+  padding: 10px;
+}
+.signup-form__input {
+  margin: 1rem 0;
+}
+.signup-form__input input {
+  width: 100%;
+  padding: 15px;
+  text-align: start;
+  border: none;
+  outline-color: #63ccf9;
+}
+
+.signup-form__submit input {
+  text-align: center;
+  color: #63ccf9;
+}
+.signup-form__submit input:hover {
+  background-color: #63ccf9;
+  color: white;
+}
+#submit {
+  margin: 30px 0;
+}
+
+.signup-form__select {
+  display: flex;
+}
+.signup-form__select label {
+  width: 100%;
+}
+#admin__title {
+  width: 100%;
+}
+.info {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+}
+input[type="submit"] {
+  cursor: pointer;
+}
+input:disabled {
+  cursor: not-allowed;
+  background-color: grey;
+  color: white;
+}
+input:disabled:hover {
+  background-color: grey;
+}

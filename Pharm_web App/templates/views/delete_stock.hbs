@@ -1,0 +1,93 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma App</title>
+    
+     <link rel="stylesheet" href="/css/inventory/delete_stock.css" /> 
+     <link rel="stylesheet" href="/css/shared/log_shared.css" />
+     <link rel="stylesheet" href="/css/shared/shared.css" />
+    <script defer src="/client-side/styles/styles.js"></script>
+    <script defer type="module" src="/client-side/user/user_shared.js"></script>
+    <script defer type="module" src="/client-side/user/delete_stock.js"></script>
+  </head>
+  <body>
+    {{>log_header}}
+    
+    <main>
+      {{>notification}}
+      <div class="backdrop"></div>
+      
+      <div class="container">
+        {{>profile}}
+        <div class="delete__stock-container">
+          {{>site}}
+          <div class="modal__window">
+        <div class="modal__message">
+          <p>Do you want to delete the drug permanently?</p>
+        </div>
+            <div class="delete">
+              <span class="delete__drug remove"></span>
+              <button class="no_button">No</button>
+              <button class="yes_button">Yes</button>
+            </div>
+          </div>
+            <div class="interaction__chamber">
+                <input type="search" name="name" id="search" placeholder="item name">
+                <div class="filters">
+                    <div>
+                        <button class="toggle__filters show_filter">
+                        Show Filters
+                        </button>
+                          <div class="hover__description">
+                        <p>Show Filters</p>
+                        </div>
+                    </div>
+                    <div class="main__filters remove">
+                        <div>
+                            <select name="location" id="location">
+                            <option value="">Class</option>
+                            <option value="uselu">Uselu</option>
+                            <option value="idu">Idunmwonwina</option>
+                        </select>
+                        </div>
+                        <div>
+                            
+                            <select name="pharmacy_unit" id="pharmacy_unit">
+                                <option value="">Dosage Type</option>
+                                <option value="opd-pharmacy">opd-pharmacy</option>
+                                <option value="inpatient-pharmacy">inpatient-pharmacy</option>
+                                <option value="gms-pharmacy">gms-pharmacy</option>
+                                <option value="ward-pharmacy">ward-pharmacy</option>
+                            </select>
+                        </div>
+                    </div>
+                  
+                </div>
+                 
+                
+            </div>
+            <div class="drugs__body__container">
+                <div class="drug_elements">
+                    <div class="items__body__container">
+                        <div class=" item__container drug__headings">
+                              <div class="item__heading"> Item Name</div>
+                              <div class="item__heading"> Qty</div>
+                              <div class="item__heading"> Price</div>
+                              <div class="item__heading">Expiry Date</div>
+                            <span></span>
+                        </div>
+                        <div class="main__items">
+                             
+                        </div>
+                    </div>
+                </div>
+                        
+                    </div>
+        </div>
+        </div>
+    </main>
+     {{>footer}}
+  </body>
+</html>

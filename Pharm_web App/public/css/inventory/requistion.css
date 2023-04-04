@@ -1,0 +1,215 @@
+main {
+  background-color: #eeeeeefc;
+}
+.requistion_details {
+  width: 100%;
+  height: 100%;
+  text-align: center;
+}
+.requistion_template {
+  height: 70%;
+  display: grid;
+  place-items: center;
+}
+.requistion__container {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+.search__container {
+  margin: 1rem;
+  width: 80%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: relative;
+}
+.requistion_search {
+  padding: 1rem;
+  margin: 2rem 0;
+  width: 80%;
+  outline: none;
+  border: none;
+  border-radius: 3px;
+  text-transform: uppercase;
+}
+.requistion_search::placeholder {
+  text-transform: lowercase;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.search__render_tab {
+  position: absolute;
+  max-height: 200px;
+  background-color: white;
+  width: 100%;
+  top: 95px;
+  overflow: auto;
+  /* display: none; */
+}
+.drug__item {
+  position: relative;
+  display: flex;
+  justify-content: space-evenly;
+  padding: 2.5rem 0.5rem;
+  margin: 0.3rem;
+  background-color: #f3f8fb;
+  font-size: small;
+  font-weight: bold;
+}
+.drug__item:hover {
+  background-color: rgb(232, 250, 255);
+}
+.drug__name {
+  width: 150px;
+  overflow: auto;
+}
+.detail {
+  position: absolute;
+  top: 3%;
+  padding: 2px;
+  margin-left: 0.3rem;
+  display: none;
+  color: rgb(105, 105, 105);
+}
+.drug_details {
+  overflow: hidden;
+}
+.element {
+  cursor: pointer;
+}
+.add_element {
+  cursor: pointer;
+}
+.element:hover ~ .detail {
+  display: block;
+}
+.add_element:hover ~ .detail {
+  display: block;
+}
+.render__requistion {
+  text-align: center;
+  color: black;
+  width: 100%;
+}
+.requistion_headings {
+  min-width: 500px;
+  display: grid;
+  grid-template-columns: 1fr 60px 100px 70px 100px 20px;
+  place-items: center;
+  column-gap: 10px;
+  border-top: 0.2px solid black;
+  border-bottom: 0.2px solid black;
+  padding: 20px;
+  font-size: small;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+
+.requistion_item {
+  min-width: 500px;
+  margin: 0.3rem 0;
+  display: grid;
+  grid-template-columns: 1fr 60px 100px 70px 100px 20px;
+  place-items: center;
+  padding: 20px;
+  background-color: white;
+  border-radius: 5px;
+  color: #0099ff;
+  column-gap: 10px;
+  font-size: small;
+  font-weight: bold;
+}
+.requistion_item:nth-child(odd) {
+  background-color: rgb(232, 250, 255);
+}
+.requistion_item input {
+  width: 100%;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  font-weight: bold;
+  text-align: center;
+  color: #0099ff;
+  font-family: "Comic Neue", cursive;
+}
+.requistion_item input:disabled {
+  color: black;
+}
+.requistion__information {
+  width: 100%;
+  height: 60px;
+  display: flex;
+  flex-direction: column;
+  background-color: aliceblue;
+  justify-content: space-between;
+}
+.requistion_info {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  justify-items: end;
+  font-variant: small-caps;
+  font-size: small;
+  font-weight: bold;
+}
+.requistion_body {
+  height: 320px;
+  overflow: auto;
+  background-color: rgba(255, 255, 255, 0.5);
+}
+.delete_item {
+  cursor: pointer;
+}
+.requistion_interaction {
+  display: flex;
+  justify-content: flex-end;
+  height: 70px;
+  width: 100%;
+  padding: 1rem 0;
+  /* background-color: #dddddd; */
+}
+.requistion_interaction button {
+  padding: 10px 15px;
+  margin: 0 1.2rem;
+  box-shadow: 2px 2px 2px 2px rgba(0, 0, 0, 0.5);
+  cursor: pointer;
+  outline: none;
+  border: 0.2px solid white;
+  border-radius: 5px;
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.requistion_interaction button:hover,
+.requistion_interaction button:active {
+  box-shadow: none;
+}
+.empty_requistion {
+  background-color: rgba(255, 255, 255, 0.5);
+  padding: 2rem;
+  display: none;
+  font-size: small;
+  font-weight: bold;
+}
+.empty_requistion p {
+  text-transform: uppercase;
+}
+.send_requistion {
+  background-color: white;
+  color: rgb(57, 255, 57);
+}
+.send_requistion:hover,
+.send_requistion:active {
+  background-color: rgb(57, 255, 57);
+  color: white;
+}
+.hold_requistion {
+  background-color: white;
+  color: rgb(45, 143, 255);
+}
+.hold_requistion:hover,
+.hold_requistion:active {
+  background-color: rgb(45, 143, 255);
+  color: white;
+}

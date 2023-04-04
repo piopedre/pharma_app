@@ -1,0 +1,175 @@
+.edit__stock__container {
+  width: 100%;
+  height: 100%;
+  /* padding: 0.6rem; */
+  text-align: center;
+  position: relative;
+  background-color: #e9f8f9;
+  min-height: 500px;
+}
+#edited__drug {
+  border: none;
+  border-radius: 0;
+  border-bottom: 0.1px solid grey;
+  margin-top: 1rem;
+  background-color: transparent;
+}
+.data__information {
+  width: 100%;
+  padding: 5px;
+  margin-top: 0.2rem;
+}
+.drug_render {
+  margin-top: 4rem;
+  font-size: small;
+}
+.drug_render_headings {
+  display: grid;
+  grid-template-columns: 1fr 100px 88px;
+  gap: 12px;
+  margin: 1rem 0;
+  padding: 0.3rem;
+  border-bottom: 0.2px solid black;
+  font-weight: bold;
+  font-variant: small-caps;
+}
+.drug_render_list {
+  height: 400px;
+  overflow: auto;
+}
+.drug_render_item {
+  display: grid;
+  grid-template-columns: 1fr 90px 88px;
+  gap: 12px;
+  place-items: center;
+  background-color: #f1f2f2;
+  margin-bottom: 0.4rem;
+  padding: 1rem;
+  cursor: pointer;
+  transform: translateY(0);
+  animation: slide-down 2s ease;
+}
+.drug_render_item:nth-child(odd) {
+  background-color: #216ef93b;
+}
+.drug_render_item:hover,
+.drug_render_item:active {
+  background-color: aquamarine;
+  box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.5);
+}
+@keyframes slide-down {
+  0% {
+    transform: translateY(-20px);
+  }
+  100% {
+    transform: translateY(0px);
+  }
+}
+.search__data input {
+  border: 0.1px solid black;
+  border-radius: 5px;
+  text-transform: capitalize;
+  padding: 0.8rem;
+  width: 90%;
+  outline: none;
+}
+
+/* edit form */
+.edit__form {
+  top: 5%;
+  width: 100%;
+  height: 90%;
+  position: absolute;
+  background-color: #eeeeee;
+  padding: 10px;
+  border-radius: 20px;
+  z-index: 2;
+}
+/* edit form components */
+.item_title {
+  text-transform: uppercase;
+}
+
+.item__information {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  column-gap: 10px;
+  height: 6%;
+  margin: 0.5rem 0;
+}
+.item__information label {
+  text-transform: uppercase;
+  color: #000000;
+  text-align: left;
+  font-size: small;
+  font-weight: bold;
+}
+
+.item__information select,
+input {
+  width: 100%;
+  border: none;
+  text-align: center;
+  color: black;
+  border: 0.1px solid grey;
+  outline-color: rgb(0, 128, 255);
+}
+.item_detail {
+  margin: 2rem 0;
+  display: grid;
+  row-gap: 10px;
+  font-weight: bold;
+}
+.item_detail input {
+  height: 40px;
+}
+
+.item_details {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  column-gap: 10px;
+  align-items: start;
+}
+.interaction_container {
+  margin: 1rem 0;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  place-items: center;
+}
+.interaction_container button {
+  width: 60%;
+  color: white;
+  height: 40px;
+  outline: none;
+  border: none;
+  border-radius: 15px;
+  cursor: pointer;
+}
+.cancel_button {
+  background-color: rgb(255, 51, 51);
+}
+.cancel_button:hover,
+.cancel_button:active {
+  background-color: white;
+  color: rgb(255, 51, 51);
+}
+.edit_button {
+  background-color: #3ff78f;
+}
+.edit_button:disabled {
+  background-color: grey;
+}
+.edit_button:disabled:hover {
+  background-color: grey;
+  color: white;
+  cursor: not-allowed;
+}
+.edit_button:hover,
+.edit_button:active {
+  background-color: white;
+  color: #3ff78f;
+}
+
+.edited {
+  border: 1px solid#3ff78f;
+}

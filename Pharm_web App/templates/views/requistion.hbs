@@ -1,0 +1,88 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma App</title>
+    <link rel="stylesheet" href="/css/inventory/requistion.css" />
+    <link rel="stylesheet" href="/css/shared/log_shared.css" /> 
+    <link rel="stylesheet" href="/css/shared/shared.css" />
+    {{!-- <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.2.1/css/all.min.css"
+      integrity="sha512-MV7K8+y+gLIBoVD59lQIYicR65iaqukzvf/nwasF0nqhPay5w/9lJmVM2hMDcnK1OnMGCdVK+iQrJ7lzPJQd1w=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    /> --}}
+    <script defer src="/client-side/styles/styles.js"></script>
+    <script defer type="module" src="/client-side/user/user_shared.js"></script>
+     <script defer type="module" src="/client-side/user/requistion.js"></script> 
+  </head>
+  <body>
+    {{>log_header}}
+    <main>
+      <div class="backdrop"></div>
+
+      <div class="container">
+        {{>profile}}
+        
+        <div class="requistion__container">
+          {{>site}}
+          {{>notification}}
+          <div class="search__container">
+            <input type="search" class="requistion_search" placeholder="Search Item Name">
+            <div class="search__render_tab">
+              <div class="drug__items">
+               
+                
+              </div>
+            </div>
+          </div>
+           <div class="render__requistion">
+            <p>REQUISTION</p>
+           
+            <div class="requistion_headings">
+               
+              <div class="drug_details">Item Name</div>
+              <div class="unit_stock-level">On Hand Qty</div>
+              <div class="unit_stock-wanted">Qty</div>
+              <div class="unit_price">Price</div>
+              <div class="quantity_price">Ext Price</div>
+              <div class="empty_delete"></div>
+            </div>
+            <div class="requistion_body">
+             
+              <div class="empty_requistion">
+                <p> + Add Drug To Requistion</p>
+              </div>
+            </div>
+            <div class="requistion__information">
+              <div class="requistion_info">
+                <div>No of Items Requisted</div>
+                <div class="qty_requisted">0</div>
+              </div>
+              <div class="requistion_info">
+                <div>Total Qty Sold</div>
+                <div class="qty_sold">0</div>
+              </div>
+              <div class="requistion_info">
+                <div>Total</div>
+                <div class="qty_total">0</div>
+              </div>
+              {{!-- number of items in requistion
+              total price of requistion
+              Total
+               --}}
+            </div>
+            <div class="requistion_interaction">
+              <button class="hold_requistion">Held Requistions</button>
+              <button class="send_requistion">Send</button>
+            </div>
+          </div>
+        </div>
+       
+      </div>
+    </main>
+    {{>footer}}
+  </body>
+</html>
