@@ -1,22 +1,18 @@
 const express = require("express");
 const router = new express.Router();
 const authenication = require("../authenication/authenication");
-const Drug = require("../models/drug");
+const Product = require("../models/product");
 
-router.post("/drugs/add_drug", authenication, async (req, res) => {
+router.post("/products/add_product", authenication, async (req, res) => {
   try {
-    const verifyDrug = await Drug.verifyDrug(req.body);
-    // check if drug exists first
-    if (verifyDrug) {
-      const drug = new Drug(req.body);
-      await drug.save();
-      res.status(201).send("Drug Added");
-    }
+    const product = new Product(req.body);
+    await product.save();
+    res.status(201).send("Product Added");
   } catch (e) {
     res.status(400).send(e.message);
   }
 });
-router.get("/drugs/search", authenication, async (req, res) => {
+router.get("/products/search", authenication, async (req, res) => {
   const search = req.query;
   const keys = Object.keys(search);
   if (keys.length > 0) {
@@ -27,29 +23,29 @@ router.get("/drugs/search", authenication, async (req, res) => {
     });
   }
   try {
-    const drug = await Drug.find(search);
+    const product = await Product.find(search);
 
-    if (!drug.length) {
+    if (!product.length) {
       return res.status(404).send();
     }
-    res.status(200).send(drug);
+    res.status(200).send(product);
   } catch (e) {
     res.status(400).send("Error processing request");
   }
 });
-router.get("/drugs/:id", authenication, async (req, res) => {
+router.get("/products/:id", authenication, async (req, res) => {
   const _id = req.params.id;
   try {
-    const drug = await Drug.findById(_id);
-    if (!drug) {
+    const product = await Product.findById(_id);
+    if (!product) {
       return res.status(404).send();
     }
-    res.status(200).send(drug);
+    res.status(200).send(product);
   } catch (e) {
     res.status(400).send();
   }
 });
-router.patch("/drugs/:id", authenication, async (req, res) => {
+router.patch("/products/:id", authenication, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "drug_type",
@@ -66,26 +62,26 @@ router.patch("/drugs/:id", authenication, async (req, res) => {
   }
   const _id = req.params.id;
   try {
-    const drug = await Drug.findById(_id);
-    if (!drug) {
+    const product = await Product.findById(_id);
+    if (!product) {
       return res.status(404).send();
     }
-    updates.forEach((update) => (drug[update] = req.body[update]));
-    await drug.save();
-    res.status(200).send(drug.toEDIT());
+    updates.forEach((update) => (product[update] = req.body[update]));
+    await product.save();
+    res.status(200).send(product.toEDIT());
   } catch (e) {
-    res.status(400).send("Error adding a drug");
+    res.status(400).send("Error adding a product");
   }
 });
-router.delete("/drugs/:id", authenication, async (req, res) => {
+router.delete("/products/:id", authenication, async (req, res) => {
   const _id = req.params.id;
 
   try {
-    const drug = await Drug.findById(_id);
-    if (!drug) {
-      return res.status(404).send("drug not found");
+    const product = await Product.findById(_id);
+    if (!product) {
+      return res.status(404).send("product not found");
     }
-    drug.remove();
+    product.remove();
     res.status(200).send();
   } catch (e) {
     res.status(500).send(e);

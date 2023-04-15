@@ -117,8 +117,8 @@ button[aria-pressed="true"] span:nth-child(3) {
   display: none;
   position: fixed;
   background-color: rgba(255, 255, 255, 0.274);
-  min-width: 40vw;
-  top: 49px;
+  min-width: 50vw;
+  top: 7%;
   border: 1px solid rgba(255, 255, 255, 0.274);
   z-index: 3;
 }
@@ -131,14 +131,41 @@ button[aria-pressed="true"] span:nth-child(3) {
 .nav__toggle-item {
   background-color: rgb(2, 34, 49);
   border: 1px solid white;
+  /* margin: 20px; */
   padding: 20px;
 }
 .toggle__nav-link {
   text-decoration: none;
   color: #1abcc4;
+  cursor: pointer;
+  /* padding: 20px; */
 }
 .toggle__nav-link:hover {
   color: rgb(105, 53, 152);
+}
+/* navbar features */
+.features__items {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  display: none;
+  transform: translateY(0);
+  animation: slidedown 600ms ease-in;
+}
+@keyframes slidedown {
+  from {
+    transform: translateY(-10px);
+  }
+  to {
+    transform: translateY(0);
+  }
+}
+.features__items .features__item a {
+  text-decoration: none;
+  color: grey;
+}
+.features__items .features__item a:hover {
+  color: #b4b4b4;
 }
 /* backdrop */
 .backdrop {

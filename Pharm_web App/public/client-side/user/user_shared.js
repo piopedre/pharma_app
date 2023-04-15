@@ -1,96 +1,120 @@
 import { getProfile, ResponseError } from "../utils/utils.js";
 // USER VERIFICATION
-const $profileName = document.querySelector(".user__profile-name");
-const $profileNumber = document.querySelector(".user__profile-number");
-const $featuresLinks = document.querySelectorAll(".features-link");
-const $displayName = document.querySelector(".user__display_name");
-const $navLinks = document.querySelectorAll(".nav-link");
-const $displayPicture = document.querySelector(
-  ".dashboard__profile_display img"
-);
-const $siteLocation = document.querySelector(".site_location");
-const $siteUnit = document.querySelector(".site_unit");
-const $date = document.querySelector(".date");
-const $time = document.querySelector(".time");
-// const $featuresLinks = document.querySelectorAll(".features-link");
-window.addEventListener("DOMContentLoaded", async () => {
-  if (!sessionStorage.getItem("id") || !sessionStorage.getItem("token")) {
-    // back to login page
-    location.replace("/pharma_app/login");
-    return;
-  }
-  //////////////////////////
-  const token = JSON.parse(sessionStorage.getItem("token"));
-  const id = JSON.parse(sessionStorage.getItem("id"));
-  const options = {
-    hour: "numeric",
-    minute: "numeric",
-  };
+(function () {
+  const $profileName = document.querySelector(".user__profile-name");
+  const $profileNumber = document.querySelector(".user__profile-number");
+  const $featuresLinks = document.querySelectorAll(".features-link");
+  const $toggleFeaturesLinks = document.querySelectorAll(
+    ".toggle__features-link"
+  );
+  const $displayName = document.querySelector(".user__display_name");
+  const $navLinks = document.querySelectorAll(".nav-link");
+  const $displayPicture = document.querySelector(
+    ".dashboard__profile_display img"
+  );
+  const $siteLocation = document.querySelector(".site_location");
+  const $siteUnit = document.querySelector(".site_unit");
+  const $date = document.querySelector(".date");
+  const $time = document.querySelector(".time");
+  const $toggleLinks = document.querySelectorAll(".toggle__nav-link");
+  window.addEventListener("DOMContentLoaded", async () => {
+    if (!sessionStorage.getItem("id") || !sessionStorage.getItem("token")) {
+      // back to login page
+      location.replace("/pharma_app/login");
+      return;
+    }
+    //////////////////////////
+    const token = JSON.parse(sessionStorage.getItem("token"));
+    const id = JSON.parse(sessionStorage.getItem("id"));
+    const options = {
+      hour: "numeric",
+      minute: "numeric",
+    };
 
-  const $location = JSON.parse(
-    sessionStorage.getItem("location")
-  ).toUpperCase();
-  const unit = JSON.parse(sessionStorage.getItem("unit")).toUpperCase();
-  try {
-    const response = await getProfile(token);
-    if (!response.ok) {
-      throw new ResponseError("Bad Fetch Response", response);
-    }
-    const result = await response.json();
-    const { title, first_name, last_name, phone_number, _id } = result;
-    $profileName.textContent = `${title} ${last_name}`;
-    $profileNumber.textContent = phone_number;
-    $siteLocation.textContent = $location;
-    $siteUnit.textContent = `${unit.toUpperCase()}`;
-    const date = Intl.DateTimeFormat("en-GB")
-      .format(new Date())
-      .replaceAll("/", "-");
-    $date.textContent = date;
-    setInterval(() => {
-      const timeFrame = Intl.DateTimeFormat("en-GB", options).format(
-        new Date()
-      );
-      $time.textContent = timeFrame;
-    });
-    if ($displayName) {
-      $displayName.textContent = `Hi ${first_name}`;
-    }
-    const pictureResponse = await fetch(`/admins/${_id}/avatar`);
-    if (pictureResponse.ok) {
-      $displayPicture.src = `/admins/${_id}/avatar`;
-    } else {
-      $displayPicture.src = `/images/avatar.png`;
-    }
-  } catch (err) {
-    switch (err?.response?.status) {
-      case 400:
-        location.replace("/pharma_app/login");
-        break;
-      case 401:
-        location.replace("/pharma_app/login");
-        break;
-      case 500:
-        location.replace("/pharma_app/login");
-        break;
-    }
-  }
-});
-// functions
-const profile = async () => {};
-profile();
-const profileLinks = (e) => {
-  const parent = e.target.closest("div");
-  const feature = parent.querySelector(".features__items");
-  $featuresLinks.forEach((link) => {
-    const mainParent = link.closest("div");
-    if (parent !== mainParent) {
-      if (
-        mainParent.querySelector(".features__items").classList.contains("show")
-      ) {
-        mainParent.querySelector(".features__items").classList.remove("show");
+    const $location = JSON.parse(
+      sessionStorage.getItem("location")
+    ).toUpperCase();
+    const unit = JSON.parse(sessionStorage.getItem("unit")).toUpperCase();
+    try {
+      const response = await getProfile(token);
+      if (!response.ok) {
+        throw new ResponseError("Bad Fetch Response", response);
+      }
+      const result = await response.json();
+      const { title, first_name, last_name, phone_number, _id } = result;
+      $profileName.textContent = `${title} ${last_name}`;
+      $profileNumber.textContent = phone_number;
+      $siteLocation.textContent = $location;
+      $siteUnit.textContent = `${unit.toUpperCase()}`;
+      const date = Intl.DateTimeFormat("en-GB")
+        .format(new Date())
+        .replaceAll("/", "-");
+      $date.textContent = date;
+      setInterval(() => {
+        const timeFrame = Intl.DateTimeFormat("en-GB", options).format(
+          new Date()
+        );
+        $time.textContent = timeFrame;
+      });
+      if ($displayName) {
+        $displayName.textContent = `Hi ${first_name}`;
+      }
+      const pictureResponse = await fetch(`/admins/${_id}/avatar`);
+      if (pictureResponse.ok) {
+        $displayPicture.src = `/admins/${_id}/avatar`;
+      } else {
+        $displayPicture.src = `/images/avatar.png`;
+      }
+    } catch (err) {
+      switch (err?.response?.status) {
+        case 400:
+          location.replace("/pharma_app/login");
+          break;
+        case 401:
+          location.replace("/pharma_app/login");
+          break;
+        case 500:
+          location.replace("/pharma_app/login");
+          break;
       }
     }
   });
-  feature?.classList.toggle("show");
-};
-$navLinks.forEach((link) => link.addEventListener("click", profileLinks));
+  // functions
+  const profileLinks = (e) => {
+    const parent = e.target.closest("div");
+    const feature = parent.querySelector(".features__items");
+    $featuresLinks?.forEach((link) => {
+      const mainParent = link.closest("div");
+      if (parent !== mainParent) {
+        if (
+          mainParent
+            .querySelector(".features__items")
+            .classList.contains("show")
+        ) {
+          mainParent.querySelector(".features__items").classList.remove("show");
+        }
+      }
+    });
+    feature?.classList.toggle("show");
+  };
+  const toggleLinks = (e) => {
+    const parent = e.target.closest("div");
+    const feature = parent.querySelector(".features__items");
+    $toggleFeaturesLinks?.forEach((link) => {
+      const mainParent = link.closest("div");
+      if (parent !== mainParent) {
+        if (
+          mainParent
+            .querySelector(".features__items")
+            .classList.contains("show")
+        ) {
+          mainParent.querySelector(".features__items").classList.remove("show");
+        }
+      }
+      return;
+    });
+    feature?.classList.toggle("show");
+  };
+  $navLinks?.forEach((link) => link.addEventListener("click", profileLinks));
+  $toggleLinks?.forEach((link) => link.addEventListener("click", toggleLinks));
+})();

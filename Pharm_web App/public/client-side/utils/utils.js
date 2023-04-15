@@ -63,7 +63,7 @@ async function updateAvatar(token, data) {
 //////////////////////////
 ///DRUGS///
 async function addDrug(token, data) {
-  const response = await fetch("/drugs/add_drug", {
+  const response = await fetch("/products/add_product", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -79,7 +79,7 @@ async function getAllDrugs(
   pharmacyUnit = undefined
 ) {
   const response = await fetch(
-    `/drugs/search?location=${location}&pharmacy_unit=${pharmacyUnit}`,
+    `/products/search?location=${location}&pharmacy_unit=${pharmacyUnit}`,
     {
       method: "GET",
       headers: {
@@ -92,7 +92,7 @@ async function getAllDrugs(
 }
 
 async function getDrugById(token, id) {
-  const response = await fetch(`/drugs/${id}`, {
+  const response = await fetch(`/products/${id}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -104,7 +104,7 @@ async function getDrugById(token, id) {
 }
 
 async function editDrugById(token, id, body) {
-  const response = await fetch(`/drugs/${id}`, {
+  const response = await fetch(`/products/${id}`, {
     method: "PATCH",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -115,7 +115,7 @@ async function editDrugById(token, id, body) {
   return response;
 }
 async function deleteDrugById(token, id) {
-  const response = await fetch(`/drugs/${id}`, {
+  const response = await fetch(`/products/${id}`, {
     method: "DELETE",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -138,6 +138,18 @@ async function requiste(token, body) {
   });
   return response;
 }
+///////////////////
+// Product Category
+async function categoryAdd(body) {
+  const response = await fetch("/product/new_category", {
+    method: "POST",
+    headers: {
+      "Content-type": "application/json",
+    },
+    body,
+  });
+  return response;
+}
 export {
   registerUser,
   loginUser,
@@ -151,4 +163,5 @@ export {
   updateAvatar,
   ResponseError,
   updateUser,
+  categoryAdd,
 };

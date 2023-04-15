@@ -6,8 +6,9 @@ const app = express();
 const port = process.env.PORT;
 const adminRouter = require("./routers/admin");
 const clientServer = require("../public/app");
-const drugServer = require("./routers/drug");
+const productServer = require("./routers/product");
 const requistionServer = require("./routers/requistion");
+const productCategoryServer = require("./routers/productCategory");
 // define paths
 const publicDir = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -24,8 +25,9 @@ app.use(
 app.use(express.json());
 app.use(adminRouter);
 app.use(clientServer);
-app.use(drugServer);
+app.use(productServer);
 app.use(requistionServer);
+app.use(productCategoryServer);
 app.use(express.static(publicDir));
 
 app.listen(port, () => {

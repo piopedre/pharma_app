@@ -1,11 +1,10 @@
 const express = require("express");
 const router = new express.Router();
+const axios = require("axios");
 router.get("/pharma_app/register", (req, res) => {
   res.render("register");
 });
-// router.post("/pharma_app/admin/register", async (req, res) => {
-//   res.send("notification");
-// });
+
 router.get("/pharma_app/login", async (req, res) => {
   res.render("login");
 });
@@ -19,8 +18,20 @@ router.get("/pharma_app/profile", (req, res) => {
 router.get("/pharma_app/prescription_validation", (req, res) => {
   res.render("prescriptionValidation");
 });
-router.get("/pharma_app/add_stock", (req, res) => {
-  res.render("add_stock");
+router.get("/pharma_app/add_stock", async (req, res) => {
+  let categories;
+  try {
+    const request = await axios.get("http://localhost:3000/product/categories");
+    if (!request.ok) {
+      categories = [];
+    }
+    categories = request.data;
+  } catch (error) {
+    if (!error.statusCode === 200) {
+      res.render("add_stock", { categories });
+    }
+  }
+  res.render("add_stock", { categories });
 });
 router.get("/pharma_app/edit_stock", (req, res) => {
   res.render("edit_stock");

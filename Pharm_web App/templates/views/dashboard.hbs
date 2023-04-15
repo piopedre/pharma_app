@@ -12,8 +12,42 @@
     <script defer type="module" src="/client-side/user/user_shared.js"></script>
   </head>
   <body>
+    <div class="backdrop"></div>
     <header>
-      <div class="toggle__navbar">
+      {{>log_header}}
+      
+    </header>
+    <main>
+      
+      <div class="container">
+        {{>profile}}
+
+        <div class="homepage__features container__item">
+          {{>site}}
+          <div class="overview__container">
+            <h2 class="features__overview">Overview</h2>
+            <h4 class="user__display_name">
+            </h4>
+          </div>
+
+          <div class="sales__display_dashboard dashboard__inputs">
+            <div class="user__drug-sales">
+
+            </div>
+          </div>
+
+          <div class="drug__notice-display dashboard__inputs">
+          </div>
+          <div class="patient__activity-display dashboard__inputs">
+
+          </div>
+
+        </div>
+      </div>
+    </main>
+ {{>footer}}
+  </body>
+  {{!-- <div class="toggle__navbar">
         <ul class="nav__toggle-items">
           <li class="nav__toggle-item">
             <a href="/pharma_app/admin/register" class="toggle__nav-link">
@@ -126,35 +160,6 @@
 
         </ul>
       </nav>
-    </header>
-    <main>
-      <div class="backdrop"></div>
-      <div class="container">
-        {{>profile}}
+       --}}
 
-        <div class="homepage__features container__item">
-          {{>site}}
-          <div class="overview__container">
-            <h2 class="features__overview">Overview</h2>
-            <h4 class="user__display_name">
-            </h4>
-          </div>
-
-          <div class="sales__display_dashboard dashboard__inputs">
-            <div class="user__drug-sales">
-
-            </div>
-          </div>
-
-          <div class="drug__notice-display dashboard__inputs">
-          </div>
-          <div class="patient__activity-display dashboard__inputs">
-
-          </div>
-
-        </div>
-      </div>
-    </main>
- {{>footer}}
-  </body>
 </html>

@@ -13,74 +13,88 @@
     <script defer type="module" src="/client-side/user/add_stock.js"></script>
   </head>
   <body>
+      <div class="backdrop"></div>
     {{>log_header}}
     {{>loader}}
     <main>
-      <div class="backdrop"></div>
+    
       <div class="container">
         {{>notification}}
         {{>profile}}
        
         <div class="stock__inventory__container">
              {{>site}}
-            <form id="add_new_stock" method="post">
-              <div class="drug__form__title">
-                <p>Provide the new drug information</p>
+              <div class=" no_display new_category">
+                <div class="category_ctn">
+                  <label for="new_category">New Category :</label>
+                  <input type="text" class="category">
+                  <button class="remove_category">X</button>
+                  <button class="category_added">Add category</button>
+                </div>
               </div>
-              
+          <form id="add_new_stock" method="post">
+           
                 
-            <div class="main_drug__components">
-              <div class="stock__drug">
-                <label for="dosage_type">DRUG TYPE</label>
-               <select name="drug_type" required>
-                <option value="Tablet">Tablet</option>
-                <option value="Capsule">Capsule</option>
-                <option value="Suspension">Suspension</option>
-                <option value="Syrup">Syrups</option>
-                <option value="Injectable">Injection</option>
-                <option value="Consumable">Consumable</option>
+            <div class="product_information">
+              <div class="drug__form__title">
+                <p>Provide the new product information</p>
+              </div>
+                <p class="product_title">Product Information</p>
+
+                
+              <div class="product_name">
+                   <label for="product_name">Name:</label>
+                   <div class="product">
+                    <input type="text" name="product_name" placeholder="Product Name" required>
+                    <span class="product_example">E.g Tab Haloperidol 2mg </span>
+                   </div>    
+              </div>
+               <div class="product_categories">
+                <label for="product_category">Product Category:</label>
+                
+               <select name="product_category">
+                  {{#each categories}}
+                <option value="{{category}}">{{category}}</option>
+                  {{else}}
+                      <option value="none" >There is no Category</option> 
+                  {{/each}}   
                </select>
-              </div>
-            <div class="main__drug">
-              <div class="stock__drug">
-                <label for="brand"> NAME </label>
-                <input type="text" name="name" placeholder="NAME OR BRAND NAME" required>
-              </div>
-              <div class="stock__drug non-compatitible">
-                <label for="">GENERIC NAME </label>
-                <input type="text" name="generic_name" placeholder="GENERIC NAME" >
+               
+               
+               <button class="add_category">Add</button>
+
               </div>
               
-             
-            </div>
-            <div class="manufacturer__information"> 
-              <div class="stock__drug ">
-                <label for="manufacturer">MANUFACTURER NAME</label>
-                <input type="text" name="manufacturer_name" placeholder="MANUFACTURER" >
+              <div class="product_quantity_ctn">
+                <p>Product Quantity</p>
+                <div class="product_quantity">
+                  <label for="unit_issue">Unit Issue</label>
+                  <label for="pack_size">Pack size</label>
+                  <label for="unit_issue">Quantity</label>
+                  <label for="minimum Quantity">Minimum quantity</label>
+                  <input type="number" name="unit_of_issue" min="1" placeholder="Unit of issue" required>
+                  <input type="number" name="pack_size" min="1" placeholder="Pack size"  required>
+                  <input type="number" name="quantity"  min="1" placeholder="Quantity"  required>
+                  <input type="number" name="minimum_quantity"  min="1" placeholder="Quantity"  required>
+                </div>
               </div>
-               <div class="stock__drug non-compatitible">
-                <label for="strength">STRENGTH</label>
-                <input type="text" name="strength" placeholder="STRENGTH E.G 80MG OR 80MG/480MG">
-              </div>
-              <div class="stock__drug">
-                <label for="cost_price">COST PRICE</label>
-                <input type="number" name="cost_price" placeholder="PRICE" required >
-              </div>
-              <div class="stock__drug">
-                <label for="quantity">QUANTITY</label>
-                <input type="number" name="quantity"  placeholder="QUANTITY" required>
-              </div>
-              </div>
-              <div class="stock__drug">
-                <label for="expiry_date">EXPIRY DATE</label>
+                <div class="manufacturer_ctn">
+                  <p class="manufacturer_information">Manufacturer Information</p>
+                  <div class="info"> 
+              <label for="manufacturer">Manufacturer name</label>
+              <label for="price">Product price</label>
+              <label for="expiry_date">Expiry date</label>
+              <input type="text" name="manufacturer_name" placeholder="Manufacturer name" >
+              <input type="number" name="cost_price" placeholder="Price" required >
                 <input type="date" name="expiry_date" placeholder="EXPIRY DATE" required >
-              </div>
-              
+            </div>
+                </div>
+            
               <div class="action__container">
                 <input type="reset" class="cancel_btn" value="CANCEL">
                 <input type="submit" class="add_btn" value="ADD NEW DRUG">
               </div>
-            </form>
+          </form>
       
         </div>
       </div>

@@ -5,44 +5,156 @@
   margin-bottom: 1rem;
   text-align: center;
 }
+
 #add_new_stock {
   background-color: #eeeeee;
+  padding: 10px;
   width: 100%;
+  height: 95%;
+}
+
+#add_new_stock input {
+  outline-color: rgb(63, 247, 143);
+  min-width: 90px;
+}
+.new_category {
+  z-index: 2;
+  top: 40%;
+  position: fixed;
+  width: 100%;
+  background-color: #eeeeee;
+  padding: 30px;
+  min-width: 400px;
+}
+.category {
+  width: 150px;
+}
+.remove_category {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: #f60a55;
+}
+.category_ctn {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  align-items: center;
+}
+.new_category input {
+  outline-color: rgb(63, 247, 143);
+}
+.category {
+  padding: 5px;
+}
+.new_category button {
+  outline: none;
+  color: white;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+}
+.category_added {
+  background-color: rgb(63, 247, 143);
+}
+.remove_category:hover,
+.remove_category:active {
+  color: #f60a55;
+  background-color: white;
+}
+.category_added:hover,
+.category_added:active {
+  color: rgb(63, 247, 143);
+  background-color: white;
 }
 .drug__form__title {
-  padding-top: 2rem;
   text-transform: uppercase;
   margin: 0;
   text-align: center;
 }
-.main_drug__components {
+.product_information {
   display: grid;
-  height: 80%;
 }
 label {
   font-size: small;
 }
-.manufacturer__information {
+.product_categories {
+  margin: 1rem 0;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
+  grid-template-columns: 100px auto 70px;
+  align-items: center;
 }
-.main__drug {
+.product_categories select {
+  padding: 5px;
+  width: 100%;
+  outline-color: rgb(63, 247, 143);
+}
+.product_categories button {
+  border: none;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-weight: bolder;
+}
+.product_categories button:hover,
+.product_categories button:active {
+  color: rgb(63, 247, 143);
+}
+.product {
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+}
+.product_name {
+  display: grid;
+  grid-template-columns: 100px auto;
+  margin-bottom: 1rem;
+}
+.product_name input {
+  padding: 10px;
+  text-transform: capitalize;
+}
+.product_example {
+  font-size: smaller;
+  justify-self: start;
+}
+.product_quantity_ctn {
+  margin: 10px 0;
+}
+.product_quantity {
+  display: grid;
+  grid-template-columns: auto auto auto auto;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.product_quantity input {
+  width: 100%;
+  padding: 10px;
+}
+.info {
+  display: grid;
+  grid-template-columns: auto auto auto;
+  column-gap: 10px;
+  row-gap: 10px;
+}
+.info input {
+  width: 100%;
+  padding: 10px;
 }
 @media (min-width: 40rem) {
+  .new_category {
+    width: 80%;
+  }
 }
 input::placeholder {
   font-family: "Comic Neue", cursive;
 }
 .action__container {
-  margin: 1rem 0;
+  margin: 2rem 0;
 }
 .action__container input {
   cursor: pointer;
   padding: 0.5rem;
-  margin: 0 1rem;
+  margin: 0.5rem;
 }
 .add_btn {
   color: seagreen;
@@ -63,21 +175,4 @@ input::placeholder {
 .cancel_btn:active {
   background-color: rgb(248, 1, 104);
   color: white;
-}
-.stock__drug {
-  display: grid;
-  place-items: center;
-}
-
-.stock__drug input,
-.stock__drug select {
-  width: 70%;
-  padding: 0.7rem;
-  outline: none;
-  border: none;
-  text-transform: uppercase;
-}
-
-.remove {
-  display: none;
 }
