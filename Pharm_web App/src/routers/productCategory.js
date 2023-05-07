@@ -19,7 +19,7 @@ router.get("/product/categories", async (req, res) => {
     }
     res.status(200).send(categories);
   } catch (e) {
-    res.status(400).send();
+    res.status(500).send();
   }
 });
 module.exports = router;

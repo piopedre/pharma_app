@@ -9,12 +9,13 @@
      <link rel="stylesheet" href="/css/shared/shared.css" />
     <script defer src="/client-side/styles/styles.js"></script>
     <script defer src="/client-side/user/user_shared.js"></script>
-    <script defer src="/client-side/user/prescription_validation.js"></script> 
+    <script type="module" defer src="/client-side/user/prescription_validation.js"></script> 
   </head>
   <body>
       {{>log_header}}
-    <main>
       <div class="backdrop"></div>
+    <main>
+      
       <div class="container">
         {{>profile}}
         <div class="prescription__validation">

@@ -68,7 +68,8 @@
   color: rgb(63, 247, 143);
   background-color: white;
 }
-.drug__form__title {
+/* product */
+.product__form__title {
   text-transform: uppercase;
   margin: 0;
   text-align: center;
@@ -132,7 +133,7 @@ label {
 }
 .info {
   display: grid;
-  grid-template-columns: auto auto auto;
+  grid-template-columns: auto auto;
   column-gap: 10px;
   row-gap: 10px;
 }

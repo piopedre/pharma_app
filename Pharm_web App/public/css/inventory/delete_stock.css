@@ -21,48 +21,11 @@ input {
 input::placeholder {
   font-variant: small-caps;
 }
-.filters {
-  display: flex;
-  justify-content: space-around;
-  align-items: center;
-  flex-wrap: wrap;
-  padding: 1rem 0;
-  position: relative;
-}
-.main__filters {
-  display: grid;
-  grid-template-columns: auto auto;
-  column-gap: 0.3rem;
-}
 select {
   padding: 0.6rem 0;
   margin: 0 0.2rem;
   outline: none;
   border-radius: 20px;
-}
-.toggle__filters {
-  padding: 0.6rem;
-  margin: 2rem 0.5rem;
-  outline: none;
-  border: none;
-  border-radius: 10px;
-  cursor: pointer;
-}
-
-.toggle__filters:hover ~ .hover__description {
-  display: block;
-}
-.hover__description {
-  position: absolute;
-  font-size: small;
-  top: 2px;
-  background-color: rgb(3, 75, 121);
-  color: white;
-  padding: 5px;
-  display: none;
-}
-.hover__description p {
-  margin: 0;
 }
 
 .items__body__container {
@@ -83,23 +46,21 @@ select {
 
 .main__items {
   overflow: auto;
-  max-height: 400px;
+  height: 500px;
   padding: 10px;
 }
-/* .drug__items::-webkit-scrollbar-thumb {
-  background: #1abcc4;
-} */
+
 .main__item {
   position: relative;
   color: rgb(0, 0, 0);
   margin: 10px 0;
-  display: flex;
-  justify-content: space-around;
+  display: grid;
+  grid-template-columns: auto auto auto auto auto;
   align-items: center;
-  padding: 20px 0;
-  background-color: #ededed;
+  padding: 20px 10px;
   font-size: small;
   text-transform: uppercase;
+  min-width: 400px;
 }
 .main__item:nth-child(odd) {
   background-color: rgb(211, 253, 235);
@@ -113,7 +74,6 @@ select {
 .item_name {
   cursor: pointer;
   width: 70px;
-  overflow: hidden;
 }
 
 .item_name:hover .item_details {

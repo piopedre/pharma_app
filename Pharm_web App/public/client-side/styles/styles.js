@@ -6,20 +6,11 @@
   const $toggleNavbar = document.querySelector(".toggle__navbar");
   const $toggleNavlinks = document.querySelectorAll(".linking_nav");
   const $copyright = document.querySelector(".copyright");
-  const width = window.matchMedia("(min-width:40rem)");
-
   // Copyright
   $copyright.innerHTML = `Copyright © ${new Intl.DateTimeFormat("en-GB", {
     year: "numeric",
   }).format(new Date())}`;
-  // functions
-  const removeBackdrop = (width) => {
-    if (width.matches) {
-      if ($backdrop.classList.contains("show")) {
-        $backdrop.classList.remove("show");
-      }
-    }
-  };
+  // Functions
   const toggle = () => {
     $toggleButton?.setAttribute(
       "aria-pressed",
@@ -49,5 +40,5 @@
   $toggleNavlinks.forEach((link) => {
     link.addEventListener("click", removetoggleNavbar);
   });
-  width.addEventListener("change", removeBackdrop);
 })();
+// test code

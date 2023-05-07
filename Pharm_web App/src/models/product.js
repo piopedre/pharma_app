@@ -8,10 +8,11 @@ const productSchema = new mongoose.Schema(
       trim: true,
       uppercase: true,
     },
-    product_name: {
+    name: {
       type: String,
       uppercase: true,
       unique: true,
+      trim: true,
     },
     cost_price: {
       type: Number,
@@ -24,19 +25,23 @@ const productSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
+    display_quantity: {
+      type: String,
+    },
     unit_of_issue: {
       type: Number,
       required: true,
+      min: 1,
     },
     pack_size: {
       type: Number,
       required: true,
+      min: 1,
     },
     minimum_quantity: {
       type: Number,
       required: true,
     },
-    manufacturer_name: [],
     location: {
       type: String,
       trim: true,
@@ -58,18 +63,21 @@ const productSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-
-productSchema.methods.toEDIT = function () {
-  const drug = this;
-  const drugObject = drug.toObject();
-
-  delete drugObject._id;
-  return drugObject;
-};
+//product and productLog relationship
+productSchema.virtual("productLog", {
+  ref: "ProductLog",
+  localField: "_id",
+  foreignField: "product",
+});
 productSchema.pre("save", async function (next) {
-  const drug = this;
-  if (drug.isModified("cost_price")) {
-    drug.selling_price = Math.ceil(drug.cost_price * 1.3);
+  const product = this;
+  if (product.isModified("cost_price")) {
+    product.selling_price = Math.ceil(product.cost_price * 1.3);
+  }
+  if (product.isModified("quantity")) {
+    product.display_quantity = `${Math.ceil(
+      product.quantity / product.pack_size
+    )} * ${product.pack_size}`;
   }
   next();
 });

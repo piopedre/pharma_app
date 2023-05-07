@@ -7,7 +7,7 @@ router.post("/products/add_product", authenication, async (req, res) => {
   try {
     const product = new Product(req.body);
     await product.save();
-    res.status(201).send("Product Added");
+    res.status(201).send(product);
   } catch (e) {
     res.status(400).send(e.message);
   }
@@ -30,7 +30,7 @@ router.get("/products/search", authenication, async (req, res) => {
     }
     res.status(200).send(product);
   } catch (e) {
-    res.status(400).send("Error processing request");
+    res.status(500).send("Error processing request");
   }
 });
 router.get("/products/:id", authenication, async (req, res) => {
@@ -42,16 +42,19 @@ router.get("/products/:id", authenication, async (req, res) => {
     }
     res.status(200).send(product);
   } catch (e) {
-    res.status(400).send();
+    res.status(500).send();
   }
 });
 router.patch("/products/:id", authenication, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
-    "drug_type",
+    "name",
+    "product_category",
     "cost_price",
     "quantity",
-    "batch_number",
+    "unit_of_issue",
+    "pack_size",
+    "minimum_quantity",
     "expiry_date",
   ];
   const isValidOperation = updates.every((update) =>
@@ -68,7 +71,7 @@ router.patch("/products/:id", authenication, async (req, res) => {
     }
     updates.forEach((update) => (product[update] = req.body[update]));
     await product.save();
-    res.status(200).send(product.toEDIT());
+    res.status(200).send(product);
   } catch (e) {
     res.status(400).send("Error adding a product");
   }

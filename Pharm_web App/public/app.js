@@ -33,8 +33,20 @@ router.get("/pharma_app/add_stock", async (req, res) => {
   }
   res.render("add_stock", { categories });
 });
-router.get("/pharma_app/edit_stock", (req, res) => {
-  res.render("edit_stock");
+router.get("/pharma_app/edit_stock", async (req, res) => {
+  let categories;
+  try {
+    const request = await axios.get("http://localhost:3000/product/categories");
+    if (!request.ok) {
+      categories = [];
+    }
+    categories = request.data;
+  } catch (error) {
+    if (!error.statusCode === 200) {
+      res.render("edit_stock", { categories });
+    }
+  }
+  res.render("edit_stock", { categories });
 });
 router.get("/pharma_app/delete_stock", (req, res) => {
   res.render("delete_stock");

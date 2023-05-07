@@ -12,9 +12,7 @@
   font-size: smaller;
   font-weight: bold;
 }
-.date {
-  display: none;
-}
+
 .container {
   display: flex;
   flex-direction: row;
@@ -27,12 +25,6 @@
   display: none;
 }
 @media (min-width: 40rem) {
-  .site_information {
-    grid-template-columns: 1fr 1fr 1fr auto;
-  }
-  .date {
-    display: block;
-  }
   .container {
     align-items: stretch;
   }

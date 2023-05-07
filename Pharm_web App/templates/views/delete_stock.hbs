@@ -14,10 +14,10 @@
   </head>
   <body>
     {{>log_header}}
-    
+    <div class="backdrop"></div>
     <main>
       {{>notification}}
-      <div class="backdrop"></div>
+      
       
       <div class="container">
         {{>profile}}
@@ -35,36 +35,6 @@
           </div>
             <div class="interaction__chamber">
                 <input type="search" name="name" id="search" placeholder="item name">
-                <div class="filters">
-                    <div>
-                        <button class="toggle__filters show_filter">
-                        Show Filters
-                        </button>
-                          <div class="hover__description">
-                        <p>Show Filters</p>
-                        </div>
-                    </div>
-                    <div class="main__filters remove">
-                        <div>
-                            <select name="location" id="location">
-                            <option value="">Class</option>
-                            <option value="uselu">Uselu</option>
-                            <option value="idu">Idunmwonwina</option>
-                        </select>
-                        </div>
-                        <div>
-                            
-                            <select name="pharmacy_unit" id="pharmacy_unit">
-                                <option value="">Dosage Type</option>
-                                <option value="opd-pharmacy">opd-pharmacy</option>
-                                <option value="inpatient-pharmacy">inpatient-pharmacy</option>
-                                <option value="gms-pharmacy">gms-pharmacy</option>
-                                <option value="ward-pharmacy">ward-pharmacy</option>
-                            </select>
-                        </div>
-                    </div>
-                  
-                </div>
                  
                 
             </div>

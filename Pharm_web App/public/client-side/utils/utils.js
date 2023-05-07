@@ -5,6 +5,130 @@ class ResponseError extends Error {
     this.response = res;
   }
 }
+// send Request
+async function sendReq(
+  token,
+  data,
+  reqFunction,
+  messageEl,
+  successMessage,
+  message400,
+  message500
+) {
+  try {
+    const response = await reqFunction(token, data);
+    if (!response.ok) {
+      throw new ResponseError("Bad Fetch Response", response);
+    }
+    messageEl.style.backgroundColor = "#2bf712";
+    messageEl.textContent = successMessage;
+    return response;
+  } catch (err) {
+    switch (err?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = message400;
+        break;
+      case 401:
+        location.replace("/pharma_app/login");
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = message500;
+        break;
+    }
+  }
+}
+async function getDatabase(token, reqFunction, location, unit, messageEl) {
+  const response = await reqFunction(token, location, unit);
+  try {
+    if (!response.ok) {
+      throw new ResponseError("Bad Fetch Response", response);
+    }
+    return response;
+  } catch (err) {
+    switch (err?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Error, Fetching Database";
+        break;
+      case 401:
+        messageEl.style.backgroundColor = "#c41a1a";
+        location.replace("/pharma_app/login");
+        break;
+      case 404:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Database is empty";
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = " error, connecting to server";
+        break;
+    }
+  }
+}
+async function altSendReq(
+  data,
+  reqFunction,
+  messageEl,
+  successMessage,
+  message400,
+  message500
+) {
+  try {
+    const response = await reqFunction(data);
+    if (!response.ok) {
+      throw new ResponseError("Bad Fetch Response", response);
+    }
+
+    messageEl.style.backgroundColor = "#2bf712";
+    messageEl.textContent = successMessage;
+    location.reload();
+  } catch (err) {
+    switch (err?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = message400;
+        break;
+      case 401:
+        location.replace("/pharma_app/admin/login");
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = message500;
+        break;
+    }
+  }
+}
+async function sendEditReq(token, reqFunction, id, data, messageEl) {
+  try {
+    const response = await reqFunction(token, id, data);
+    if (!response.ok) {
+      throw new ResponseError("Bad Fetch Response", response);
+    }
+    messageEl.style.backgroundColor = "#3ff78f";
+    messageEl.textContent = "Changes Saved";
+    return response;
+  } catch (err) {
+    switch (err?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Error, Fetching Database";
+        break;
+      case 401:
+        location.replace("/pharma_app/login");
+        break;
+      case 404:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Product does not exist";
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Problem, \n connecting to database";
+        break;
+    }
+  }
+}
 // Register Admin
 async function registerUser(data) {
   const response = await fetch("/admins/registration", {
@@ -62,7 +186,7 @@ async function updateAvatar(token, data) {
 
 //////////////////////////
 ///DRUGS///
-async function addDrug(token, data) {
+async function addProduct(token, data) {
   const response = await fetch("/products/add_product", {
     method: "POST",
     headers: {
@@ -73,7 +197,7 @@ async function addDrug(token, data) {
   });
   return response;
 }
-async function getAllDrugs(
+async function getAllProducts(
   token,
   location = undefined,
   pharmacyUnit = undefined
@@ -91,7 +215,7 @@ async function getAllDrugs(
   return response;
 }
 
-async function getDrugById(token, id) {
+async function getProductById(token, id) {
   const response = await fetch(`/products/${id}`, {
     method: "GET",
     headers: {
@@ -103,7 +227,7 @@ async function getDrugById(token, id) {
   return response;
 }
 
-async function editDrugById(token, id, body) {
+async function editProductById(token, id, body) {
   const response = await fetch(`/products/${id}`, {
     method: "PATCH",
     headers: {
@@ -114,7 +238,7 @@ async function editDrugById(token, id, body) {
   });
   return response;
 }
-async function deleteDrugById(token, id) {
+async function deleteProductById(token, id) {
   const response = await fetch(`/products/${id}`, {
     method: "DELETE",
     headers: {
@@ -129,6 +253,28 @@ async function deleteDrugById(token, id) {
 
 async function requiste(token, body) {
   const response = await fetch("/requistion", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body,
+  });
+  return response;
+}
+async function getLastRequistion(token) {
+  const response = await fetch("/last_requistion", {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+  });
+  return response;
+}
+// product log
+async function addProductLogs(token, body) {
+  const response = await fetch("/productlogs", {
     method: "POST",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -154,14 +300,20 @@ export {
   registerUser,
   loginUser,
   getProfile,
-  addDrug,
-  getAllDrugs,
-  getDrugById,
-  editDrugById,
-  deleteDrugById,
+  addProduct,
+  getAllProducts,
+  getProductById,
+  editProductById,
+  deleteProductById,
   requiste,
   updateAvatar,
   ResponseError,
   updateUser,
   categoryAdd,
+  sendReq,
+  altSendReq,
+  getDatabase,
+  sendEditReq,
+  getLastRequistion,
+  addProductLogs,
 };

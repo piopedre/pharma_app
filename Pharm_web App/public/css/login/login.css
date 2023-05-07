@@ -44,6 +44,7 @@ main {
   margin: 0.5rem 0;
   width: 100%;
   outline-color: #1abcc4;
+  text-transform: capitalize;
 }
 .submit {
   margin-top: 0.2rem;

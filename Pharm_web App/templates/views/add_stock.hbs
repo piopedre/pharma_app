@@ -36,7 +36,7 @@
            
                 
             <div class="product_information">
-              <div class="drug__form__title">
+              <div class="product__form__title">
                 <p>Provide the new product information</p>
               </div>
                 <p class="product_title">Product Information</p>
@@ -45,8 +45,8 @@
               <div class="product_name">
                    <label for="product_name">Name:</label>
                    <div class="product">
-                    <input type="text" name="product_name" placeholder="Product Name" required>
-                    <span class="product_example">E.g Tab Haloperidol 2mg </span>
+                    <input type="text" name="name" placeholder="Product Name" required>
+                    <span class="product_example">E.g Tab Haloperidol 5mg or Tab Risperidone (Risperdal) 2mg  </span>
                    </div>    
               </div>
                <div class="product_categories">
@@ -66,25 +66,25 @@
               </div>
               
               <div class="product_quantity_ctn">
-                <p>Product Quantity</p>
+                <p>Product Quantity Information</p>
                 <div class="product_quantity">
                   <label for="unit_issue">Unit Issue</label>
                   <label for="pack_size">Pack size</label>
-                  <label for="unit_issue">Quantity</label>
+                  <label for="quantity">Quantity</label>
                   <label for="minimum Quantity">Minimum quantity</label>
                   <input type="number" name="unit_of_issue" min="1" placeholder="Unit of issue" required>
                   <input type="number" name="pack_size" min="1" placeholder="Pack size"  required>
-                  <input type="number" name="quantity"  min="1" placeholder="Quantity"  required>
-                  <input type="number" name="minimum_quantity"  min="1" placeholder="Quantity"  required>
+                  <input type="number" name="quantity"   placeholder="Quantity"  required>
+                  <input type="number" name="minimum_quantity"   placeholder="Quantity"  required>
                 </div>
               </div>
                 <div class="manufacturer_ctn">
                   <p class="manufacturer_information">Manufacturer Information</p>
                   <div class="info"> 
-              <label for="manufacturer">Manufacturer name</label>
+              
               <label for="price">Product price</label>
               <label for="expiry_date">Expiry date</label>
-              <input type="text" name="manufacturer_name" placeholder="Manufacturer name" >
+              
               <input type="number" name="cost_price" placeholder="Price" required >
                 <input type="date" name="expiry_date" placeholder="EXPIRY DATE" required >
             </div>

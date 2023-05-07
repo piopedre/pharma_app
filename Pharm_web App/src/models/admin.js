@@ -63,10 +63,17 @@ const adminSchema = new mongoose.Schema({
     },
   ],
 });
+// admin requistion relationship
 adminSchema.virtual("requistions", {
-  ref: "requistion",
+  ref: "Requistion",
   localField: "_id",
   foreignField: "requisting_pharmacist",
+});
+// admin productLog relationship
+adminSchema.virtual("productLogs", {
+  ref: "ProductLog",
+  localField: "_id",
+  foreignField: "signature",
 });
 adminSchema.methods.generateToken = async function () {
   const admin = this;

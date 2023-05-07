@@ -1,23 +1,17 @@
 .edit__stock__container {
   width: 100%;
   height: 100%;
-  /* padding: 0.6rem; */
   text-align: center;
   position: relative;
   background-color: #e9f8f9;
   min-height: 500px;
 }
 #edited__drug {
-  border: none;
-  border-radius: 0;
-  border-bottom: 0.1px solid grey;
-  margin-top: 1rem;
-  background-color: transparent;
-}
-.data__information {
-  width: 100%;
-  padding: 5px;
-  margin-top: 0.2rem;
+  margin-top: 3rem;
+  background-color: white;
+  font-size: small;
+  text-align: center;
+  border-color: rgb(145, 227, 255);
 }
 .drug_render {
   margin-top: 4rem;
@@ -75,63 +69,129 @@
 }
 
 /* edit form */
-.edit__form {
+.edit {
   top: 5%;
   width: 100%;
   height: 90%;
   position: absolute;
-  background-color: #eeeeee;
+  background-color: #eefbfc;
   padding: 10px;
-  border-radius: 20px;
-  z-index: 2;
+  overflow: auto;
+}
+.edit input,
+.edit select {
+  outline-color: rgb(128, 198, 255);
+}
+.add_category {
+  outline: none;
+  color: grey;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.add_category:hover,
+.add_category:active {
+  color: #3ff78f;
+}
+/* edit form */
+.edit_form {
+  height: 60%;
+  display: grid;
+  row-gap: 30px;
+  font-size: small;
 }
 /* edit form components */
-.item_title {
+.edit_form_title {
+  font-size: larger;
+  font-weight: 100;
   text-transform: uppercase;
 }
-
-.item__information {
+.product {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  column-gap: 10px;
-  height: 6%;
-  margin: 0.5rem 0;
-}
-.item__information label {
-  text-transform: uppercase;
-  color: #000000;
+  grid-template-columns: auto auto;
   text-align: left;
-  font-size: small;
-  font-weight: bold;
+}
+.product_category {
+  display: grid;
+  grid-template-columns: auto auto 40px;
+  text-align: left;
 }
 
-.item__information select,
-input {
-  width: 100%;
-  border: none;
-  text-align: center;
-  color: black;
-  border: 0.1px solid grey;
-  outline-color: rgb(0, 128, 255);
-}
-.item_detail {
-  margin: 2rem 0;
+.product_quantity {
   display: grid;
-  row-gap: 10px;
-  font-weight: bold;
+  grid-template-columns: repeat(4, auto);
+  column-gap: 10px;
+  place-items: center;
 }
-.item_detail input {
+.product_quantity input {
+  width: 100px;
   height: 40px;
 }
-
-.item_details {
+.manufacturer_info {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  column-gap: 10px;
-  align-items: start;
+  grid-template-columns: auto auto;
+  column-gap: 20px;
 }
+.manufacturer_info input {
+  height: 40px;
+}
+/* category container */
+.new_category {
+  z-index: 2;
+  top: 40%;
+  position: fixed;
+  width: 100%;
+  background-color: #eeeeee;
+  padding: 30px;
+  min-width: 400px;
+  font-size: small;
+}
+.category {
+  width: 150px;
+}
+.remove_category {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  background-color: #f60a55;
+}
+.category_ctn {
+  display: flex;
+  justify-content: space-evenly;
+  height: 100%;
+  align-items: center;
+}
+.new_category input {
+  outline-color: rgb(63, 247, 143);
+}
+.category {
+  padding: 5px;
+}
+.new_category button {
+  outline: none;
+  color: white;
+  border: none;
+  padding: 7px;
+  cursor: pointer;
+}
+.category_added {
+  background-color: rgb(63, 247, 143);
+}
+.remove_category:hover,
+.remove_category:active {
+  color: #f60a55;
+  background-color: white;
+}
+.category_added:hover,
+.category_added:active {
+  color: rgb(63, 247, 143);
+  background-color: white;
+}
+
+/* interaction container */
 .interaction_container {
-  margin: 1rem 0;
+  /* margin: 1rem 0; */
   display: grid;
   grid-template-columns: 1fr 1fr;
   place-items: center;
@@ -172,4 +232,9 @@ input {
 
 .edited {
   border: 1px solid#3ff78f;
+}
+@media (min-width: 40rem) {
+  .new_category {
+    width: 80%;
+  }
 }

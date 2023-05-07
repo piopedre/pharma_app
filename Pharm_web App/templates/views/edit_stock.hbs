@@ -12,21 +12,30 @@
     <script defer type="module" src="/client-side/user/edit_stock.js"></script>
   </head>
   <body>
+    <div class="backdrop"></div>
     {{>log_header}}
     <main>
       {{>notification}}
-      <div class="backdrop"></div>
+      
       <div class="container">
         {{>profile}}
         <div class="edit__stock__container">
           {{>site}}
+          <div class=" no_display new_category">
+                <div class="category_ctn">
+                  <label for="new_category">New Category :</label>
+                  <input type="text" class="category">
+                  <button class="remove_category">X</button>
+                  <button class="category_added">Add category</button>
+                </div>
+              </div>
 
-          <form method="post" class="data__information">
+          
             <div class="search__data">
               <input
                 type="search"
                 id="edited__drug"
-                placeholder="SEARCH ITEM NAME"
+                placeholder="SEARCH PRODUCT NAME"
               />
             </div>
             <div class="drug_render">
@@ -51,50 +60,54 @@
 
               </div>
             </div>
-          </form>
-          <div class="edit__form no_display">
-            <form  method="post">
-            <h4 class="item_title">Item Information </h4>
-            
-              <div class="item__information item_type">
-                    <label for="drug_dosage">item type :</label>
-                    <select name="drug_type" id="edited_drug_type">
-                    <option value="CAPSULE">CAPSULE</option>
-                    <option value="TABLET">TABLET</option>
-                    <option value="INJECTION">INJECTION</option>
-                    <option value="CONSUMABLE">CONSUMABLE</option>
-                    <option value="SYRUP">SYRUP</option>
-                    <option value="SUSPENSION">SUSPENSION</option>
+          <div class="edit no_display">
+            <h4  class="edit_form_title">Edit Product Information</h4>
+            <form  method="post" class="edit_form">
+            {{!-- <p class="item_title">Product Information </p> --}}
+              <div class="product"> 
+                      <label for="name">Name </label>
+                      <input placeholder="NAME" type="text" id="name" name="name">
+              </div>
+              <div class="product_category">
+                    <label for="product_category">Category </label>
+                    <select name="product_category" id="product_category">
+                      {{#each categories }}
+                    <option value="{{category}}">{{category}}</option>
+                    {{else}}
+                    <option value="None">No category</option>
+                    {{/each}}
                     </select>
+                    <button class="add_category">Add</button>
               </div>
-              <div class="item__information item_name"> 
-                      <label for="name">item name :</label>
-                      <input placeholder="NAME" type="text" id="name">
-              </div>
-                <div class="item__information item_strength">
-                    <label for="strength">strength:</label>
-                    <input type="text" placeholder="STRENGTH" id="drug__strength">
-                </div>
-            <div class="item_details">
-              <div class="item_detail">
-                    <label for="quantity">QUANTITY</label>
-                    <input name="quantity" placeholder="QUANTITY" type="number" id="quantity" >
+            
+                
+            <div class="product_quantity_ctn">
+             
+              <div class="product_quantity">
+                    <label for="unit_issue">Unit of issue</label>
+                    <label for="pack_size">Pack size</label>
+                    <label for="quantity">Quantity</label>
+                    <label for="minimum_quantity">Minimum Quantity</label>
+                    <input type="text" placeholder="unit of issue" id="unit_of_issue">
+                    <input name="pack_size" placeholder="Pack size" type="number" id="pack_size" min="0" >
+                    <input name="quantity" placeholder="Quantity" type="number" id="quantity" min="0" >
+                    <input name="minimum_quantity" placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0" >
                     <span class="element_id no_display"></span>
-                  </div>
-               <div class="item_detail">
-                    <label for="price">ITEM PRICE</label>
-                    <input type="number" name="cost_price" id="cost__price" placeholder="NEW COST PRICE" min="1">
-                    <input type="number" id="selling__price" placeholder="SELLING PRICE" readonly>
-               </div>
-                <div class="item_detail">
-                    <label for="manufacturer">MANUFACTURER</label>
-                    <input type="text" id="manufacturer" placeholder="MANUFACTURER NAME" readonly>
-                </div>
-                <div class="item_detail" >
-                    <label for="expiry_date">EXPIRY DATE</label>
+              </div>
+             </div>
+              
+              <div class="manufacturer_ctn">
+                
+                <div class="manufacturer_info">
+                   <label for="price">Product Cost Price</label>
+                    <label for="expiry_date">Expiry Date</label>
+                    <input type="number" name="cost_price" id="cost__price" placeholder="Cost price" min="1">
                     <input type="date" id="drug_expiry_date" name="expiry_date">
                 </div>
-            </div>
+                   
+              </div>
+                   
+
             <div class="interaction_container">
               <button class="cancel_button">CANCEL</button>
               <button class="edit_button">SAVE</button>
@@ -105,7 +118,6 @@
         </div>
       </div>
     </main>
-    {{! <a href="https://www.flaticon.com/free-icons/edit" title="edit icons">Edit icons created by Kiranshastry - Flaticon</a> }}
     {{>footer}}
   </body>
   {{! <form  method="post" class="edited_post no_display">

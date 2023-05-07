@@ -123,7 +123,7 @@ router.post("/admin/logout", authenication, async (req, res) => {
     await req.admin.save();
     res.status(200).send("Admin is logged out");
   } catch (e) {
-    res.status(500).send(e.message);
+    res.status(500).send();
   }
 });
 
