@@ -1,0 +1,50 @@
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma App</title>
+    <link rel="stylesheet" href="/css/drug_services/prescription_validation.css" />
+    <link rel="stylesheet" href="/css/shared/log_shared.css" />
+     <link rel="stylesheet" href="/css/shared/shared.css" />
+    <script defer src="/client-side/styles/styles.js"></script>
+    <script defer type="module" src="/client-side/user/user_shared.js"></script>
+    <script type="module" defer src="/client-side/user/prescription_validation.js"></script> 
+  </head>
+  <body>
+      {{>log_header}}
+      <div class="backdrop"></div>
+    <main>
+      
+      <div class="container">
+        {{>profile}}
+        <div class="prescription__validation">
+          {{>site}}
+          <div class="search__container">
+            <input class="search__input" type="text" name="product" id="product" placeholder="search product name">
+          </div>
+          <div class="render__container">
+            <div class="product_headings">
+              <div >Product</div>
+              <div>On Hand Qty</div>
+              <div>Qty</div>
+              <div>Expiry</div>
+            </div>
+            <div class="product_list">
+              <div class="product_item">
+                <div class="product_name">Tab Chlorpheniramine 4mg</div>
+                <div class="product_quantity">1000</div>
+                <div contenteditable m class="product_given_quantity">0</div>
+                <div class="product_expiry">5-24</div>
+              </div>
+            </div>
+           
+
+          </div>
+          
+         
+    </main>
+    {{>footer}}
+  </body>
+ 
+</html>

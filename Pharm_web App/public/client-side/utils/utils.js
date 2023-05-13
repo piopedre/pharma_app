@@ -284,6 +284,16 @@ async function addProductLogs(token, body) {
   });
   return response;
 }
+async function getProductLogsByProduct(token, id) {
+  const response = await fetch(`/productlogsbyproduct/${id}`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+  });
+  return response;
+}
 ///////////////////
 // Product Category
 async function categoryAdd(body) {
@@ -316,4 +326,5 @@ export {
   sendEditReq,
   getLastRequistion,
   addProductLogs,
+  getProductLogsByProduct,
 };

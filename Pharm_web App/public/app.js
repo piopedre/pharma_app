@@ -16,7 +16,7 @@ router.get("/pharma_app/profile", (req, res) => {
   res.render("profile");
 });
 router.get("/pharma_app/prescription_validation", (req, res) => {
-  res.render("prescriptionValidation");
+  res.render("prescription_validation");
 });
 router.get("/pharma_app/add_stock", async (req, res) => {
   let categories;

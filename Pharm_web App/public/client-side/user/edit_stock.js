@@ -4,7 +4,8 @@ import {
   getDatabase,
   sendEditReq,
   categoryAdd,
-  altSendReq,
+  sendReq,
+  addProductLogs,
 } from "../utils/utils.js";
 const edit = async () => {
   const $renderCtn = document.querySelector(".drug_render_list");
@@ -152,8 +153,8 @@ const edit = async () => {
       $message
     );
     if (response?.ok) {
-      const movementName = [...form.keys].reduce((acc, key) => {
-        acc += cur + " ";
+      const movementName = [...form.keys()].reduce((acc, key) => {
+        acc += key + " ";
         return acc;
       }, "edited ");
       const product = await response.json();
@@ -169,7 +170,7 @@ const edit = async () => {
         JSON.stringify(Object.fromEntries(movement)),
         addProductLogs,
         $message,
-        "",
+        "Changes Saved",
         "Logs not added",
         "Server Error"
       );
