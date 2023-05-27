@@ -4,11 +4,12 @@
 }
 .search__container {
   display: flex;
-  margin: 2rem 0;
+  margin: 0.5rem 0 2rem 0;
   justify-content: center;
+  position: relative;
 }
 .search__input {
-  padding: 1rem;
+  padding: 0.5rem;
   width: 70%;
   background-color: rgba(219, 219, 219, 0.557);
   outline: none;
@@ -16,23 +17,171 @@
   text-transform: capitalize;
   border-radius: 3px;
 }
-/* .render__container {
-  border-top: 1px solid grey;
-} */
-.product_headings {
-  margin: 1rem 0;
+.search_render_tab {
+  position: absolute;
+  padding: 0.2rem;
+  /* margin: 0.3rem 0; */
+  height: 300px;
+  width: 100%;
+  top: 110%;
+  overflow: hidden;
+  font-size: small;
+  background-color: rgba(219, 219, 219, 0.557);
+}
+.render_structure {
   display: grid;
-  grid-template-columns: 0.9fr 100px 100px auto;
-  text-align: center;
-  border-bottom: 1px solid black;
-  background-color: rgb(224, 245, 255);
-  font-variant: small-caps;
+  grid-template-columns: 1fr 100px 100px 100px;
+  column-gap: 10px;
   place-items: center;
 }
-.product_item {
-  display: grid;
-  grid-template-columns: 0.9fr 100px 100px auto;
-  text-align: center;
+.render_list_headings {
+  margin: 0.6rem 0;
+  border-bottom: 1px solid #0274c0;
+}
+.render_list {
+  height: 80%;
+  overflow: auto;
+}
+.product_searched {
+  background-color: white;
   padding: 1rem 0;
+  cursor: pointer;
+  border: 1px solid white;
+}
+.product_searched:active,
+.product_searched:hover {
+  border: 1px solid #1abcc4;
+}
+.product_structure {
+  display: grid;
+  grid-template-columns: 1fr 100px 60px 150px;
+  place-items: center;
+  padding: 0.5rem;
+  margin: 0.5rem;
+  text-align: center;
+  column-gap: 15px;
+}
+.product_headings {
+  border-bottom: 1px solid black;
+  text-transform: uppercase;
+  font-size: small;
+  font-weight: bold;
+}
+.product_list {
+  height: 55%;
+  overflow: hidden;
+}
+.empty_list {
+  margin: 0 0.5rem;
+  padding: 1rem;
+  text-transform: uppercase;
+  background-color: rgba(219, 219, 219, 0.557);
+  display: flex;
+  justify-content: center;
   align-items: center;
+  height: 30%;
+}
+.empty_list div {
+  padding: 1rem;
+}
+.product_item {
+  cursor: pointer;
+  background-color: #dbdbdb8e;
+  margin: 0.2rem 0.5rem;
+  border: 0.2px solid #dbdbdb8e;
+  font-size: small;
+  font-weight: bold;
+}
+.product_item:hover {
+  border: 0.2px solid #0274c0;
+}
+.product_details {
+  height: 12%;
+  display: flex;
+  padding: 10px;
+  justify-content: space-between;
+  font-variant: small-caps;
+}
+.product_detail_structure {
+  display: flex;
+}
+.remove_product {
+  background-color: white;
+  outline: none;
+  color: #ff1212;
+  border: 0.2px solid white;
+  cursor: pointer;
+  border-radius: 5px;
+  text-transform: uppercase;
+}
+.remove_product:active,
+.remove_product:hover {
+  background-color: #ff1212;
+  color: white;
+}
+
+.product_quantity {
+  border: none;
+  outline: none;
+  width: 100%;
+  text-align: center;
+  font-size: small;
+  font-weight: bolder;
+  background-color: transparent;
+}
+.quantity {
+  display: flex;
+  margin: 1rem 0.5rem;
+  justify-content: flex-end;
+  font-variant: small-caps;
+  font-weight: bolder;
+}
+.product_sales_information {
+  display: flex;
+  flex-direction: column;
+  padding: 1rem 0.4rem;
+  margin: 0 0.5rem;
+  height: 15%;
+  align-items: flex-end;
+  justify-content: space-between;
+  background-color: rgba(219, 219, 219, 0.557);
+  font-variant: small-caps;
+  font-weight: bold;
+}
+.product_sales_content {
+  display: grid;
+  grid-template-columns: 1fr 200px;
+  justify-items: end;
+}
+.interaction_ctn {
+  display: flex;
+  background-color: rgba(219, 219, 219, 0.557);
+  margin: 0 0.5rem;
+  justify-content: flex-end;
+}
+.interaction_ctn button {
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+  border: none;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+}
+.send_sales {
+  background-color: #1abcc4;
+}
+.hold_sales {
+  background-color: #0274c0;
+}
+.send_sales:hover,
+.send_sales:active {
+  color: #1abcc4;
+  background-color: white;
+}
+.hold_sales:hover,
+.hold_sales:active {
+  color: #0274c0;
+  background-color: white;
 }

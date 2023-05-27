@@ -1,5 +1,5 @@
 const express = require("express");
-const ProductLog = require("../models/productLog");
+const ProductLog = require("../models/ProductLog");
 const authenication = require("../authenication/authenication");
 const router = new express.Router();
 

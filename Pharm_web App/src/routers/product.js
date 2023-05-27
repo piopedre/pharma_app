@@ -1,7 +1,7 @@
 const express = require("express");
 const router = new express.Router();
 const authenication = require("../authenication/authenication");
-const Product = require("../models/product");
+const Product = require("../models/Product");
 
 router.post("/products/add_product", authenication, async (req, res) => {
   try {

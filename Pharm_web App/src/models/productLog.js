@@ -49,6 +49,5 @@ const productLogSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
-// produc
 const ProductLog = mongoose.model("ProductLog", productLogSchema);
 module.exports = ProductLog;

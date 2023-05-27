@@ -1,6 +1,6 @@
 const express = require("express");
 const authenication = require("../authenication/authenication");
-const Requistion = require("../models/requistion");
+const Requistion = require("../models/Requistion");
 const router = new express.Router();
 
 router.post("/requistion", authenication, async (req, res) => {

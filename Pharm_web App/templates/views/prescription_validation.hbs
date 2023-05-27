@@ -18,26 +18,97 @@
       
       <div class="container">
         {{>profile}}
+        {{>notification}}
         <div class="prescription__validation">
           {{>site}}
           <div class="search__container">
             <input class="search__input" type="text" name="product" id="product" placeholder="search product name">
-          </div>
-          <div class="render__container">
-            <div class="product_headings">
-              <div >Product</div>
-              <div>On Hand Qty</div>
-              <div>Qty</div>
-              <div>Expiry</div>
-            </div>
-            <div class="product_list">
-              <div class="product_item">
-                <div class="product_name">Tab Chlorpheniramine 4mg</div>
-                <div class="product_quantity">1000</div>
-                <div contenteditable m class="product_given_quantity">0</div>
-                <div class="product_expiry">5-24</div>
+            <div class="search_render_tab no_display">
+              <div class="render_list_headings render_structure">
+                <div>
+                  Product Name
+                </div>
+                <div>
+                  Product Price
+                </div>
+                <div>
+                  Product Qty
+                </div>
+                <div>
+                  Product Expiry
+                </div>
+              </div>
+              <div class="render_list">
+                {{!-- <div class="product_searched render_structure">
+                  <div class="searched_product_name">
+                    Tab Chlorpheniramine 4mg
+                  </div>
+                  <div class="searched_product_price">
+                    100
+                  </div>
+                  <div class="searched_product_quantity">
+                    1000
+                  </div>
+                  <div class="searched_product_expiry">
+                    5-24
+                  </div>
+                </div> --}}
               </div>
             </div>
+          </div>
+          <div class="render__container">
+            <div class="product_headings product_structure">
+              <div >Product Name</div>
+              <div>Qty</div>
+              <div>Price</div>
+              <div>Ext Price</div>
+            </div>
+            <div class="product_list">
+              <div class="empty_list">
+                <div>Add a Product</div>
+                
+              </div>
+              {{!-- <div class="product_item">
+                <div class="product_structure">
+                <div class="product_name">Tab Chlorpheniramine 4mg</div>
+                <input type="number" value="0" class="product_quantity" min="1">
+                <div class="unit_quantity_price">10000</div>
+                <div class="quantity_price">3</div>
+                </div>
+                <div class="product_details">
+                  <div class="onhand_quantity product_detail_structure">
+                    <div class="quantity_title">On Hand Qty : </div>
+                    <div class="on_hand_qty">46</div>
+                  </div>
+                  <div class="expiry product_detail_structure">
+                    <div class="expiry_title">Expiry Date : </div>
+                    <div class="expiry_date">5-24</div>
+                  </div>
+                  <button class="remove_product">delete</button>
+                </div>
+
+                
+              </div> --}}
+            </div>
+            <div class="product_sales_information">
+              <div class="product_sales_content">
+                <div class="number_products_sold_title">No of products sold</div>
+                <div class="number_products_sold">0</div>
+              </div>
+              <div class="product_sales_content">
+                <div class="qty_products_sold_title">products sold</div>
+                <div class="qty_products_sold">0</div>
+              </div>
+              <div class="product_sales_content">
+                <div class="products_total_title">Total</div>
+                <div class="products_total_amount">0</div>
+              </div>
+            </div>
+             <div class="interaction_ctn">
+              <button class="hold_sales">Hold Sales</button>
+              <button class="send_sales">Send</button>
+            </div>
+            
            
 
           </div>

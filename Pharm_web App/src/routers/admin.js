@@ -1,6 +1,6 @@
 const express = require("express");
 const router = new express.Router();
-const Admin = require("../models/admin");
+const Admin = require("../models/Admin");
 const authenication = require("../authenication/authenication");
 const multer = require("multer");
 const sharp = require("sharp");
@@ -58,18 +58,6 @@ router.patch("/admins/update_user", authenication, async (req, res) => {
   }
 });
 
-// router.get("/admins/:id", authenication, async (req, res) => {
-//   const id = req.params.id;
-//   try {
-//     const admin = await Admin.findOne({ _id: id });
-//     if (!admin) {
-//       return res.status(404).send();
-//     }
-//     res.status(200).send(admin.toJSON());
-//   } catch (e) {
-//     res.status(400).send(e.message);
-//   }
-// });
 // multer file upload
 const upload = multer({
   linmits: {

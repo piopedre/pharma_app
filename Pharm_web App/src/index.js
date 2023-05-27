@@ -10,6 +10,7 @@ const productServer = require("./routers/product");
 const requistionServer = require("./routers/requistion");
 const productCategoryServer = require("./routers/productCategory");
 const productLogServer = require("./routers/productLog");
+const productSaleServer = require("./routers/productSale");
 // define paths
 const publicDir = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -30,6 +31,7 @@ app.use(productServer);
 app.use(requistionServer);
 app.use(productCategoryServer);
 app.use(productLogServer);
+app.use(productSaleServer);
 app.use(express.static(publicDir));
 
 app.listen(port, () => {
