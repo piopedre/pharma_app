@@ -4,7 +4,10 @@ const ProductSale = require("../models/ProductSale");
 const router = new express.Router();
 
 router.post("/productsales", authenication, async (req, res) => {
-  const productSale = new ProductSale(req.body);
+  const productSale = new ProductSale({
+    ...req.body,
+    pharmacist: req.admin._id,
+  });
   try {
     await productSale.save();
     res.status(200).send();

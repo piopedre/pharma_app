@@ -67,6 +67,35 @@ async function getDatabase(token, reqFunction, location, unit, messageEl) {
     }
   }
 }
+async function getPatientDatabase(token, reqFunction, messageEl) {
+  const response = await reqFunction(token);
+  try {
+    if (!response.ok) {
+      throw new ResponseError("Bad Fetch Response", response);
+    }
+    return response;
+  } catch (err) {
+    switch (err?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Error, Fetching Database";
+        break;
+      case 401:
+        messageEl.style.backgroundColor = "#c41a1a";
+        location.replace("/pharma_app/login");
+        break;
+      case 404:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Database is empty";
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = " error, connecting to server";
+        break;
+    }
+  }
+}
+
 async function altSendReq(
   data,
   reqFunction,
@@ -306,6 +335,41 @@ async function categoryAdd(body) {
   });
   return response;
 }
+///////////////////
+// Patient
+async function addPatient(token, data) {
+  const response = await fetch("/patients", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body: data,
+  });
+  return response;
+}
+async function getAllPatients(token) {
+  const response = await fetch(`/patients`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+  });
+  return response;
+}
+// Sales
+async function addSale(token, data) {
+  const response = await fetch("/productsales", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body: data,
+  });
+  return response;
+}
 export {
   registerUser,
   loginUser,
@@ -327,4 +391,8 @@ export {
   getLastRequistion,
   addProductLogs,
   getProductLogsByProduct,
+  addPatient,
+  getAllPatients,
+  getPatientDatabase,
+  addSale,
 };

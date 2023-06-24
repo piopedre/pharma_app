@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -24,7 +25,7 @@
           <div class=" no_display new_category">
                 <div class="category_ctn">
                   <label for="new_category">New Category :</label>
-                  <input type="text" class="category">
+                  <input id="new_category" type="text" class="category">
                   <button class="remove_category">X</button>
                   <button class="category_added">Add category</button>
                 </div>
@@ -36,6 +37,7 @@
                 type="search"
                 id="edited__drug"
                 placeholder="SEARCH PRODUCT NAME"
+                autofocus
               />
             </div>
             <div class="drug_render">
@@ -45,18 +47,7 @@
                 <div class="drug_expiry-heading"> Expiry Date</div>
               </div>
               <div class="drug_render_list">
-                {{! <div class="drug_render_item">
-                    <div class="drug_details">TAB. CHLORPHENIRAMINE 4MG</div>
-                    <div class="drug_quantity">200</div>
-                    <div class="drug_expiry_date">02/24</div>
-                    <div class="drug_id no_display"></div>
-                  </div>
-                  <div class="drug_render_item">
-                    <div class="drug_details">TAB. RISPERDAL 3MG</div>
-                    <div class="drug_quantity">400</div>
-                    <div class="drug_expiry_date">03/24</div>
-                    <div class="drug_id no_display"></div>
-                  </div> }}
+                
 
               </div>
             </div>
@@ -66,7 +57,7 @@
             {{!-- <p class="item_title">Product Information </p> --}}
               <div class="product"> 
                       <label for="name">Name </label>
-                      <input placeholder="NAME" type="text" id="name" name="name">
+                      <input autocomplete="additional-name" placeholder="NAME" type="text" id="name" name="name">
               </div>
               <div class="product_category">
                     <label for="product_category">Category </label>
@@ -84,14 +75,14 @@
             <div class="product_quantity_ctn">
              
               <div class="product_quantity">
-                    <label for="unit_issue">Unit of issue</label>
+                    <label for="unit_of_issue">Unit of issue</label>
                     <label for="pack_size">Pack size</label>
                     <label for="quantity">Quantity</label>
                     <label for="minimum_quantity">Minimum Quantity</label>
-                    <input type="text" placeholder="unit of issue" id="unit_of_issue">
-                    <input name="pack_size" placeholder="Pack size" type="number" id="pack_size" min="0" >
-                    <input name="quantity" placeholder="Quantity" type="number" id="quantity" min="0" >
-                    <input name="minimum_quantity" placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0" >
+                    <input type="text"  placeholder="unit of issue" id="unit_of_issue">
+                    <input name="pack_size"  placeholder="Pack size" type="number" id="pack_size" min="0" >
+                    <input name="quantity"  placeholder="Quantity" type="number" id="quantity" min="0" >
+                    <input name="minimum_quantity"  placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0" >
                     <span class="element_id no_display"></span>
               </div>
              </div>
@@ -99,10 +90,12 @@
               <div class="manufacturer_ctn">
                 
                 <div class="manufacturer_info">
-                   <label for="price">Product Cost Price</label>
+                   <label for="cost_price">Product Cost Price</label>
+                   <label for="fg_price">Product Fg Cost Price</label>
                     <label for="expiry_date">Expiry Date</label>
-                    <input type="number" name="cost_price" id="cost__price" placeholder="Cost price" min="1">
-                    <input type="date" id="drug_expiry_date" name="expiry_date">
+                    <input type="text" name="cost_price" id="cost_price" placeholder="Cost price" min="1">
+                    <input type="text" name="fg_price" id="fg_price" placeholder="Fg price" min="1">
+                    <input type="date" id="expiry_date" name="expiry_date">
                 </div>
                    
               </div>
@@ -120,36 +113,5 @@
     </main>
     {{>footer}}
   </body>
-  {{! <form  method="post" class="edited_post no_display">
-              <h4 class="form__heading">Item Information</h4>
-                <div class="drug__information">
-                  
-                  <div>
-                      <label for="name">ITEM NAME</label>
-                      <input placeholder="NAME" type="text" id="name" readonly>
-                  </div>
-                  <div>
-                    <label for="strength">STRENGTH</label>
-                    <input type="text" placeholder="STRENGTH" id="drug__strength" readonly>
-                    <span class="no_display" id="element-id"></span>
-                  </div>
-                  <div>
-                    <label for="price">PRICE</label>
-                    <input type="number" name="cost_price" id="cost__price" placeholder="NEW COST PRICE" min="1">
-                    <input type="number" id="selling__price" placeholder="SELLING PRICE" readonly>
-                  </div>
-                  <div >
-                    <label for="quantity">QUANTITY</label>
-                    <input name="quantity" placeholder="QUANTITY" type="number" id="quantity" readonly>
-                    <input type="number" id="added__quantity" placeholder="ADDED QUANTITY" min="1">
-                  </div>
-                  <div>
-                    <label for="manufacturer">MANUFACTURER NAME</label>
-                    <input type="text" id="manufacturer" placeholder="MANUFACTURER NAME" readonly>
-                  </div>
-                  <div>
-                    <label for="expiry_date">EXPIRY DATE</label>
-                    <input type="date" id="drug_expiry_date" name="expiry_date">
-                  </div>
-            </form> }}
+  
 </html>

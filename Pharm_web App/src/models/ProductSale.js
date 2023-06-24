@@ -5,15 +5,20 @@ const productSalesSchema = new mongoose.Schema(
     receipt_number: {
       type: String,
       required: true,
-      unique: true,
     },
     amount: {
       type: Number,
       required: true,
     },
+    pharmacist: {
+      type: mongoose.Schema.Types.ObjectId,
+      required: true,
+      ref: "Admin",
+    },
     patient: {
       type: String,
       default: "UNREGISTERED",
+      uppercase: true,
     },
     date: {
       type: Date,
@@ -22,29 +27,15 @@ const productSalesSchema = new mongoose.Schema(
     location: {
       type: String,
       required: true,
+      uppercase: true,
     },
     unit: {
       type: String,
       required: true,
+      uppercase: true,
     },
-    products: [
-      {
-        product: {
-          name: {
-            type: String,
-            required: true,
-          },
-          quantity: {
-            type: String,
-            required: true,
-          },
-          amount: {
-            type: Number,
-            required: true,
-          },
-        },
-      },
-    ],
+
+    products: [],
   },
   {
     timestamps: true,

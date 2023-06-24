@@ -266,7 +266,7 @@ import {
     const drug_id = parent.querySelector(".drug_id").textContent;
     const unitPrice = parent.querySelector(".unit_price").textContent;
     const drugQuantityPrice = parent.querySelector(".quantity_price");
-    const sumTotal = Math.ceil(+e.target.value * +unitPrice);
+    const sumTotal = (e.target.value * +unitPrice).toFixed(2);
     drugQuantityPrice.textContent = nf.format(sumTotal);
 
     mainRequistion.forEach((product) => {
@@ -327,7 +327,7 @@ import {
     drugRequisted.set("display_quantity", displayQuantity);
     drugRequisted.set("cost_price", +costPrice);
     drugRequisted.set("stock_required", stockRequired);
-    drugRequisted.set("quantity_price", Math.ceil(+stockRequired * costPrice));
+    drugRequisted.set("quantity_price", (stockRequired * costPrice).toFixed(2));
     drugRequisted.set("pack_size", packSize);
 
     const duplicate = mainRequistion.find(
@@ -375,13 +375,16 @@ import {
     <span class="detail">Quantity</span>
   </div>
   <span>
-    <div class="add_element">➕</div>
+    <div class="add_element">
+     <span class="add_stick"></span>
+     <span class="add_stick"></span>
+    </div>
     <span class="detail">Add</span>
   </span>
   
-  <span class="cost_price no_display">${
+  <span class="cost_price no_display">${(
     product.cost_price * product.pack_size
-  }</span>
+  ).toFixed(2)}</span>
   <span class="pack_size no_display">${product.pack_size}</span>
   <span class="drug__id no_display">${product._id}</span>
 </div>`;

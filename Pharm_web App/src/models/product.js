@@ -1,4 +1,5 @@
 const mongoose = require("mongoose");
+const ProductLog = require("./ProductLog");
 
 const productSchema = new mongoose.Schema(
   {
@@ -15,11 +16,21 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
     cost_price: {
-      type: Number,
+      type: String,
       required: true,
     },
     selling_price: {
-      type: Number,
+      type: String,
+    },
+    fg_price: {
+      type: String,
+      default: "0",
+    },
+    nhia_price: {
+      type: String,
+    },
+    nnpc_price: {
+      type: String,
     },
     quantity: {
       type: Number,
@@ -72,13 +83,36 @@ productSchema.virtual("productLog", {
 productSchema.pre("save", async function (next) {
   const product = this;
   if (product.isModified("cost_price")) {
-    product.selling_price = Math.ceil(product.cost_price * 1.3);
+    const selling_price = (product.cost_price * 1.3).toFixed(2);
+    product.selling_price = selling_price;
+    product.nnpc_price = (selling_price * 1.2).toFixed(2);
   }
+  if (product.isModified("fg_price")) {
+    const selling_price = (+product.cost_price * 1.3).toFixed(2);
+    const tenPercent = (0.1 * product.fg_price).toFixed(2);
+    if (product.fg_price === "0") {
+      product.nhia_price = selling_price;
+    } else if (selling_price > product.fg_price) {
+      product.nhia_price = (
+        selling_price -
+        product.fg_price +
+        +tenPercent
+      ).toFixed(2);
+    } else {
+      product.nhia_price = tenPercent;
+    }
+  }
+
   if (product.isModified("quantity")) {
     product.display_quantity = `${Math.ceil(
       product.quantity / product.pack_size
     )} * ${product.pack_size}`;
   }
+  next();
+});
+productSchema.pre("remove", async function (next) {
+  const product = this;
+  await ProductLog.deleteMany({ product: product._id });
   next();
 });
 

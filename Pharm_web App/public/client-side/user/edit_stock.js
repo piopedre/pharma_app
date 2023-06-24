@@ -49,11 +49,12 @@ const edit = async () => {
   const $form = document.querySelector(".edit_form");
   const $drugName = document.querySelector("#name");
   const $unitOfIssue = document.querySelector("#unit_of_issue");
-  const $costPrice = document.querySelector("#cost__price");
+  const $costPrice = document.querySelector("#cost_price");
+  const $fgPrice = document.querySelector("#fg_price");
   const $packSize = document.querySelector("#pack_size");
   const $quantity = document.querySelector("#quantity");
   const $minimumQuantity = document.querySelector("#minimum_quantity");
-  const $expiryDate = document.querySelector("#drug_expiry_date");
+  const $expiryDate = document.querySelector("#expiry_date");
   const $productCategory = document.querySelector("#product_category");
   const $elementId = document.querySelector(".element_id");
   const $cancelBtn = document.querySelector(".cancel_button");
@@ -81,12 +82,14 @@ const edit = async () => {
       quantity,
       pack_size,
       unit_of_issue,
+      fg_price,
     } = drug;
     $editForm.classList.remove("no_display");
     $elementId.textContent = _id;
     $drugName.value = name;
     ($productCategory.value = product_category),
       ($costPrice.value = cost_price);
+    $fgPrice.value = fg_price;
     $quantity.value = quantity;
     $packSize.value = pack_size;
     $minimumQuantity.value = minimum_quantity;

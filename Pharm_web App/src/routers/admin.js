@@ -10,6 +10,7 @@ router.post("/admins/registration", async (req, res) => {
     if (req.body.otp !== process.env.ADMINOTP_PASSCODE) {
       return res.status(401).send("Only Members Allowed");
     }
+
     delete req.body.otp;
     const admin = new Admin({ ...req.body });
     await admin.save();

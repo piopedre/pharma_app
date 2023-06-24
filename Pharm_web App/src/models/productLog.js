@@ -5,6 +5,7 @@ const productLogSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: true,
+      default: new Date(),
     },
     serial_voucher: {
       type: String,

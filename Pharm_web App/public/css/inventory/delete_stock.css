@@ -61,15 +61,15 @@ select {
   font-size: small;
   text-transform: uppercase;
   min-width: 400px;
+  background-color: white;
 }
-.main__item:nth-child(odd) {
-  background-color: rgb(211, 253, 235);
-}
+
 .delete_item {
   cursor: pointer;
 }
 .main__item:hover {
-  background-color: rgb(144, 255, 248);
+  background-color: #0274c0;
+  color: white;
 }
 .item_name {
   cursor: pointer;
@@ -78,9 +78,11 @@ select {
 
 .item_name:hover .item_details {
   display: block;
+  color: black;
 }
 i:hover .item_details {
   display: block;
+  color: black;
 }
 .item_details {
   position: absolute;

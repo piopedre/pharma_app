@@ -1,6 +1,9 @@
 .container {
   justify-content: center;
 }
+.edit__profile__container {
+  height: 100%;
+}
 .user__profile__page {
   width: 100%;
   height: 100%;

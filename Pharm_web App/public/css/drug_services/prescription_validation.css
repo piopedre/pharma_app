@@ -28,11 +28,16 @@
   font-size: small;
   background-color: rgba(219, 219, 219, 0.557);
 }
+.render__container {
+  height: 78%;
+  overflow: auto;
+}
 .render_structure {
   display: grid;
   grid-template-columns: 1fr 100px 100px 100px;
+  justify-items: start;
   column-gap: 10px;
-  place-items: center;
+  /* place-items: center; */
 }
 .render_list_headings {
   margin: 0.6rem 0;
@@ -45,6 +50,7 @@
 .product_searched {
   background-color: white;
   padding: 1rem 0;
+  margin: 0.2rem;
   cursor: pointer;
   border: 1px solid white;
 }
@@ -68,8 +74,8 @@
   font-weight: bold;
 }
 .product_list {
-  height: 55%;
-  overflow: hidden;
+  height: 63.5%;
+  overflow: auto;
 }
 .empty_list {
   margin: 0 0.5rem;
@@ -91,6 +97,7 @@
   border: 0.2px solid #dbdbdb8e;
   font-size: small;
   font-weight: bold;
+  padding: 1rem;
 }
 .product_item:hover {
   border: 0.2px solid #0274c0;
@@ -141,7 +148,7 @@
   flex-direction: column;
   padding: 1rem 0.4rem;
   margin: 0 0.5rem;
-  height: 15%;
+  height: 25%;
   align-items: flex-end;
   justify-content: space-between;
   background-color: rgba(219, 219, 219, 0.557);
@@ -155,7 +162,6 @@
 }
 .interaction_ctn {
   display: flex;
-  background-color: rgba(219, 219, 219, 0.557);
   margin: 0 0.5rem;
   justify-content: flex-end;
 }
@@ -184,4 +190,331 @@
 .hold_sales:active {
   color: #0274c0;
   background-color: white;
+}
+/* patient container */
+.patient_profile {
+  position: fixed;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  left: 0;
+  top: 0;
+  background-color: rgba(32, 32, 32, 0.557);
+  padding: 1rem;
+  text-align: center;
+  font-size: small;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+.main_patient_profile {
+  background-color: white;
+  position: relative;
+  padding: 20px;
+  top: 5%;
+}
+.profile_title {
+  margin: 0.5rem 0;
+}
+.search_render_ctn {
+  margin: 0.3rem 0;
+  display: grid;
+  grid-template-columns: auto auto;
+  column-gap: 10px;
+  place-items: center;
+}
+.remove_patient_profile {
+  position: absolute;
+  outline: none;
+  border: none;
+  background-color: transparent;
+  top: 0%;
+  right: 0%;
+  padding: 10px;
+  cursor: pointer;
+}
+.remove_patient_profile span {
+  border: 1px solid #ff1212;
+}
+.patient_search {
+  padding: 0.5rem;
+  margin-top: 0.2rem;
+  background-color: rgba(219, 219, 219, 0.557);
+  outline: none;
+  border: none;
+  text-transform: capitalize;
+  border-radius: 3px;
+  width: 100%;
+}
+.patient_search:focus {
+  border: 0.1px solid #0274c0;
+}
+.add_patient {
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  outline: none;
+  border: 0.1px solid white;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  background-color: #0274c0;
+}
+.add_patient_ctn {
+  padding: 1rem;
+  position: relative;
+  background-color: rgba(219, 219, 219, 0.557);
+  display: none;
+}
+.add_patient_ctn span {
+  color: #ff1212;
+}
+.add_patient_title {
+  margin: 1rem 0;
+}
+.min_ctn {
+  display: grid;
+  grid-template-rows: auto auto;
+  column-gap: 10px;
+}
+@media (min-width: 40rem) {
+  .min_ctn {
+    display: grid;
+    grid-template-columns: auto auto;
+    column-gap: 10px;
+  }
+}
+.remove_ctn {
+  position: absolute;
+  right: 0;
+  top: 0;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  background-color: transparent;
+  padding: 10px;
+}
+.remove_ctn span {
+  border: 1px solid #ff1212;
+}
+/* Patient Render Search */
+.render_patient_searched {
+  position: absolute;
+  background-color: rgba(255, 255, 255, 0.941);
+  width: 75%;
+  display: none;
+  top: 90%;
+}
+.patient_list_headings {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  column-gap: 10px;
+  padding: 1rem;
+  border: 1px solid rgba(219, 219, 219, 0.557);
+  font-weight: bold;
+}
+.patient_list {
+  height: 200px;
+  padding: 0 5px;
+  background-color: rgba(219, 219, 219, 0.557);
+  overflow: auto;
+}
+.searched_patient {
+  display: grid;
+  grid-template-columns: 100px 100px;
+  column-gap: 10px;
+  padding: 0.5rem;
+  background-color: white;
+  border: 0.2px solid #1abcc4;
+  cursor: pointer;
+  margin: 0.2rem 0;
+}
+.searched_patient:hover {
+  border: 0.2px solid #0274c0;
+}
+
+.input_ctn {
+  margin: 0.6rem 0;
+
+  display: grid;
+  grid-template-rows: auto;
+  text-align: left;
+}
+.add_input {
+  padding: 0.6rem;
+  outline: none;
+  border: none;
+  width: 100%;
+  border-radius: 3px;
+  text-transform: capitalize;
+}
+.add_input:focus {
+  border: 0.1px solid #0274c0;
+}
+.patient_sex select {
+  border: none;
+  outline: none;
+  height: 35px;
+}
+
+.patient_sex select:focus {
+  border: 0.1px solid #0274c0;
+}
+.add_new_patient {
+  margin: 1rem 0.5rem;
+  padding: 0.5rem;
+  outline: none;
+  border: 0.1px solid white;
+  text-transform: uppercase;
+  cursor: pointer;
+  border-radius: 5px;
+  color: white;
+  background-color: #0274c0;
+}
+.add_new_patient:active,
+.add_new_patient:hover,
+.add_patient:hover,
+.add_patient:active {
+  background-color: white;
+  color: #0274c0;
+  border: 0.1px solid #0274c0;
+}
+/* patient display */
+/* button opening the ctn */
+.patient_container {
+  cursor: pointer;
+  outline: none;
+  position: relative;
+}
+.patient_container_info {
+  font-size: smaller;
+  background-color: #0274c0;
+  padding: 5px;
+  border-radius: 5px;
+  position: absolute;
+  color: white;
+  bottom: -120%;
+  left: -10%;
+  display: none;
+}
+.patient_container:hover .patient_container_info {
+  display: block;
+}
+/*  */
+.patient_display {
+  width: 100%;
+  display: flex;
+  padding: 0.5rem;
+  justify-content: space-around;
+  background-color: #1abcc4;
+  color: white;
+  position: relative;
+}
+.display_cancel_btn {
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer;
+}
+.display_cancel_btn:hover span {
+  display: block;
+}
+.button_info {
+  position: absolute;
+  background-color: #0274c0;
+  color: white;
+  padding: 10px;
+  border-radius: 10px;
+  z-index: 2;
+  font-size: smaller;
+
+  bottom: -100%;
+  display: none;
+}
+.cancel_stick {
+  display: block;
+  border: 1px solid white;
+  margin: 0.2rem 0;
+  width: 1rem;
+}
+.cancel_stick:nth-child(1) {
+  transform: translate(0, 5px) rotate(45deg);
+}
+.cancel_stick:nth-child(2) {
+  transform: rotate(135deg);
+}
+/* pricing system */
+.pricing_system {
+  display: flex;
+  justify-content: space-around;
+  font-size: smaller;
+  font-weight: bold;
+}
+.pricing_unit input {
+  cursor: pointer;
+}
+.sale_ctn {
+  position: fixed;
+  display: flex;
+  z-index: 2;
+  height: 100%;
+  width: 100%;
+  padding: 0.5rem;
+  justify-content: center;
+  align-items: flex-start;
+  text-align: center;
+  background-color: rgba(219, 219, 219, 0.557);
+}
+.patient_tab {
+  width: 100%;
+}
+.sale_tab {
+  height: 40%;
+  width: 70%;
+  background-color: white;
+  padding: 0.5rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  position: relative;
+}
+.patient_detail {
+  text-transform: uppercase;
+}
+.remove_sale_tab {
+  padding: 10px;
+  border: none;
+  outline: none;
+  position: absolute;
+  right: 0%;
+  top: 0%;
+  background-color: #ff1212;
+  cursor: pointer;
+}
+.sale_receipt {
+  padding: 0.5rem;
+  outline-color: #0274c0;
+}
+.save_tab {
+  height: 50%;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+}
+.save_tab span {
+  font-size: small;
+  font-weight: bold;
+}
+.save_purchase {
+  background-color: #0274c0;
+  color: white;
+  border: none;
+  padding: 0.5rem;
+  border-radius: 5px;
+  cursor: pointer;
+}
+.save_purchase:hover,
+.save_purchase:active {
+  color: #0274c0;
+  background-color: rgba(219, 219, 219, 0.557);
 }

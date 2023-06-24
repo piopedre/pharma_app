@@ -75,6 +75,12 @@ adminSchema.virtual("productLogs", {
   localField: "_id",
   foreignField: "signature",
 });
+// admin productSale relationship
+adminSchema.virtual("productSales", {
+  ref: "ProductSale",
+  localField: "_id",
+  foreignField: "pharmacist",
+});
 adminSchema.methods.generateToken = async function () {
   const admin = this;
   const token = jwt.sign({ _id: admin.id.toString() }, process.env.ADMINKEY, {

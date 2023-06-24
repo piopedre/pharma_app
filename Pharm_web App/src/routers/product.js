@@ -9,6 +9,7 @@ router.post("/products/add_product", authenication, async (req, res) => {
     await product.save();
     res.status(201).send(product);
   } catch (e) {
+    console.log(e.message);
     res.status(400).send(e.message);
   }
 });

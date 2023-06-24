@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -27,7 +28,7 @@
               <div class=" no_display new_category">
                 <div class="category_ctn">
                   <label for="new_category">New Category :</label>
-                  <input type="text" class="category">
+                  <input id="new_category" type="text" class="category">
                   <button class="remove_category">X</button>
                   <button class="category_added">Add category</button>
                 </div>
@@ -45,14 +46,14 @@
               <div class="product_name">
                    <label for="product_name">Name:</label>
                    <div class="product">
-                    <input type="text" name="name" placeholder="Product Name" required>
+                    <input autocomplete="product" id="product_name" type="text" name="name" placeholder="Product Name" required autofocus>
                     <span class="product_example">E.g Tab Haloperidol 5mg or Tab Risperidone (Risperdal) 2mg  </span>
                    </div>    
               </div>
                <div class="product_categories">
                 <label for="product_category">Product Category:</label>
                 
-               <select name="product_category">
+               <select id="product_category" name="product_category">
                   {{#each categories}}
                 <option value="{{category}}">{{category}}</option>
                   {{else}}
@@ -72,24 +73,23 @@
                   <label for="pack_size">Pack size</label>
                   <label for="quantity">Quantity</label>
                   <label for="minimum Quantity">Minimum quantity</label>
-                  <input type="number" name="unit_of_issue" min="1" placeholder="Unit of issue" required>
-                  <input type="number" name="pack_size" min="1" placeholder="Pack size"  required>
-                  <input type="number" name="quantity"   placeholder="Quantity"  required>
-                  <input type="number" name="minimum_quantity"   placeholder="Quantity"  required>
+                  <input id="unit_issue" type="number" name="unit_of_issue" min="1" placeholder="Unit of issue" required>
+                  <input id="pack_size" type="number" name="pack_size" min="1" placeholder="Pack size"  required>
+                  <input  id="quantity" type="number" name="quantity"   placeholder="Quantity"  required>
+                  <input id="minimum Quantity"  type="number" name="minimum_quantity"   placeholder="Quantity"  required>
                 </div>
               </div>
                 <div class="manufacturer_ctn">
                   <p class="manufacturer_information">Manufacturer Information</p>
-                  <div class="info"> 
-              
+                <div class="info"> 
               <label for="price">Product price</label>
+              <label for="fg_price">Product Fg price</label>
               <label for="expiry_date">Expiry date</label>
-              
-              <input type="number" name="cost_price" placeholder="Price" required >
-                <input type="date" name="expiry_date" placeholder="EXPIRY DATE" required >
+              <input id="price" type="text" name="cost_price" placeholder="Price" required >
+              <input id="fg_price" type="text" name="fg_price" placeholder="Nhia Cost Price"  >
+                <input id="expiry_date" type="date" name="expiry_date" placeholder="EXPIRY DATE" required >
             </div>
                 </div>
-            
               <div class="action__container">
                 <input type="reset" class="cancel_btn" value="CANCEL">
                 <input type="submit" class="add_btn" value="ADD NEW DRUG">

@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -15,14 +16,118 @@
       {{>log_header}}
       <div class="backdrop"></div>
     <main>
-      
       <div class="container">
         {{>profile}}
-        {{>notification}}
+         {{>notification}}
+         
         <div class="prescription__validation">
           {{>site}}
+          {{!-- Prescription Tab  --}}
+          <div class="sale_ctn no_display">
+            <div class="sale_tab">
+              <div class="patient_tab">
+              <div class="patient_detail">
+                <div class="patient_detail_title"></div>
+              <button class="remove_sale_tab">
+                <span class="cancel_stick"></span>
+                <span class="cancel_stick"></span>
+              </button>
+              </div>
+            </div>
+            <div class="save_tab">
+              <input type="text" id="sale_receipt"  class="sale_receipt" placeholder="Enter Receipt Number" min="6">
+              <span >Input Last 6 digits in the Receipt</span>
+              <button class="save_purchase">Save Purchase</button>
+            </div>
+            </div>
+          </div>
+          <div class="patient_display no_display">
+            <button class="display_cancel_btn">
+              <span class="cancel_stick"></span>
+              <span class="cancel_stick"></span>
+              <span class="button_info">Remove Patient</span>
+            </button>
+            <div class="patient_display_name">
+            </div>
+            <div class="patient_display_contact">
+            </div>
+          </div>
+          {{!-- Patient Profile --}}
+          <div class="patient_profile no_display">
+              <div class="main_patient_profile">
+                  <div class="profile_title">
+                  PATIENT INFORMATION
+                  </div>
+            <div class="search_render_ctn">
+                <input autofocus type="text" class="patient_search" name="name" autocomplete="on" placeholder="Search patient name or file number">
+                  <button class="add_patient">New Patient</button>
+                  <button class="remove_patient_profile">
+                      <span class="cancel_stick"></span>
+                      <span class="cancel_stick"></span>
+                  </button>
+                  <div class="render_patient_searched">
+                    <div class="patient_list_headings">
+                      <div>Patient Name</div>
+                      <div>File Number</div>
+                    </div>
+                    <div class="patient_list">
+                    </div>
+                  </div>
+          </div>
+            <div class="add_patient_ctn ">
+              <div class="add_patient_title">
+                 NEW PATIENT INFORMATION
+              </div>
+              <span>All * boxes should be entered</span>
+              <button class="remove_ctn">
+                  <span class="cancel_stick"></span>
+              <span class="cancel_stick"></span>
+              </button>
+              
+              <form id="main_ctn" method="post">
+                <div class="min_ctn">
+                   <div class="patient_name input_ctn">
+                <label for="name">Full Name* </label>
+                <input class="add_input" id="name" type="text" name="name" autocomplete="on" required >
+              </div>
+              <div class="file_number input_ctn">
+                <label for="file_number">File Number* </label>
+                <input class="add_input" id="file_number" type="text" name="file_number" autocomplete="on" required >
+              </div>
+              <div class="patient_contact input_ctn">
+                <label for="contact">Contact </label>
+                <input class="add_input" id="contact" type="tel" name="contact" autocomplete="on" >
+              </div>
+              <div class="patient_sex input_ctn">
+                <label for="sex">Sex* </label>
+                <select name="sex" id="sex" required>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                </select>
+                
+              </div>
+                </div>
+                
+              <button class="add_new_patient">ADD PATIENT</button>
+              </div>
+             
+            </form>
+            <div class="patient_display_ctn">
+              
+             
+            </div>
+            {{!-- </div> --}}
+          </div>
+           
+          </div>
+         
           <div class="search__container">
-            <input class="search__input" type="text" name="product" id="product" placeholder="search product name">
+            <input autofocus class="search__input" type="text" name="product" id="product" placeholder="search product name" autocomplete="on">
+            <button class="patient_container">👤
+              <span class="patient_container_info">
+                Patient
+              </span>
+            </button>
             <div class="search_render_tab no_display">
               <div class="render_list_headings render_structure">
                 <div>
@@ -39,23 +144,25 @@
                 </div>
               </div>
               <div class="render_list">
-                {{!-- <div class="product_searched render_structure">
-                  <div class="searched_product_name">
-                    Tab Chlorpheniramine 4mg
-                  </div>
-                  <div class="searched_product_price">
-                    100
-                  </div>
-                  <div class="searched_product_quantity">
-                    1000
-                  </div>
-                  <div class="searched_product_expiry">
-                    5-24
-                  </div>
-                </div> --}}
+               
               </div>
             </div>
           </div>
+          <fieldset class="pricing_system">
+            <legend> Pricing System</legend>
+            <div class="pricing_unit">
+              <input type="radio" name="pricing" id="normal" value="NORMAL" checked>
+            <label for="normal">NORMAL</label> 
+            </div>
+            <div class="pricing_unit">
+              <input type="radio" name="pricing" id="nhis" value="NHIA">
+            <label for="nhis">NHIA</label> 
+            </div>
+            <div class="pricing_unit">
+               <input type="radio" name="pricing" id="nnpc" value="NNPC">
+             <label for="nnpc">NNPC</label>
+            </div>
+          </fieldset>
           <div class="render__container">
             <div class="product_headings product_structure">
               <div >Product Name</div>
@@ -68,27 +175,7 @@
                 <div>Add a Product</div>
                 
               </div>
-              {{!-- <div class="product_item">
-                <div class="product_structure">
-                <div class="product_name">Tab Chlorpheniramine 4mg</div>
-                <input type="number" value="0" class="product_quantity" min="1">
-                <div class="unit_quantity_price">10000</div>
-                <div class="quantity_price">3</div>
-                </div>
-                <div class="product_details">
-                  <div class="onhand_quantity product_detail_structure">
-                    <div class="quantity_title">On Hand Qty : </div>
-                    <div class="on_hand_qty">46</div>
-                  </div>
-                  <div class="expiry product_detail_structure">
-                    <div class="expiry_title">Expiry Date : </div>
-                    <div class="expiry_date">5-24</div>
-                  </div>
-                  <button class="remove_product">delete</button>
-                </div>
-
-                
-              </div> --}}
+             
             </div>
             <div class="product_sales_information">
               <div class="product_sales_content">
@@ -103,11 +190,12 @@
                 <div class="products_total_title">Total</div>
                 <div class="products_total_amount">0</div>
               </div>
+              <div class="interaction_ctn">
+              <button class="hold_sales">Held Sale</button>
+              <button class="send_sales">Make Sale</button>
             </div>
-             <div class="interaction_ctn">
-              <button class="hold_sales">Hold Sales</button>
-              <button class="send_sales">Send</button>
             </div>
+             
             
            
 

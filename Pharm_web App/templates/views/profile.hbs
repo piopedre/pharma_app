@@ -1,3 +1,4 @@
+<!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
@@ -39,7 +40,7 @@
           </div>
             <div class="label__input">
               <label for="title">Choose a title: </label>
-              <select name="title" class="user__title">
+              <select id="title" name="title" class="user__title">
                 <option value="MR">MR</option>
                 <option value="MRS">MRS</option>
                 <option value="PHARM">PHARM</option>
@@ -50,7 +51,9 @@
                 <label for="first_name">First Name</label>
                 <input
                   type="text"
+                   autocomplete="first-name"
                   name="first_name"
+                  id="first_name"
                   class="first_name_input"
                   required
                 />
@@ -59,7 +62,9 @@
                 <label for="last_name">Last Name</label>
                 <input
                   type="text"
+                  autocomplete="last-name"
                   name="last_name"
+                  id="last_name"
                   class="last_name_input"
                   required
                 />
@@ -67,14 +72,16 @@
             </div>
             <div class="label__input">
               <label for="email">Email</label>
-              <input type="text" name="email" class="email_input" required />
+              <input id="email"  autocomplete="email" type="text" name="email" class="email_input" required />
             </div>
             <div class="label__input">
               <label for="username">Username</label>
               <input
                 type="text"
+                id="username"
                 name="username"
                 class="username_input"
+                autocomplete="user-name"
                 required
               />
               <span class="username__check_error"></span>
@@ -83,7 +90,9 @@
               <label for="phone_number">Phone Number</label>
               <input
                 type="tel"
+                id="phone_number"
                 name="phone_number"
+                autocomplete="phone-number"
                 class="phone_number_input"
                 required
               />
@@ -98,25 +107,5 @@
     </main>
     {{>footer}}
   </body>
-  {{!-- <div class="no_display">
-              <div class="label__input">
-              <label for="password">Password</label>
-              <input
-                type="password"
-                name="password"
-                class="password_input"
-                required
-              />
-            </div>
-            <br>
-            <div class="label__input">
-              <label for="password">Retype Password</label>
-              <input
-                type="retype_password"
-                name="retype_password"
-                class="retype_password_input"
-                required
-              />
-            </div>
-            </div> --}}
+
 </html>
