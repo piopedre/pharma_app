@@ -9,7 +9,6 @@ router.post("/patients", authenication, async (req, res) => {
     await patient.save();
     res.status(200).send();
   } catch (error) {
-    console.log(error.message);
     res.status(400).send();
   }
 });

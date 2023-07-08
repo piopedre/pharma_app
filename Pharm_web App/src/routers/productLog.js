@@ -12,6 +12,7 @@ router.post("/productlogs", authenication, async (req, res) => {
     await productlog.save();
     res.status(201).send();
   } catch (error) {
+    console.log(error.message);
     res.status(400).send();
   }
 });
@@ -19,12 +20,15 @@ router.post("/productlogs", authenication, async (req, res) => {
 router.get("/productlogsbyproduct/:id", authenication, async (req, res) => {
   const product = req.params.id;
   try {
-    const productlog = await ProductLog.find({ product });
+    const productlog = await ProductLog.find({ product })
+      .populate("signature")
+      .exec();
     if (!productlog) {
       return res.status(404).send();
     }
     res.status(200).send(productlog);
   } catch (e) {
+    console.log(e.message);
     res.status(400).send();
   }
 });

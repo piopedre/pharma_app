@@ -6,11 +6,14 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharma App Dashboard</title>
     <link rel="stylesheet" href="/css/dashboard/dashboard.css" />
-      <link rel="stylesheet" href="/css/shared/log_shared.css">
+      <link rel="stylesheet" href="/css/shared/log-shared.css">
       <link rel="stylesheet" href="/css/shared/shared.css" />
     
+    
+    <script defer  src="/client-side/utils/plotly-2.24.1.min.js" charset="utf-8"></script>
     <script defer src="/client-side/styles/styles.js"></script>
-    <script defer type="module" src="/client-side/user/user_shared.js"></script>
+    <script defer type="module" src="/client-side/user/userShared.js"></script>
+    <script defer type="module" src="/client-side/user/dashboard.js"></script>
   </head>
   <body>
     <div class="backdrop"></div>
@@ -25,23 +28,28 @@
 
         <div class="homepage__features container__item">
           {{>site}}
+          {{>notification}}
           <div class="overview__container">
             <h2 class="features__overview">Overview</h2>
             <h4 class="user__display_name">
             </h4>
           </div>
 
-          <div class="sales__display_dashboard dashboard__inputs">
-            <div class="user__drug-sales">
-
-            </div>
+          <div id="sales_dashboard" class="sales__display_dashboard dashboard__inputs">
+           <div id="sales_slide_1" class="slide_structure"></div>
+           <div id="sales_slide_2" class="slide_structure"></div>
+           <div id='sales_slide_3'class="slide_structure"></div>
+           <div class="forward_btn control_btn">
+            <span class="arrow_element"></span>
+            <span class="arrow_element" ></span>
+           </div>
+           <div class="backward_btn control_btn">
+             <span class="arrow_element"></span>
+            <span class="arrow_element"></span>
+           </div>
           </div>
-
-          <div class="drug__notice-display dashboard__inputs">
-          </div>
-          <div class="patient__activity-display dashboard__inputs">
-
-          </div>
+          {{!-- drug notice --}}
+          {{!-- patient activity --}}
 
         </div>
       </div>

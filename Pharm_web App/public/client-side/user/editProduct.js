@@ -6,6 +6,7 @@ import {
   categoryAdd,
   sendReq,
   addProductLogs,
+  altSendReq,
 } from "../utils/utils.js";
 const edit = async () => {
   const $renderCtn = document.querySelector(".drug_render_list");
@@ -85,6 +86,13 @@ const edit = async () => {
       fg_price,
     } = drug;
     $editForm.classList.remove("no_display");
+    const parsedDate = Intl.DateTimeFormat("en-US", {
+      year: "numeric",
+      month: "numeric",
+    })
+      .format(Date.parse(`${expiry_date}`))
+      .replace("/", "-");
+
     $elementId.textContent = _id;
     $drugName.value = name;
     ($productCategory.value = product_category),
@@ -94,7 +102,7 @@ const edit = async () => {
     $packSize.value = pack_size;
     $minimumQuantity.value = minimum_quantity;
     $unitOfIssue.value = unit_of_issue;
-    $expiryDate.value = new Date(`${expiry_date}`).toISOString().split("T")[0];
+    $expiryDate.value = parsedDate;
     $submitBtn.disabled = true;
   }
   const edited = (e) => {

@@ -16,21 +16,21 @@ const productSchema = new mongoose.Schema(
       trim: true,
     },
     cost_price: {
-      type: String,
+      type: Number,
       required: true,
     },
     selling_price: {
-      type: String,
+      type: Number,
     },
     fg_price: {
-      type: String,
-      default: "0",
+      type: Number,
+      default: 0,
     },
     nhia_price: {
-      type: String,
+      type: Number,
     },
     nnpc_price: {
-      type: String,
+      type: Number,
     },
     quantity: {
       type: Number,
@@ -90,9 +90,9 @@ productSchema.pre("save", async function (next) {
   if (product.isModified("fg_price")) {
     const selling_price = (+product.cost_price * 1.3).toFixed(2);
     const tenPercent = (0.1 * product.fg_price).toFixed(2);
-    if (product.fg_price === "0") {
+    if (product.fg_price === 0) {
       product.nhia_price = selling_price;
-    } else if (selling_price > product.fg_price) {
+    } else if (selling_price > +product.fg_price) {
       product.nhia_price = (
         selling_price -
         product.fg_price +
@@ -103,8 +103,8 @@ productSchema.pre("save", async function (next) {
     }
   }
 
-  if (product.isModified("quantity")) {
-    product.display_quantity = `${Math.ceil(
+  if (product.isModified("quantity") || product.isModified("pack_size")) {
+    product.display_quantity = `${Math.floor(
       product.quantity / product.pack_size
     )} * ${product.pack_size}`;
   }

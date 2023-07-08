@@ -48,12 +48,12 @@ import {
     );
     if (response?.ok) {
       $category.value = "";
-      location.reload();
     }
 
     setTimeout(() => {
       $message.textContent = "";
       $notifyCtn.classList.add("no_display");
+      location.reload();
     }, 900);
   };
   const addNewDrug = async (e) => {

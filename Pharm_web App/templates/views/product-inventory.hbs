@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma App</title>
+    {{!-- css links --}}
+    <link rel="stylesheet" href="/css/shared/shared.css" />
+    <link rel="stylesheet" href="/css/shared/log-shared.css" />
+    <link rel="stylesheet" href="/css/inventory/product-inventory.css" /> 
+    {{!-- JS links --}}
+    <script defer src="/client-side/styles/styles.js"></script>
+    <script defer type="module" src="/client-side/user/userShared.js"></script>
+     <script defer type="module" src="/client-side/user/productInventory.js"></script> 
+  </head>
+  <body>
+    {{>log_header}}
+    <main>
+      <div class="backdrop"></div>
+
+      <div class="container">
+        {{>notification}}
+        {{>profile}}
+        <div class="product__inventory__container">
+        {{>site}}
+          <div class="inventory_container">
+            <div class="search_inventory_container">
+              <input type="text" name="product_name" id="product_name" placeholder="Search Product Name">
+            </div>
+            <div class="inventory_render_container">
+              <span class="inventory_title">Inventory List</span>
+              <div class="product_list">
+                {{!-- <div class="product_main_item">
+                    <div class="product_item">
+                      <div class="product_name">Tab Chlorpheniramine 4mg</div>
+                      <div class="product_quantity">500</div>
+                      <div class="product_expiry">7/23</div>
+                    </div>
+                    <div class="product_details ">
+                      <div class="product_logs_headings product_logs_structure">
+                        <div class="product_issue_date">Date</div>
+                        <div class="product_movement">Movement</div>
+                        <div class="product_received_amount">Rec/Issued</div>
+                        <div class="product_balance">Balance</div>
+                        <div class="pharmacist_name">Pharm</div>
+                      </div>
+                      <div class="product_detail_container">
+                        <div class="product_logs product_logs_structure">
+                        <div class="product_issue_date">12/09/93</div>
+                        <div class="product_movement">Voke Aghama</div>
+                        <div class="product_received_amount">300</div>
+                        <div class="product_balance">500</div>
+                        <div class="pharmacist_name">Abas</div>
+                      </div>
+                    </div>
+                      
+                    </div> --}}
+                    
+                </div>
+                
+                
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+    {{>footer}}
+  </body>
+</html>

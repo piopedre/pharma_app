@@ -29,7 +29,7 @@
   background-color: rgba(219, 219, 219, 0.557);
 }
 .render__container {
-  height: 78%;
+  height: 77%;
   overflow: auto;
 }
 .render_structure {
@@ -144,6 +144,7 @@
   font-weight: bolder;
 }
 .product_sales_information {
+  border: 0.2px solid rgba(32, 32, 32, 0.557);
   display: flex;
   flex-direction: column;
   padding: 1rem 0.4rem;
@@ -215,6 +216,11 @@
 }
 .profile_title {
   margin: 0.5rem 0;
+}
+@media (min-width: 40rem) {
+  .main_patient_profile {
+    width: 70%;
+  }
 }
 .search_render_ctn {
   margin: 0.3rem 0;
@@ -313,6 +319,7 @@
   border: 1px solid rgba(219, 219, 219, 0.557);
   font-weight: bold;
 }
+
 .patient_list {
   height: 200px;
   padding: 0 5px;
@@ -332,7 +339,14 @@
 .searched_patient:hover {
   border: 0.2px solid #0274c0;
 }
-
+@media (min-width: 40rem) {
+  .patient_list_headings {
+    grid-template-columns: auto auto;
+  }
+  .searched_patient {
+    grid-template-columns: auto auto;
+  }
+}
 .input_ctn {
   margin: 0.6rem 0;
 
@@ -477,6 +491,11 @@
   flex-direction: column;
   justify-content: space-around;
   position: relative;
+}
+@media (min-width: 40rem) {
+  .sale_tab {
+    width: 40%;
+  }
 }
 .patient_detail {
   text-transform: uppercase;

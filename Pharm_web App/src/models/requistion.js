@@ -14,7 +14,7 @@ const requistionSchema = new mongoose.Schema(
     },
     date: {
       type: Date,
-      required: true,
+      default: new Date(),
     },
     serial_number: {
       type: String,
@@ -23,7 +23,7 @@ const requistionSchema = new mongoose.Schema(
     requisting_pharmacist: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "admin",
+      ref: "Admin",
     },
     number_of_items_requisted: {
       type: Number,

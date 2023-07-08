@@ -59,6 +59,17 @@ router.patch("/admins/update_user", authenication, async (req, res) => {
   }
 });
 
+router.get("/admins/:id", authenication, async (req, res) => {
+  try {
+    const admin = await Admin.findOne({ _id: req.params.id });
+    if (!admin) {
+      return res.status(404).send();
+    }
+    res.status(200).send(admin);
+  } catch (error) {
+    res.status(500).send();
+  }
+});
 // multer file upload
 const upload = multer({
   linmits: {

@@ -100,7 +100,7 @@ adminSchema.methods.toJSON = function () {
   delete adminObject.password;
   delete adminObject.tokens;
   delete adminObject.avatar;
-  // delete adminObject._id;
+
   return adminObject;
 };
 adminSchema.statics.findAdmin = async (body) => {

@@ -62,6 +62,7 @@ import {
   let productDatabase = null;
   let patientDatabase = null;
   let pricing = "";
+  localStorage.setItem("productList", []);
   const productList = [];
   await getProducts();
   await getPatients();
@@ -265,10 +266,11 @@ import {
   // Confirm Sale
   async function confirmSale() {
     // e.preventDefault();
-    const receiptNumber = document.querySelector("#sale_receipt").value;
-    if (!receiptNumber || receiptNumber.length !== 6) {
+    const receiptNumber = document.querySelector("#sale_receipt");
+    if (!receiptNumber.value || receiptNumber.value.length !== 6) {
       return;
     }
+
     // removing sale container
     $saleCtn.classList.add("no_display");
     // notification container
@@ -295,7 +297,8 @@ import {
     }, []);
     // Preparing Data to be Saved
     const data = Object.create(null);
-    data.receipt_number = receiptNumber;
+    data.date = new Date();
+    data.receipt_number = receiptNumber.value;
     data.amount = +$totalSold.textContent.replace("NGN", "").replace(",", "");
     // check if patient is available
     if ($patientDisplayCtn.classList.contains("no_display")) {
@@ -306,6 +309,7 @@ import {
     data.location = $location;
     data.unit = $unit;
     data.products = products;
+    data.pricing = pricing;
 
     // save to database
     const response = await sendReq(
@@ -313,12 +317,13 @@ import {
       JSON.stringify(data),
       addSale,
       $message,
-      "Purchase Successfully",
+      "Purchase Successful",
       "Problem Adding Sale"
     );
     if (response?.ok) {
       renderProduct();
       productTab();
+      receiptNumber.value = "";
       $patientDisplayCtn.classList.add("no_display");
       products.forEach(async (product) => {
         const editStock = Object.create(null);
@@ -334,6 +339,7 @@ import {
 
         // For Product Logs
         const movement = new Map();
+        movement.set("date", new Date());
         movement.set("movement", data.patient);
         movement.set("issued", product.quantity);
         movement.set("balance", product.onHandQuantity - product.quantity);
@@ -410,7 +416,7 @@ import {
       productList.findIndex((product) => product.get("id") === selectedProduct),
       1
     );
-
+    // revert to
     renderProduct(productList);
     // dynamic adjust sales board
     productTab(productList);

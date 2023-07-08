@@ -39,8 +39,53 @@ async function sendReq(
     }
   }
 }
+
 async function getDatabase(token, reqFunction, location, unit, messageEl) {
   const response = await reqFunction(token, location, unit);
+  try {
+    if (!response.ok) {
+      throw new ResponseError("Bad Fetch Response", response);
+    }
+    return response;
+  } catch (err) {
+    switch (err?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Error, Fetching Database";
+        break;
+      case 401:
+        messageEl.style.backgroundColor = "#c41a1a";
+        location.replace("/pharma_app/login");
+        break;
+      case 404:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Database is empty";
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = " error, connecting to server";
+        break;
+    }
+  }
+}
+async function getSalesDatabase(
+  token,
+  reqFunction,
+  location,
+  unit,
+  messageEl,
+  pricing,
+  startDate,
+  endDate
+) {
+  const response = await reqFunction(
+    token,
+    location,
+    unit,
+    startDate,
+    endDate,
+    pricing
+  );
   try {
     if (!response.ok) {
       throw new ResponseError("Bad Fetch Response", response);
@@ -183,6 +228,18 @@ async function loginUser(data) {
 
 async function getProfile(token) {
   const response = await fetch(`/admins/me`, {
+    method: "GET",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+  });
+  return response;
+}
+// get User Last Name
+
+async function getAdmin(token, id) {
+  const response = await fetch(`/admins/${id}`, {
     method: "GET",
     headers: {
       Authorization: `Bearer ${token}`,
@@ -370,6 +427,28 @@ async function addSale(token, data) {
   });
   return response;
 }
+async function getSales(
+  token,
+  location,
+  pharmacyUnit,
+  startDate = `${new Date().getFullYear()}-${
+    new Date().getMonth() + 1
+  }-${new Date().getDate()}`,
+  endDate = new Date().setDate(new Date().getDate() + 1),
+  pricing = "NORMAL"
+) {
+  const response = await fetch(
+    `/productsales/search?pricing=${pricing}&location=${location}&unit=${pharmacyUnit}&end_date=${endDate}&start_date=${startDate}`,
+    {
+      method: "GET",
+      headers: {
+        Authorization: `Bearer ${token}`,
+        "Content-type": "application/json",
+      },
+    }
+  );
+  return response;
+}
 export {
   registerUser,
   loginUser,
@@ -395,4 +474,7 @@ export {
   getAllPatients,
   getPatientDatabase,
   addSale,
+  getSales,
+  getSalesDatabase,
+  getAdmin,
 };

@@ -5,7 +5,6 @@ const productLogSchema = new mongoose.Schema(
     date: {
       type: Date,
       required: true,
-      default: new Date(),
     },
     serial_voucher: {
       type: String,
@@ -28,12 +27,12 @@ const productLogSchema = new mongoose.Schema(
     product: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "product",
+      ref: "Product",
     },
     signature: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
-      ref: "admin",
+      ref: "Admin",
     },
     location: {
       type: String,

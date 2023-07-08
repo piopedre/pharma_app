@@ -16,7 +16,7 @@ router.get("/pharma_app/profile", (req, res) => {
   res.render("profile");
 });
 router.get("/pharma_app/prescription_validation", (req, res) => {
-  res.render("prescription_validation");
+  res.render("prescription-validation");
 });
 router.get("/pharma_app/add_stock", async (req, res) => {
   let categories;
@@ -28,10 +28,10 @@ router.get("/pharma_app/add_stock", async (req, res) => {
     categories = request.data;
   } catch (error) {
     if (!error.statusCode === 200) {
-      res.render("add_stock", { categories });
+      res.render("add-product", { categories });
     }
   }
-  res.render("add_stock", { categories });
+  res.render("add-product", { categories });
 });
 router.get("/pharma_app/edit_stock", async (req, res) => {
   let categories;
@@ -43,15 +43,18 @@ router.get("/pharma_app/edit_stock", async (req, res) => {
     categories = request.data;
   } catch (error) {
     if (!error.statusCode === 200) {
-      res.render("edit_stock", { categories });
+      res.render("edit-product", { categories });
     }
   }
-  res.render("edit_stock", { categories });
+  res.render("edit-product", { categories });
 });
 router.get("/pharma_app/delete_stock", (req, res) => {
-  res.render("delete_stock");
+  res.render("delete-product");
 });
 router.get("/pharma_app/requistion", (req, res) => {
   res.render("requistion.hbs");
+});
+router.get("/pharma_app/product_inventory", (req, res) => {
+  res.render("product-inventory");
 });
 module.exports = router;

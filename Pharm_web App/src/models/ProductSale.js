@@ -20,6 +20,11 @@ const productSalesSchema = new mongoose.Schema(
       default: "UNREGISTERED",
       uppercase: true,
     },
+    pricing: {
+      type: String,
+      required: true,
+      uppercase: true,
+    },
     date: {
       type: Date,
       default: new Date(),

@@ -18,10 +18,10 @@
     );
   };
 
-  const addtoggleNavbar = () => {
-    $toggleNavbar?.classList.add("show");
-    $backdrop?.classList.add("show");
-  };
+  // const addtoggleNavbar = () => {
+  //   $toggleNavbar?.classList.add("show");
+  //   $backdrop?.classList.add("show");
+  // };
   const toggleNavbar = () => {
     $toggleNavbar?.classList.toggle("show");
     $backdrop?.classList.toggle("show");
@@ -41,18 +41,4 @@
     link.addEventListener("click", removetoggleNavbar);
   });
 })();
-// test code
-// (async function () {
-//   const response = await fetch(
-//     `/productlogsbyproduct/6457bc3bcd607488c3da52b9`,
-//     {
-//       method: "GET",
-//       headers: {
-//         Authorization: `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJfaWQiOiI2NDI5ODI2OGZhMzkzZDY1NGE2YzMwNjIiLCJpYXQiOjE2ODM0Nzg2NTUsImV4cCI6MTY4MzQ4MjI1NX0.B-Oxewwoavbhf4mi6I6aMh6AGV45F30mGX1770TeZ8s`,
-//         "Content-type": "application/json",
-//       },
-//     }
-//   );
-//   const productlog = await response.json();
-//   console.log(productlog.error);
-// })();
+// 64298268fa393d654a6c3062
