@@ -2,6 +2,7 @@ import { ResponseError, loginUser } from "../utils/utils.js";
 
 (function () {
   const $form = document.querySelector(".signin");
+  const $notifyCtn = document.querySelector(".notification");
   const $message = document.querySelector(".notification__message");
   const $loader = document.querySelector(".loader_container");
 
@@ -23,7 +24,7 @@ import { ResponseError, loginUser } from "../utils/utils.js";
       );
       sessionStorage.setItem(
         "unit",
-        JSON.stringify(Object.fromEntries(new FormData($form)).pharmacy_unit)
+        JSON.stringify(Object.fromEntries(new FormData($form)).unit)
       );
       sessionStorage.setItem("token", JSON.stringify(result.token));
       setTimeout(() => {
@@ -32,6 +33,7 @@ import { ResponseError, loginUser } from "../utils/utils.js";
       }, 900);
     } catch (err) {
       $loader.classList.add("no_display");
+      $notifyCtn.classList.remove("no_display");
       switch (err?.response?.status) {
         case 400:
           $message.style.color = "#c41a1a";
@@ -45,8 +47,8 @@ import { ResponseError, loginUser } from "../utils/utils.js";
           break;
       }
       setTimeout(() => {
-        $message.style.display = "none";
-      }, 2000);
+        $notifyCtn.classList.add("no_display");
+      }, 5000);
     }
   };
 

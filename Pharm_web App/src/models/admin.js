@@ -9,12 +9,12 @@ const adminSchema = new mongoose.Schema({
     uppercase: true,
     default: "Pharm",
   },
-  first_name: {
+  firstName: {
     type: String,
     required: true,
     trim: true,
   },
-  last_name: {
+  lastName: {
     type: String,
     required: true,
     trim: true,
@@ -40,7 +40,7 @@ const adminSchema = new mongoose.Schema({
     },
     // please if the mail actually exists add to validate
   },
-  phone_number: {
+  phoneNumber: {
     type: String,
     unique: true,
     required: true,
@@ -84,7 +84,7 @@ adminSchema.virtual("productSales", {
 adminSchema.methods.generateToken = async function () {
   const admin = this;
   const token = jwt.sign({ _id: admin.id.toString() }, process.env.ADMINKEY, {
-    expiresIn: "1h",
+    expiresIn: "2h",
   });
   if (!token) {
     throw new Error("Unable to authenicate");
@@ -123,9 +123,9 @@ adminSchema.pre("save", async function (next) {
     const salt = await bcrypt.genSalt(8);
     admin.password = await bcrypt.hash(admin.password, salt);
   }
-  if (admin.isModified("first_name")) {
-    admin.first_name =
-      admin.first_name[0].toUpperCase() + admin.first_name.slice(1);
+  if (admin.isModified("firstName")) {
+    admin.firstName =
+      admin.firstName[0].toUpperCase() + admin.firstName.slice(1);
   }
   next();
 });

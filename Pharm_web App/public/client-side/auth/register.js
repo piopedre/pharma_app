@@ -14,13 +14,29 @@ import { registerUser, ResponseError } from "../utils/utils.js";
   const $message = document.querySelector(".notification__message");
   const registrationMessage = document.querySelector(".registration__message");
   const $telephone = document.querySelector("#telephone");
-  const $tele_error = document.querySelector(".tele_error__label");
+  const $teleError = document.querySelector(".tele_error__label");
   const $submit = document.querySelector("input[type='submit']");
   // functions
   const register = async (e) => {
     e.preventDefault();
-    $loader.classList.remove("no_display");
+    const passwordRegex =
+      /(?=[A-Za-z0-9@#$%^&+!=]+$)^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[@#$%^&+!=])(?=.{8,}).*$/g;
 
+    const registerForm = new FormData($form);
+    if (!passwordRegex.test(registerForm.get("password"))) {
+      $notify.classList.remove("no_display");
+      $message.style.backgroundColor = "#c41a1a";
+      $message.textContent = `password must contain at least 8 characters long,
+         min 1 Uppercase 1 Lowercase 1 Number 1 special character and only contains symbols from the alphabet,
+          numbers and chosen special characters (@#$%^&+!=)`;
+      setTimeout(() => {
+        $notify.classList.add("no_display");
+        $form.reset();
+      }, 3000);
+      return;
+    }
+    $loader.classList.remove("no_display");
+    [...registerForm.keys()].forEach((key) => [registerForm.delete(key)]);
     try {
       const response = await registerUser(
         JSON.stringify(Object.fromEntries(new FormData($form).entries()))
@@ -72,13 +88,13 @@ import { registerUser, ResponseError } from "../utils/utils.js";
 
   const validPhoneNumber = () => {
     if (!$telephone.value.match("^[0-9]*$") || $telephone.value.length !== 11) {
-      $tele_error.innerHTML = "Invalid Phone number";
-      $tele_error.style.color = "#ff0c44";
+      $teleError.innerHTML = "Invalid Phone number";
+      $teleError.style.color = "#ff0c44";
       $submit.disabled = true;
       return;
     }
-    $tele_error.innerHTML = `Valid Phone Number`;
-    $tele_error.style.color = "#0efb83";
+    $teleError.innerHTML = `Valid Phone Number`;
+    $teleError.style.color = "#0efb83";
     $submit.disabled = false;
   };
 

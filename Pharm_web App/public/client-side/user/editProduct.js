@@ -75,33 +75,32 @@ const edit = async () => {
 
     const {
       _id,
-      cost_price,
-      product_category,
-      expiry_date,
-      minimum_quantity,
+      costPrice,
+      productCategory,
+      expiryDate,
+      minimumQuantity,
       name,
       quantity,
-      pack_size,
-      unit_of_issue,
-      fg_price,
+      packSize,
+      unitOfIssue,
+      fgPrice,
     } = drug;
     $editForm.classList.remove("no_display");
     const parsedDate = Intl.DateTimeFormat("en-US", {
       year: "numeric",
       month: "numeric",
     })
-      .format(Date.parse(`${expiry_date}`))
+      .format(Date.parse(`${expiryDate}`))
       .replace("/", "-");
 
     $elementId.textContent = _id;
     $drugName.value = name;
-    ($productCategory.value = product_category),
-      ($costPrice.value = cost_price);
-    $fgPrice.value = fg_price;
+    ($productCategory.value = productCategory), ($costPrice.value = costPrice);
+    $fgPrice.value = fgPrice;
     $quantity.value = quantity;
-    $packSize.value = pack_size;
-    $minimumQuantity.value = minimum_quantity;
-    $unitOfIssue.value = unit_of_issue;
+    $packSize.value = packSize;
+    $minimumQuantity.value = minimumQuantity;
+    $unitOfIssue.value = unitOfIssue;
     $expiryDate.value = parsedDate;
     $submitBtn.disabled = true;
   }
@@ -174,7 +173,7 @@ const edit = async () => {
       movement.set("movement", movementName);
       movement.set("product", $elementId.textContent);
       movement.set("balance", product.quantity);
-      movement.set("pharmacy_unit", $pharmacyUnit);
+      movement.set("unit", $pharmacyUnit);
       movement.set("location", $location);
       const movementResponse = await sendReq(
         token,
@@ -203,7 +202,7 @@ const edit = async () => {
     $renderCtn.innerHTML = "";
     searchData.map((product) => {
       const quantity = product.quantity;
-      const formatDate = Date.parse(`${product.expiry_date}`);
+      const formatDate = Date.parse(`${product.expiryDate}`);
       const options = {
         year: "2-digit",
         month: "numeric",

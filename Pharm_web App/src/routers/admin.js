@@ -31,7 +31,8 @@ router.post("/admins/login", async (req, res) => {
     const id = admin._id;
     res.status(200).send({ token, id });
   } catch (e) {
-    res.status(400).send(e.message);
+    console.log(e.message);
+    res.status(400).send();
   }
 });
 router.patch("/admins/update_user", authenication, async (req, res) => {

@@ -12,7 +12,7 @@ const patientSchema = new mongoose.Schema({
     required: true,
     uppercase: true,
   },
-  file_number: {
+  fileNumber: {
     type: String,
     required: true,
     unique: true,

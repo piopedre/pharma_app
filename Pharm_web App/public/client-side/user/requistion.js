@@ -37,8 +37,8 @@ import {
       return items.reduce(
         (acc, product, curIndex) => {
           if (
-            product.get("stock_required") <= 0 ||
-            product.get("quantity_price") <= 0
+            product.get("stockRequired") <= 0 ||
+            product.get("quantityPrice") <= 0
           ) {
             acc.error = true;
             acc.index = curIndex;
@@ -82,14 +82,14 @@ import {
         const requiste = ` <div class="requistion_item">
                  <div class="drug_details">${product.get("name")}</div>
                  <div class="item_quantity">${product.get(
-                   "display_quantity"
+                   "displayQuantity"
                  )}</div>
               <input type="number" class="stock_required" value=${product.get(
-                "stock_required"
+                "stockRequired"
               )} min='1' required>
-              <div class="unit_price">${product.get("cost_price")}</div>
+              <div class="unit_price">${product.get("costPrice")}</div>
               <div class="quantity_price">${nf.format(
-                product.get("quantity_price")
+                product.get("quantityPrice")
               )}</div>
               <div class="drug_id no_display">${product.get("id")}</div>
               <div class="delete_item">❌</div>
@@ -98,9 +98,9 @@ import {
       });
       const values = mainRequistion.reduce(
         (acc, cur, _, arr) => {
-          acc.qtySold += cur.get("stock_required");
+          acc.qtySold += cur.get("stockRequired");
           acc.noItems = arr.length;
-          acc.quantityPrice += cur.get("quantity_price");
+          acc.quantityPrice += cur.get("quantityPrice");
           return acc;
         },
         {
@@ -178,14 +178,14 @@ import {
       }).format(lastDate);
 
       if (+yearToday > +requistionYear) {
-        requistionData.set("serial_number", 1);
+        requistionData.set("serialNumber", 1);
       } else {
-        requistionData.set("serial_number", +requistion.serial_number + 1);
+        requistionData.set("serialNumber", +requistion.serialNumber + 1);
       }
     } catch (err) {
       switch (err?.response?.status) {
         case 404:
-          requistionData.set("serial_number", 1);
+          requistionData.set("serialNumber", 1);
           break;
         case 500:
           $message.style.backgroundColor = "#c41a1a";
@@ -200,15 +200,15 @@ import {
       $message.style.backgroundColor = "transparent";
     }, 3000);
 
-    requistionData.set("pharmacy_unit", "opd-pharmacy");
+    requistionData.set("unit", "opd-pharmacy");
     requistionData.set("location", "uselu");
     requistionData.set("date", new Date());
-    requistionData.set("requistion_process", true);
+    requistionData.set("requistionProcess", true);
     const values = mainRequistion.reduce(
       (acc, cur, _, arr) => {
-        acc.qtySold += cur.get("stock_required");
+        acc.qtySold += cur.get("stockRequired");
         acc.noItems = arr.length;
-        acc.quantityPrice += cur.get("quantity_price");
+        acc.quantityPrice += cur.get("quantityPrice");
         return acc;
       },
       {
@@ -218,8 +218,8 @@ import {
       }
     );
     const { noItems, quantityPrice } = values;
-    requistionData.set("number_of_items_requisted", noItems);
-    requistionData.set("cost_of_requistion", quantityPrice);
+    requistionData.set("numberOfItemsRequisted", noItems);
+    requistionData.set("costOfRequistion", quantityPrice);
     mainRequistion = mainRequistion.map((product) =>
       Object.fromEntries(product)
     );
@@ -271,15 +271,15 @@ import {
 
     mainRequistion.forEach((product) => {
       if (product.get("id") === drug_id) {
-        product.set("stock_required", +e.target.value);
-        product.set("quantity_price", sumTotal);
+        product.set("stockRequired", +e.target.value);
+        product.set("quantityPrice", sumTotal);
       }
     });
     const values = mainRequistion.reduce(
       (acc, cur, _, arr) => {
-        acc.qtySold += cur.get("stock_required");
+        acc.qtySold += cur.get("stockRequired");
         acc.noItems = arr.length;
-        acc.quantityPrice += cur.get("quantity_price");
+        acc.quantityPrice += cur.get("quantityPrice");
         return acc;
       },
       {
@@ -324,11 +324,11 @@ import {
     const drugRequisted = new Map();
     drugRequisted.set("id", productId);
     drugRequisted.set("name", name);
-    drugRequisted.set("display_quantity", displayQuantity);
-    drugRequisted.set("cost_price", +costPrice);
-    drugRequisted.set("stock_required", stockRequired);
-    drugRequisted.set("quantity_price", (stockRequired * costPrice).toFixed(2));
-    drugRequisted.set("pack_size", packSize);
+    drugRequisted.set("displayQuantity", displayQuantity);
+    drugRequisted.set("costPrice", +costPrice);
+    drugRequisted.set("stockRequired", stockRequired);
+    drugRequisted.set("quantityPrice", (stockRequired * costPrice).toFixed(2));
+    drugRequisted.set("packSize", packSize);
 
     const duplicate = mainRequistion.find(
       (requiste) => requiste.get("id") === drugRequisted.get("id")
@@ -371,7 +371,7 @@ import {
     <span class="detail">${product.name}</span>
   </div>
   <div class="drug__quantity">
-    <div class="element">${product.display_quantity}</div>
+    <div class="element">${product.displayQuantity}</div>
     <span class="detail">Quantity</span>
   </div>
   <span>
@@ -383,9 +383,9 @@ import {
   </span>
   
   <span class="cost_price no_display">${(
-    product.cost_price * product.pack_size
+    product.costPrice * product.packSize
   ).toFixed(2)}</span>
-  <span class="pack_size no_display">${product.pack_size}</span>
+  <span class="pack_size no_display">${product.packSize}</span>
   <span class="drug__id no_display">${product._id}</span>
 </div>`;
       $searchContainer.style.display = "block";

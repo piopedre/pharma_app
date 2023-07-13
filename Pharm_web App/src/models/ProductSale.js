@@ -2,7 +2,7 @@ const mongoose = require("mongoose");
 
 const productSalesSchema = new mongoose.Schema(
   {
-    receipt_number: {
+    receiptNumber: {
       type: String,
       required: true,
     },
@@ -16,9 +16,12 @@ const productSalesSchema = new mongoose.Schema(
       ref: "Admin",
     },
     patient: {
-      type: String,
-      default: "UNREGISTERED",
-      uppercase: true,
+      name: {
+        type: String,
+      },
+      fileNumber: {
+        type: String,
+      },
     },
     pricing: {
       type: String,

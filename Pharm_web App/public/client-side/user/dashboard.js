@@ -35,6 +35,7 @@ import {
   };
   const data = productAnalysis();
   const sales = salesAnalysis();
+
   Plotly.react($salesSlide_1, {
     data: [
       {
@@ -95,11 +96,11 @@ import {
   // Analyzing Products Array
   // DRUG PORPULARIRTY BASED ON USE
   function productAnalysis(color = "#0274c0") {
-    if (productDatabase || productDatabase.length) {
+    if (productDatabase || productDatabase?.length) {
       const dataAnalysed = productDatabase.reduce((acc, cur) => {
-        acc[cur.product_category]
-          ? acc[cur.product_category]++
-          : (acc[cur.product_category] = 1);
+        acc[cur.productCategory]
+          ? acc[cur.productCategory]++
+          : (acc[cur.productCategory] = 1);
         return acc;
       }, {});
       const data = Object.entries(dataAnalysed).reduce(
@@ -124,7 +125,9 @@ import {
       return;
     }
     const dataAnalysed = salesDatabase.reduce((acc, cur) => {
-      acc[cur.patient] ? acc[curpatient]++ : (acc[cur.patient] = cur.amount);
+      acc[cur.patient]
+        ? (acc[cur.patient.name] += cur.amount)
+        : (acc[cur.patient.name] = cur.amount);
       return acc;
     }, {});
     const data = Object.entries(dataAnalysed).reduce(

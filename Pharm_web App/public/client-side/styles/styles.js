@@ -41,4 +41,3 @@
     link.addEventListener("click", removetoggleNavbar);
   });
 })();
-// 64298268fa393d654a6c3062

@@ -6,10 +6,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pharmacy App</title>
     {{! css styles loaded }}
-    <link rel="stylesheet" href="/css/shared/shared.css" />
     <link rel="stylesheet" href="/css/register/register.css" />
-
-
+    <link rel="stylesheet" href="/css/shared/shared.css" />
+    {{!-- JS Files --}}
     <script defer  src="/client-side/styles/styles.js"></script>
     <script defer type="module" src="/client-side/auth/register.js"></script>
   </head>
@@ -74,7 +73,7 @@
             method="post"
           >
             <div class="signup-form__select">
-              <label for="title">Choose a title: </label>
+              <label for="admin__title">Choose a title: </label>
               <select name="title" id="admin__title">
                 <option value="MR">MR</option>
                 <option value="MRS">MRS</option>
@@ -86,7 +85,7 @@
               <input
                 autofocus
                 type="text"
-                name="first_name"
+                name="firstName"
                 id="firstname"
                 placeholder="FIRST NAME*"
                 required
@@ -95,7 +94,7 @@
              <div class="signup-form__input">
               <input
                 type="text"
-                name="last_name"
+                name="lastName"
                 id="lastname"
                 placeholder="LAST NAME* (SURNAME)"
                 required
@@ -128,7 +127,7 @@
             <div class="signup-form__input">
               <input
                 type="tel"
-                name="phone_number"
+                name="phoneNumber"
                 id="telephone"
                 placeholder="TELEPHONE NUMBER*"
                 size="11"

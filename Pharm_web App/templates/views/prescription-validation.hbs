@@ -17,11 +17,52 @@
       <div class="backdrop"></div>
     <main>
       <div class="container">
+
         {{>profile}}
          {{>notification}}
+         {{!-- Hold tab --}}
+          <div class="hold_container no_display">
+           
+            <button class="remove_list">
+              <span class="cancel_stick"></span>
+              <span class="cancel_stick"></span>
+            </button>
+            <div class="prescription_list">
+              <span class="hold_ctn_title">
+                Held Sales
+              </span>
+              <div class="main_list">
+                {{!-- <div class="held_sale">
+                  <div class="sale_name_info">Unregistered</div>
+                  <div class="sale_amount_info">₦12000</div>
+                </div>
+                <div class="held_sale">
+                  <div class="sale_name_info">Voke Akinmutola</div>
+                  <div class="sale_amount_info">₦6000</div>
+                </div>
+                <div class="held_sale">
+                  <div class="sale_name_info">Lawrence Okoro</div>
+                  <div class="sale_amount_info">₦9000</div>
+                </div>
+                <div class="held_sale">
+                  <div class="sale_name_info">Usiabulu Kevin</div>
+                  <div class="sale_amount_info">₦10000</div>
+                </div>
+                <div class="held_sale">
+                  <div class="sale_name_info">Usiabulu Oghogho</div>
+                  <div class="sale_amount_info">₦8000</div>
+                </div>
+                <div class="held_sale">
+                  <div class="sale_name_info">Kayle David</div>
+                  <div class="sale_amount_info">₦20000</div>
+                </div> --}}
+              </div>
+            </div>
+          </div>
          
         <div class="prescription__validation">
           {{>site}}
+          
           {{!-- Prescription Tab  --}}
           <div class="sale_ctn no_display">
             <div class="sale_tab">
@@ -92,7 +133,7 @@
               </div>
               <div class="file_number input_ctn">
                 <label for="file_number">File Number* </label>
-                <input class="add_input" id="file_number" type="text" name="file_number" autocomplete="on" required >
+                <input class="add_input" id="file_number" type="text" name="fileNumber" autocomplete="on" required >
               </div>
               <div class="patient_contact input_ctn">
                 <label for="contact">Contact </label>
@@ -107,20 +148,13 @@
                 
               </div>
                 </div>
-                
               <button class="add_new_patient">ADD PATIENT</button>
               </div>
-             
             </form>
             <div class="patient_display_ctn">
-              
-             
             </div>
-            {{!-- </div> --}}
           </div>
-           
           </div>
-         
           <div class="search__container">
             <input autofocus class="search__input" type="text" name="product" id="product" placeholder="search product name" autocomplete="on">
             <button class="patient_container">👤

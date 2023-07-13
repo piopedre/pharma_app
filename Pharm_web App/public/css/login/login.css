@@ -78,26 +78,6 @@ main {
   color: #2102e7;
   text-decoration: underline;
 }
-/* .error_label {
-  text-transform: capitalize;
-  text-align: center;
-  background-color: #f6f6f6;
-  transform: translate(0);
-  animation: error_label 3s ease-in-out;
-  color: rgb(255, 99, 99);
+.notification {
+  top: 10%;
 }
-
-@keyframes error_label {
-  0% {
-    transform: translate(10px, 0);
-    opacity: 0.3;
-  }
-  50% {
-    transform: translate(0, 0);
-    opacity: 0.5;
-  }
-  100% {
-    transform: translate(0, 0);
-    opacity: 1;
-  }
-} */

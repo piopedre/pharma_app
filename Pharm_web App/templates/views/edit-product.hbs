@@ -17,7 +17,6 @@
     {{>log_header}}
     <main>
       {{>notification}}
-      
       <div class="container">
         {{>profile}}
         <div class="edit__stock__container">
@@ -30,8 +29,6 @@
                   <button class="category_added">Add category</button>
                 </div>
               </div>
-
-          
             <div class="search__data">
               <input
                 type="search"
@@ -47,21 +44,18 @@
                 <div class="drug_expiry-heading"> Expiry Date</div>
               </div>
               <div class="drug_render_list">
-                
-
               </div>
             </div>
           <div class="edit no_display">
             <h4  class="edit_form_title">Edit Product Information</h4>
             <form  method="post" class="edit_form">
-            {{!-- <p class="item_title">Product Information </p> --}}
               <div class="product"> 
                       <label for="name">Name </label>
                       <input autocomplete="additional-name" placeholder="NAME" type="text" id="name" name="name">
               </div>
               <div class="product_category">
                     <label for="product_category">Category </label>
-                    <select name="product_category" id="product_category">
+                    <select name="productCategory" id="product_category">
                       {{#each categories }}
                     <option value="{{category}}">{{category}}</option>
                     {{else}}
@@ -70,44 +64,35 @@
                     </select>
                     <button class="add_category">Add</button>
               </div>
-            
-                
             <div class="product_quantity_ctn">
-             
               <div class="product_quantity">
                     <label for="unit_of_issue">Unit of issue</label>
                     <label for="pack_size">Pack size</label>
                     <label for="quantity">Quantity</label>
                     <label for="minimum_quantity">Minimum Quantity</label>
-                    <input type="text"  placeholder="unit of issue" id="unit_of_issue">
-                    <input name="pack_size"  placeholder="Pack size" type="number" id="pack_size" min="0" >
+                    <input type="text" name="unitOfIssue"  placeholder="unit of issue" id="unit_of_issue">
+                    <input name="packSize"  placeholder="Pack size" type="number" id="pack_size" min="0" >
                     <input name="quantity"  placeholder="Quantity" type="number" id="quantity" min="0" >
-                    <input name="minimum_quantity"  placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0" >
+                    <input name="minimumQuantity"  placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0" >
                     <span class="element_id no_display"></span>
               </div>
              </div>
-              
               <div class="manufacturer_ctn">
-                
                 <div class="manufacturer_info">
                    <label for="cost_price">Product Cost Price</label>
                    <label for="fg_price">Product Fg Cost Price</label>
                     <label for="expiry_date">Expiry Date</label>
-                    <input type="text" name="cost_price" id="cost_price" placeholder="Cost price" min="1">
-                    <input type="text" name="fg_price" id="fg_price" placeholder="Fg price" min="1">
-                    <input type="month" id="expiry_date" name="expiry_date">
-                </div>
-                   
+                    <input type="text" name="costPrice" id="cost_price" placeholder="Cost price" min="1">
+                    <input type="text" name="fgPrice" id="fg_price" placeholder="Fg price" min="1">
+                    <input type="month" id="expiry_date" name="expiryDate">
+                </div> 
               </div>
-                   
-
             <div class="interaction_container">
               <button class="cancel_button">CANCEL</button>
               <button class="edit_button">SAVE</button>
             </div>
             </form>
           </div>
-
         </div>
       </div>
     </main>

@@ -62,11 +62,10 @@ import {
 
     form.set(
       "quantity",
-      (+form.get("pack_size") * +form.get("quantity")) /
-        +form.get("unit_of_issue")
+      (+form.get("packSize") * +form.get("quantity")) / +form.get("unitOfIssue")
     );
     form.set("location", $location);
-    form.set("pharmacy_unit", pharmacy_unit);
+    form.set("unit", pharmacy_unit);
     $notifyCtn.classList.remove("no_display");
     const response = await sendReq(
       token,
@@ -86,7 +85,7 @@ import {
       movement.set("received", form.get("quantity"));
       movement.set("balance", form.get("quantity"));
       movement.set("product", product._id);
-      movement.set("pharmacy_unit", pharmacy_unit);
+      movement.set("unit", pharmacy_unit);
       movement.set("location", $location);
       const movementResponse = await sendReq(
         token,

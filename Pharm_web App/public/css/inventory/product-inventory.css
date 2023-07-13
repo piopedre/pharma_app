@@ -82,6 +82,9 @@
 .received {
   background-color: #2bf712;
 }
+.normal {
+  background-color: #5c5c5c;
+}
 /* product logs */
 
 /* @keyframes reveal {

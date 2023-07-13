@@ -21,13 +21,14 @@
       
       <div class="container">
         {{>profile}}
+        {{>notification}}
         <div class="user__profile__page display__feature">
           {{>site}}
           
           <div class="edit__profile__container">
             <h3>Edit Profile</h3>
             <form class="edit__form" method="post">
-            {{>notification}}
+            
             <div class="user__profile_img">
             <img src="/images/avatar.png" class="profile_image" alt="user-display picture" />
              <input
@@ -52,7 +53,7 @@
                 <input
                   type="text"
                    autocomplete="first-name"
-                  name="first_name"
+                  name="firstName"
                   id="first_name"
                   class="first_name_input"
                   required
@@ -63,7 +64,7 @@
                 <input
                   type="text"
                   autocomplete="last-name"
-                  name="last_name"
+                  name="lastName"
                   id="last_name"
                   class="last_name_input"
                   required
@@ -91,7 +92,7 @@
               <input
                 type="tel"
                 id="phone_number"
-                name="phone_number"
+                name="phoneNumber"
                 autocomplete="phone-number"
                 class="phone_number_input"
                 required

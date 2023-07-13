@@ -74,7 +74,9 @@
   background-color: #36ff58;
   color: white;
 }
-
+.changed {
+  background-color: #1ee192;
+}
 @media (min-width: 40rem) {
   .container {
     height: 100%;

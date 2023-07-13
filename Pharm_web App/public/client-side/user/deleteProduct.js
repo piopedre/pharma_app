@@ -116,7 +116,7 @@ const mainFunction = async () => {
     };
     // use formatter
     data.map((product) => {
-      const formatDate = Date.parse(`${product.expiry_date}`);
+      const formatDate = Date.parse(`${product.expiryDate}`);
       const productExpiry = new Intl.DateTimeFormat("en-US", options).format(
         formatDate
       );
@@ -128,7 +128,7 @@ const mainFunction = async () => {
         <div class="item_details">${product.name}</div>
       </div>
       <div class="item_quantity">${product.quantity}</div>
-      <div class="item_price">${product.selling_price}</div>
+      <div class="item_price">${product.sellingPrice}</div>
       <div class="item_expiry_date">${productExpiry}</div>
       <div class="item_id remove">${product._id}</div>
       <i class="delete_item">❌
@@ -159,8 +159,6 @@ const mainFunction = async () => {
 
   // add Event Listeners
   $search.addEventListener("input", searchData);
-
   $removeBtn.addEventListener("click", removeModal);
-  // $filterBtn.addEventListener("click", toggleFilters);
 };
 await mainFunction();

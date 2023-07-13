@@ -324,6 +324,17 @@ async function editProductById(token, id, body) {
   });
   return response;
 }
+async function editProductQuantityById(token, id, body) {
+  const response = await fetch(`/product/quantity/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body,
+  });
+  return response;
+}
 async function deleteProductById(token, id) {
   const response = await fetch(`/products/${id}`, {
     method: "DELETE",
@@ -457,6 +468,7 @@ export {
   getAllProducts,
   getProductById,
   editProductById,
+  editProductQuantityById,
   deleteProductById,
   requiste,
   updateAvatar,

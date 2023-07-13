@@ -7,7 +7,7 @@ import {
   getPatientDatabase,
   addSale,
   addProductLogs,
-  editProductById,
+  editProductQuantityById,
   sendEditReq,
 } from "../utils/utils.js";
 (async function () {
@@ -58,12 +58,16 @@ import {
   const $saleCtn = document.querySelector(".sale_ctn");
   const $removeSaleCtn = document.querySelector(".remove_sale_tab");
   const $patientDetail = document.querySelector(".patient_detail_title");
+  // Hold Sales
+  const $holdCtn = document.querySelector(".hold_container");
+  const $removeHeldCtnBtn = document.querySelector(".remove_list");
 
+  // Main Variables
   let productDatabase = null;
   let patientDatabase = null;
   let pricing = "";
-  localStorage.setItem("productList", []);
-  const productList = [];
+
+  let productList = [];
   await getProducts();
   await getPatients();
   renderProduct();
@@ -107,8 +111,18 @@ import {
       }
     );
   }
+  // validate ONHAND QUANTITY
+  function validateQuantity(products) {
+    products.forEach((productItem) => {
+      productDatabase.forEach((product) => {
+        if (productItem.id === product._id) {
+          productItem.onHandQuantity = product.quantity;
+        }
+      });
+    });
+  }
   // to hold sale
-  function holdSale(e) {
+  async function holdSale(e) {
     if (e.target.innerHTML === "Held Sale") {
       if (!localStorage.getItem("productList")) {
         $notifyCtn.classList.remove("no_display");
@@ -120,9 +134,12 @@ import {
         }, 900);
         return;
       } else {
-        const heldProducts = JSON.parse(localStorage.getItem("productList"));
+        const heldSales = JSON.parse(localStorage.getItem("productList"));
         // then decide on which to render
-        console.log(heldProducts);
+        // bring the hold Sales container
+        $holdCtn.classList.remove("no_display");
+        // render the held Sales
+        renderHeldSales(heldSales);
       }
     } else {
       const heldProducts = [];
@@ -131,7 +148,18 @@ import {
       });
       const data = Object.create(null);
       data.amount = +$totalSold.textContent.replace("NGN", "").replace(",", "");
-      data.patient = "Mr Uzama";
+      if (!$patientDisplayName.textContent.trim()) {
+        data.patient = {
+          name: "UNREGISTERED",
+          fileNumber: "",
+        };
+      } else {
+        data.patient = {
+          name: $patientDisplayName.textContent,
+          fileNumber: $patientDisplayFileNumber.textContent,
+        };
+      }
+
       data.location = $location;
       data.unit = $unit;
       data.products = products;
@@ -145,11 +173,15 @@ import {
         localStorage.setItem("productList", JSON.stringify(heldProducts));
       }
       productList.length = 0;
+      await getProducts();
       e.target.innerHTML = "Held Sale";
       renderProduct(productList);
       productTab(productList);
+      validateQuantity(productList);
+      removeDisplay();
     }
   }
+  // Rendering products in prescription
   function renderProduct(products = []) {
     const nf = new Intl.NumberFormat("en-GB", {
       style: "currency",
@@ -263,6 +295,9 @@ import {
     e.preventDefault();
     $saleCtn.classList.add("no_display");
   }
+  function removeHeldSaleCtn() {
+    $holdCtn.classList.add("no_display");
+  }
   // Confirm Sale
   async function confirmSale() {
     // e.preventDefault();
@@ -298,13 +333,19 @@ import {
     // Preparing Data to be Saved
     const data = Object.create(null);
     data.date = new Date();
-    data.receipt_number = receiptNumber.value;
+    data.receiptNumber = receiptNumber.value;
     data.amount = +$totalSold.textContent.replace("NGN", "").replace(",", "");
     // check if patient is available
     if ($patientDisplayCtn.classList.contains("no_display")) {
-      data.patient = "Unregistered";
+      data.patient = {
+        name: "UNREGISTERED",
+        fileNumber: "",
+      };
     } else {
-      data.patient = $patientDisplayName.textContent;
+      data.patient = {
+        name: $patientDisplayName.textContent,
+        fileNumber: $patientDisplayFileNumber.textContent,
+      };
     }
     data.location = $location;
     data.unit = $unit;
@@ -327,25 +368,27 @@ import {
       $patientDisplayCtn.classList.add("no_display");
       products.forEach(async (product) => {
         const editStock = Object.create(null);
-        editStock.quantity = product.onHandQuantity - product.quantity;
+        editStock.quantity = product.quantity;
         // For Product
         const editStockResponse = await sendEditReq(
           token,
-          editProductById,
+          editProductQuantityById,
           product.id,
           JSON.stringify(editStock),
           $message
         );
 
+        const newProduct = await editStockResponse.json();
+
         // For Product Logs
         const movement = new Map();
         movement.set("date", new Date());
-        movement.set("movement", data.patient);
+        movement.set("movement", data.patient.name);
         movement.set("issued", product.quantity);
-        movement.set("balance", product.onHandQuantity - product.quantity);
+        movement.set("balance", newProduct.quantity);
         movement.set("product", product.id);
         movement.set("location", $location);
-        movement.set("pharmacy_unit", $unit);
+        movement.set("unit", $unit);
         const movementResponse = await sendReq(
           token,
           JSON.stringify(Object.fromEntries(movement)),
@@ -446,6 +489,72 @@ import {
       }
     });
     productTab(productList);
+  }
+  // render Held Sales
+  function renderHeldSales(sales) {
+    const salesCtn = document.querySelector(".main_list");
+    salesCtn.innerHTML = "";
+    if (!sales || !sales.length) {
+      return;
+    }
+    sales.map((sale) => {
+      const saleItem = `<div class="held_sale">
+                  <div class="sale_name_info">${sale.patient.name}</div>
+                  <div class="sale_amount_info">₦${sale.amount}</div>
+                </div>`;
+      salesCtn.insertAdjacentHTML("beforeend", saleItem);
+    });
+    const saleElements = document.querySelectorAll(".held_sale");
+    saleElements.forEach((element) =>
+      element.addEventListener("click", renderHeldSaleInProductList)
+    );
+  }
+  function renderHeldSaleInProductList(e) {
+    const heldSales = JSON.parse(localStorage.getItem("productList"));
+    const selectedSale = e.target.closest(".held_sale");
+    const salesName = selectedSale
+      .querySelector(".sale_name_info")
+      .textContent.toUpperCase();
+    const salesAmount = +selectedSale
+      .querySelector(".sale_amount_info")
+      .textContent.replace("₦", "");
+    const mainSale = heldSales.find(
+      (sale) =>
+        sale.patient === salesName &&
+        sale.amount === salesAmount &&
+        sale.location === $location &&
+        sale.unit === $unit
+    );
+
+    const newHeldSales = heldSales.filter(
+      (sale) =>
+        !(sale.patient === salesName) &&
+        !(sale.amount === salesAmount) &&
+        sale.location === $location &&
+        sale.unit === $unit
+    );
+    // add it to prescription
+    if (!mainSale) {
+      return;
+    }
+    validateQuantity(mainSale.products);
+    productList = mainSale.products.map((product) => {
+      const productItem = new Map();
+      Object.keys(product).forEach((key) => {
+        productItem.set(key, product[key]);
+      });
+      return productItem;
+    });
+    if (mainSale.patient !== "UNREGISTERED") {
+      $patientDisplayCtn.classList.remove("no_display");
+      $patientDisplayName.textContent = mainSale.patient;
+      $patientDisplayFileNumber.textContent = mainSale;
+    }
+
+    renderProduct(productList);
+    productTab(productList);
+    removeHeldSaleCtn();
+    localStorage.setItem("productList", JSON.stringify(newHeldSales));
   }
   // Rendering searched Products in Sales Tab.
   function productRender(e) {
@@ -565,7 +674,7 @@ import {
   async function addNewPatient(e) {
     e.preventDefault();
     $notifyCtn.classList.remove("no_display");
-
+    // adding Patient
     const response = await sendReq(
       token,
       JSON.stringify(Object.fromEntries(new FormData(e.target).entries())),
@@ -646,7 +755,7 @@ import {
       const searchedPatient = `
        <div class="searched_patient">
                   <div class="searched_patient_name">${patient.name}</div>
-                  <div class="searched_patient_file_number">${patient.file_number}</div>
+                  <div class="searched_patient_file_number">${patient.fileNumber}</div>
        </div>
       `;
       $patientRenderCtn.insertAdjacentHTML("beforeend", searchedPatient);
@@ -670,14 +779,14 @@ import {
       };
       let price = "";
       if (pricing === "NNPC") {
-        price = product["nnpc_price"];
+        price = product["nnpcPrice"];
       } else if (pricing === "NHIA") {
-        price = product["nhia_price"];
+        price = product["nhiaPrice"];
       } else {
-        price = product["selling_price"];
+        price = product["sellingPrice"];
       }
       const expiryDate = Intl.DateTimeFormat("en-GB", options)
-        .format(Date.parse(`${product.expiry_date}`))
+        .format(Date.parse(`${product.expiryDate}`))
         .replace("-", "/");
       const searchedProduct = `
       <div class="product_searched render_structure">
@@ -685,8 +794,8 @@ import {
         <div class="searched_product_price">${price}</div>
         <div class="searched_product_quantity">${product.quantity}</div>
         <div class="searched_product_expiry">${expiryDate}</div>
-        <div class=" no_display searched_product_nnpc_price">${product.nnpc_price}</div>
-        <div class=" no_display searched_product_nhia_price">${product.nhia_price}</div>
+        <div class=" no_display searched_product_nnpc_price">${product.nnpcPrice}</div>
+        <div class=" no_display searched_product_nhia_price">${product.nhiaPrice}</div>
         <div class=" no_display searched_product_id">${product._id}</div>
      </div>`;
       $searchRenderCtn.insertAdjacentHTML("beforeend", searchedProduct);
@@ -707,4 +816,5 @@ import {
   });
   $confirmPurchaseBtn.addEventListener("click", confirmSale);
   $removeSaleCtn.addEventListener("click", removeSaleCtn);
+  $removeHeldCtnBtn.addEventListener("click", removeHeldSaleCtn);
 })();

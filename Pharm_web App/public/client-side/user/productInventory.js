@@ -55,13 +55,12 @@ import {
       delete log.createdAt;
       delete log.updatedAt;
       delete log.location;
-      delete log.pharmacy_unit;
+      delete log.unit;
       delete log._id;
       delete log.product;
     });
   }
   function searchProduct(e) {
-    // console.log(e.target.value);
     if (!e.target.value || !e.target.value.trim()) {
       return;
     }
@@ -112,19 +111,28 @@ import {
 
     productLogs.map((log) => {
       let pharmacistName = "";
+      let logColour = "";
       const dateTime = Date.parse(`${log.date}`);
       const date = Intl.DateTimeFormat("en-GB", options).format(dateTime);
-      if (log.signature.last_name) {
-        pharmacistName = log.signature.last_name;
+
+      if (log.signature.lastName) {
+        pharmacistName = log.signature.lastName;
       } else {
         pharmacistName = "Removed User";
       }
-      const productLog = `<div class="product_logs product_logs_structure ${
-        log.received ? "received" : "issued"
-      }">
+      if (log.received) {
+        logColour = "received";
+      } else if (log.issued) {
+        logColour = "issued";
+      } else {
+        logColour = "normal";
+      }
+      const productLog = `<div class="product_logs product_logs_structure ${logColour}">
          <div class="product_issue_date">${date}</div>
          <div class="product_movement">${log.movement}</div>
-        <div class="product_received_amount">${log.received || log.issued}</div>
+        <div class="product_received_amount">${
+          log.received || log.issued || log.balance
+        }</div>
         <div class="product_balance">${log.balance}</div>
         <div class="pharmacist_name">${pharmacistName}</div>
 
@@ -143,7 +151,7 @@ import {
     };
 
     products.map(async (product) => {
-      const dateTime = Date.parse(`${product.expiry_date}`);
+      const dateTime = Date.parse(`${product.expiryDate}`);
       const date = Intl.DateTimeFormat("en-GB", nOptions).format(dateTime);
       const productItem = `<div class="product_main_item">
     <div class="product_item">

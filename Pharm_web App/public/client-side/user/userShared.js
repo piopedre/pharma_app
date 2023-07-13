@@ -20,35 +20,37 @@ import { getProfile, ResponseError } from "../utils/utils.js";
   // functions
   await getStarted();
   async function getStarted() {
+    //////////////////////////
     if (!sessionStorage.getItem("token")) {
-      // back to login page
       location.replace("/pharma_app/login");
       return;
     }
-    //////////////////////////
     const token = JSON.parse(sessionStorage.getItem("token"));
+
     const $location = JSON.parse(
       sessionStorage.getItem("location")
     ).toUpperCase();
-    const unit = JSON.parse(sessionStorage.getItem("unit")).toUpperCase();
+
+    const $unit = JSON.parse(sessionStorage.getItem("unit")).toUpperCase();
+
     try {
       const response = await getProfile(token);
       if (!response.ok) {
         throw new ResponseError("Bad Fetch Response", response);
       }
       const result = await response.json();
-      const { title, first_name, last_name, phone_number, _id } = result;
-      $profileName.textContent = `${title} ${last_name}`;
-      $profileNumber.textContent = phone_number;
+      const { title, firstName, lastName, phoneNumber, _id } = result;
+      $profileName.textContent = `${title} ${lastName}`;
+      $profileNumber.textContent = phoneNumber;
       $siteLocation.textContent = $location;
-      $siteUnit.textContent = `${unit.toUpperCase()}`;
+      $siteUnit.textContent = `${$unit.toUpperCase()}`;
       const date = Intl.DateTimeFormat("en-GB")
         .format(new Date())
         .replaceAll("/", "-");
       $date.textContent = date;
 
       if ($displayName) {
-        $displayName.textContent = `Hi ${first_name}`;
+        $displayName.textContent = `Hi ${firstName}`;
       }
       const pictureResponse = await fetch(`/admins/${_id}/avatar`);
       if (pictureResponse.ok) {

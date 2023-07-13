@@ -77,6 +77,25 @@ router.patch("/products/:id", authenication, async (req, res) => {
     res.status(400).send("Error adding a product");
   }
 });
+router.patch("/product/quantity/:id", authenication, async (req, res) => {
+  const update = req.body;
+  if (!update.quantity) {
+    return res.status(400).send("Updating an element that is not available");
+  }
+  const _id = req.params.id;
+  try {
+    const product = await Product.findById(_id);
+    if (!product) {
+      return res.status(404).send();
+    }
+    product.quantity -= update.quantity;
+    await product.save();
+    res.status(200).send(product);
+  } catch (e) {
+    console.log(e.message);
+    res.send(400).send("Error adding a product");
+  }
+});
 router.delete("/products/:id", authenication, async (req, res) => {
   const _id = req.params.id;
 

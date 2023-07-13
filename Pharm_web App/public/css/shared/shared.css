@@ -281,9 +281,7 @@ button[aria-pressed="true"] span:nth-child(3) {
 .show {
   display: block;
 }
-#changed {
-  border: 1px solid #1ee192;
-}
+
 @media (min-width: 40rem) {
   .footer__items {
     flex-direction: row;

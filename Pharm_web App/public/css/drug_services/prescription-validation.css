@@ -74,7 +74,8 @@
   font-weight: bold;
 }
 .product_list {
-  height: 63.5%;
+  /* dont update affect the patient tab */
+  height: 400px;
   overflow: auto;
 }
 .empty_list {
@@ -142,6 +143,10 @@
   justify-content: flex-end;
   font-variant: small-caps;
   font-weight: bolder;
+}
+.quantity_title,
+.expiry_title {
+  margin-right: 5px;
 }
 .product_sales_information {
   border: 0.2px solid rgba(32, 32, 32, 0.557);
@@ -536,4 +541,57 @@
 .save_purchase:active {
   color: #0274c0;
   background-color: rgba(219, 219, 219, 0.557);
+}
+/* Hold Container */
+.hold_container {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1;
+  background-color: rgba(32, 32, 32, 0.557);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.remove_list {
+  border: none;
+  position: absolute;
+  background-color: transparent;
+  top: 0;
+  right: 0;
+}
+.prescription_list {
+  width: 80%;
+  height: 60%;
+  background-color: white;
+  text-align: center;
+}
+.remove_list {
+  padding: 10px;
+  cursor: pointer;
+}
+.main_list {
+  height: 350px;
+  padding: 10px;
+  overflow: auto;
+}
+.hold_ctn_title {
+  display: block;
+  text-transform: uppercase;
+  margin: 10px;
+  text-decoration: underline;
+}
+.held_sale {
+  display: grid;
+  grid-template-columns: 1fr 100px;
+  border-bottom: 1px solid black;
+  padding: 10px;
+  place-items: center;
+  column-gap: 5px;
+  text-transform: uppercase;
+  font-size: small;
+  cursor: pointer;
+}
+.held_sale:hover {
+  background-color: #e4feff;
 }

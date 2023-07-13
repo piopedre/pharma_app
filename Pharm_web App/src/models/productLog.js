@@ -6,7 +6,7 @@ const productLogSchema = new mongoose.Schema(
       type: Date,
       required: true,
     },
-    serial_voucher: {
+    serialVoucher: {
       type: String,
     },
     movement: {
@@ -39,7 +39,7 @@ const productLogSchema = new mongoose.Schema(
       required: true,
       uppercase: true,
     },
-    pharmacy_unit: {
+    unit: {
       type: String,
       required: true,
       uppercase: true,

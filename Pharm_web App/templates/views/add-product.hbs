@@ -53,7 +53,7 @@
                <div class="product_categories">
                 <label for="product_category">Product Category:</label>
                 
-               <select id="product_category" name="product_category">
+               <select id="product_category" name="productCategory">
                   {{#each categories}}
                 <option value="{{category}}">{{category}}</option>
                   {{else}}
@@ -73,10 +73,10 @@
                   <label for="pack_size">Pack size</label>
                   <label for="quantity">Quantity</label>
                   <label for="minimum Quantity">Minimum quantity</label>
-                  <input id="unit_issue" type="number" name="unit_of_issue" min="1" placeholder="Unit of issue" required>
-                  <input id="pack_size" type="number" name="pack_size" min="1" placeholder="Pack size"  required>
+                  <input id="unit_issue" type="number" name="unitOfIssue" min="1" placeholder="Unit of issue" required>
+                  <input id="pack_size" type="number" name="packSize" min="1" placeholder="Pack size"  required>
                   <input  id="quantity" type="number" name="quantity"   placeholder="Quantity"  required>
-                  <input id="minimum Quantity"  type="number" name="minimum_quantity"   placeholder="Quantity"  required>
+                  <input id="minimum Quantity"  type="number" name="minimumQuantity"   placeholder="Quantity"  required>
                 </div>
               </div>
                 <div class="manufacturer_ctn">
@@ -85,9 +85,9 @@
               <label for="price">Product price</label>
               <label for="fg_price">Product Fg price</label>
               <label for="expiry_date">Expiry date</label>
-              <input id="price" type="text" name="cost_price" placeholder="Price" required >
-              <input id="fg_price" type="text" name="fg_price" placeholder="Nhia Cost Price"  >
-                <input id="expiry_date" type="month" name="expiry_date" placeholder="EXPIRY DATE" required >
+              <input id="price" type="text" name="costPrice" placeholder="Price" required >
+              <input id="fg_price" type="text" name="fgPrice" placeholder="Nhia Cost Price"  >
+                <input id="expiry_date" type="month" name="expiryDate" placeholder="EXPIRY DATE" required >
             </div>
                 </div>
               <div class="action__container">

@@ -3,7 +3,7 @@ const ProductLog = require("./ProductLog");
 
 const productSchema = new mongoose.Schema(
   {
-    product_category: {
+    productCategory: {
       type: String,
       required: true,
       trim: true,
@@ -15,41 +15,41 @@ const productSchema = new mongoose.Schema(
       unique: true,
       trim: true,
     },
-    cost_price: {
+    costPrice: {
       type: Number,
       required: true,
     },
-    selling_price: {
+    sellingPrice: {
       type: Number,
     },
-    fg_price: {
+    fgPrice: {
       type: Number,
       default: 0,
     },
-    nhia_price: {
+    nhiaPrice: {
       type: Number,
     },
-    nnpc_price: {
+    nnpcPrice: {
       type: Number,
     },
     quantity: {
       type: Number,
       required: true,
     },
-    display_quantity: {
+    displayQuantity: {
       type: String,
     },
-    unit_of_issue: {
+    unitOfIssue: {
       type: Number,
       required: true,
       min: 1,
     },
-    pack_size: {
+    packSize: {
       type: Number,
       required: true,
       min: 1,
     },
-    minimum_quantity: {
+    minimumQuantity: {
       type: Number,
       required: true,
     },
@@ -59,13 +59,13 @@ const productSchema = new mongoose.Schema(
       required: true,
       uppercase: true,
     },
-    pharmacy_unit: {
+    unit: {
       type: String,
       trim: true,
       required: true,
       uppercase: true,
     },
-    expiry_date: {
+    expiryDate: {
       type: Date,
       required: true,
     },
@@ -82,31 +82,31 @@ productSchema.virtual("productLog", {
 });
 productSchema.pre("save", async function (next) {
   const product = this;
-  if (product.isModified("cost_price")) {
-    const selling_price = (product.cost_price * 1.3).toFixed(2);
-    product.selling_price = selling_price;
-    product.nnpc_price = (selling_price * 1.2).toFixed(2);
+  if (product.isModified("costPrice")) {
+    const sellingPrice = (product.costPrice * 1.3).toFixed(2);
+    product.sellingPrice = sellingPrice;
+    product.nnpcPrice = (sellingPrice * 1.2).toFixed(2);
   }
-  if (product.isModified("fg_price")) {
-    const selling_price = (+product.cost_price * 1.3).toFixed(2);
-    const tenPercent = (0.1 * product.fg_price).toFixed(2);
-    if (product.fg_price === 0) {
-      product.nhia_price = selling_price;
-    } else if (selling_price > +product.fg_price) {
-      product.nhia_price = (
-        selling_price -
-        product.fg_price +
+  if (product.isModified("fgPrice")) {
+    const sellingPrice = (+product.costPrice * 1.3).toFixed(2);
+    const tenPercent = (0.1 * product.fgPrice).toFixed(2);
+    if (product.fgPrice === 0) {
+      product.nhiaPrice = sellingPrice;
+    } else if (sellingPrice > +product.fgPrice) {
+      product.nhiaPrice = (
+        sellingPrice -
+        product.fgPrice +
         +tenPercent
       ).toFixed(2);
     } else {
-      product.nhia_price = tenPercent;
+      product.nhiaPrice = tenPercent;
     }
   }
 
-  if (product.isModified("quantity") || product.isModified("pack_size")) {
-    product.display_quantity = `${Math.floor(
-      product.quantity / product.pack_size
-    )} * ${product.pack_size}`;
+  if (product.isModified("quantity") || product.isModified("packSize")) {
+    product.displayQuantity = `${Math.floor(
+      product.quantity / product.packSize
+    )} * ${product.packSize}`;
   }
   next();
 });

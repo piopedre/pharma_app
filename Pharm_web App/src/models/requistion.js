@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 const requistionSchema = new mongoose.Schema(
   {
-    pharmacy_unit: {
+    unit: {
       type: String,
       required: true,
       trim: true,
