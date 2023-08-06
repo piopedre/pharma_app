@@ -70,10 +70,10 @@
                     <label for="pack_size">Pack size</label>
                     <label for="quantity">Quantity</label>
                     <label for="minimum_quantity">Minimum Quantity</label>
-                    <input type="text" name="unitOfIssue"  placeholder="unit of issue" id="unit_of_issue">
-                    <input name="packSize"  placeholder="Pack size" type="number" id="pack_size" min="0" >
-                    <input name="quantity"  placeholder="Quantity" type="number" id="quantity" min="0" >
-                    <input name="minimumQuantity"  placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0" >
+                    <input type="number" name="unitOfIssue"  placeholder="unit of issue" id="unit_of_issue" >
+                    <input name="packSize"  placeholder="Pack size" type="number" id="pack_size" min="0"  >
+                    <input name="quantity"  placeholder="Quantity" type="number" id="quantity" min="0"  >
+                    <input name="minimumQuantity"  placeholder="Minimum Quantity" type="number" id="minimum_quantity" min="0"  >
                     <span class="element_id no_display"></span>
               </div>
              </div>
@@ -82,8 +82,8 @@
                    <label for="cost_price">Product Cost Price</label>
                    <label for="fg_price">Product Fg Cost Price</label>
                     <label for="expiry_date">Expiry Date</label>
-                    <input type="text" name="costPrice" id="cost_price" placeholder="Cost price" min="1">
-                    <input type="text" name="fgPrice" id="fg_price" placeholder="Fg price" min="1">
+                    <input type="text" name="costPrice" id="cost_price" placeholder="Cost price" min="1" pattern="^[0-9]\d*(\.\d+)?$">
+                    <input type="text" name="fgPrice" id="fg_price" placeholder="Fg price" min="1" pattern="^[0-9]\d*(\.\d+)?$">
                     <input type="month" id="expiry_date" name="expiryDate">
                 </div> 
               </div>

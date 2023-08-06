@@ -22,6 +22,10 @@ const patientSchema = new mongoose.Schema({
     maxLength: 12,
   },
 });
-
-const Patient = mongoose.model("patient", patientSchema);
+patientSchema.virtual("dtps", {
+  ref: "Dtp",
+  localField: "_id",
+  foreignField: "patient",
+});
+const Patient = mongoose.model("Patient", patientSchema);
 module.exports = Patient;

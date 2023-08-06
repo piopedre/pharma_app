@@ -10,7 +10,7 @@ router.post("/products/add_product", authenication, async (req, res) => {
     res.status(201).send(product);
   } catch (e) {
     console.log(e.message);
-    res.status(400).send(e.message);
+    res.status(400).send();
   }
 });
 router.get("/products/search", authenication, async (req, res) => {
@@ -31,7 +31,7 @@ router.get("/products/search", authenication, async (req, res) => {
     }
     res.status(200).send(product);
   } catch (e) {
-    res.status(500).send("Error processing request");
+    res.status(500).send();
   }
 });
 router.get("/products/:id", authenication, async (req, res) => {
@@ -50,19 +50,21 @@ router.patch("/products/:id", authenication, async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = [
     "name",
-    "product_category",
-    "cost_price",
+    "productCategory",
+    "costPrice",
     "quantity",
-    "unit_of_issue",
-    "pack_size",
-    "minimum_quantity",
-    "expiry_date",
+    "fgPrice",
+    "unitOfIssue",
+    "packSize",
+    "minimumQuantity",
+    "expiryDate",
   ];
+
   const isValidOperation = updates.every((update) =>
     allowedUpdates.includes(update)
   );
   if (!isValidOperation) {
-    return res.status(400).send("Updating an element that is not available");
+    return res.status(400).send();
   }
   const _id = req.params.id;
   try {
@@ -74,7 +76,7 @@ router.patch("/products/:id", authenication, async (req, res) => {
     await product.save();
     res.status(200).send(product);
   } catch (e) {
-    res.status(400).send("Error adding a product");
+    res.status(400).send();
   }
 });
 router.patch("/product/quantity/:id", authenication, async (req, res) => {
@@ -92,8 +94,7 @@ router.patch("/product/quantity/:id", authenication, async (req, res) => {
     await product.save();
     res.status(200).send(product);
   } catch (e) {
-    console.log(e.message);
-    res.send(400).send("Error adding a product");
+    res.send(400).send();
   }
 });
 router.delete("/products/:id", authenication, async (req, res) => {
@@ -102,12 +103,12 @@ router.delete("/products/:id", authenication, async (req, res) => {
   try {
     const product = await Product.findById(_id);
     if (!product) {
-      return res.status(404).send("product not found");
+      return res.status(404).send();
     }
     product.remove();
     res.status(200).send();
   } catch (e) {
-    res.status(500).send(e);
+    res.status(500).send();
   }
 });
 

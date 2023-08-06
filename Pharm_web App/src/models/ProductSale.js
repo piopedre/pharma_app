@@ -10,9 +10,13 @@ const productSalesSchema = new mongoose.Schema(
       type: Number,
       required: true,
     },
-    pharmacist: {
+    assessment: {
       type: mongoose.Schema.Types.ObjectId,
       required: true,
+      ref: "Admin",
+    },
+    counsellor: {
+      type: mongoose.Schema.Types.ObjectId,
       ref: "Admin",
     },
     patient: {

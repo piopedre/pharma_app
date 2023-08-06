@@ -13,6 +13,7 @@
     <script type="module" defer src="/client-side/user/prescriptionValidation.js"></script> 
   </head>
   <body>
+     {{>loader}}
       {{>log_header}}
       <div class="backdrop"></div>
     <main>
@@ -20,6 +21,8 @@
 
         {{>profile}}
          {{>notification}}
+         {{!-- O/S CTN AND DTPs CTN --}}
+         
          {{!-- Hold tab --}}
           <div class="hold_container no_display">
            
@@ -32,37 +35,66 @@
                 Held Sales
               </span>
               <div class="main_list">
-                {{!-- <div class="held_sale">
-                  <div class="sale_name_info">Unregistered</div>
-                  <div class="sale_amount_info">₦12000</div>
-                </div>
-                <div class="held_sale">
-                  <div class="sale_name_info">Voke Akinmutola</div>
-                  <div class="sale_amount_info">₦6000</div>
-                </div>
-                <div class="held_sale">
-                  <div class="sale_name_info">Lawrence Okoro</div>
-                  <div class="sale_amount_info">₦9000</div>
-                </div>
-                <div class="held_sale">
-                  <div class="sale_name_info">Usiabulu Kevin</div>
-                  <div class="sale_amount_info">₦10000</div>
-                </div>
-                <div class="held_sale">
-                  <div class="sale_name_info">Usiabulu Oghogho</div>
-                  <div class="sale_amount_info">₦8000</div>
-                </div>
-                <div class="held_sale">
-                  <div class="sale_name_info">Kayle David</div>
-                  <div class="sale_amount_info">₦20000</div>
-                </div> --}}
+                
               </div>
             </div>
           </div>
          
         <div class="prescription__validation">
           {{>site}}
+          {{!-- OS DTPS --}}
+          <div class="os_dtps no_display">
+             <h5 class="os_dtps_title">OUT OF STOCK AND DRUG THERAPY PROBLEM</h5>
+            <div class="sub_os_dtps">
+              <div class="os_ctn">
+                <h6 class="os_ctn_title">OUT OF STOCK</h6>
+            <div class="os_sub_ctn">
+              
+              <input type="text" name="out_of_stock" id="out_of_stock" placeholder="Add Product Name">
+            <span class="os_hint"> E.g Tab. Vidalgptin 50mg</span>
+            <button class="submit_os_btn">submit</button>
+            </div>
+            
+            <button class="close_os_dtps">
+              <span class="cancel_stick"></span>
+              <span class="cancel_stick"></span>
+            </button>
+          </div>
+          <div class="dtps_ctn">
+            <h6 class="dtps_ctn_title">DRUG THERAPY PROBLEM</h6>
+            <div class="patient dtp_structure">
+              <label for="dtp_patient_search">Patient</label>
+              <div class="dtp_patient">UNREGISTERED</div>
+            </div>
+            <div class="dtp dtp_structure">
+              <label for="dtp_selected">Dtp </label>
+              <select name="dtp_selected" id="dtp_selected">
+                <option value="Unneccessary drug therapy">Unneccessary drug therapy</option>
+                <option value="Wrong drug">Wrong drug</option>
+                <option value="Dose too low">Dose too low</option>
+                <option value="Dose too high">Dose too high</option>
+                <option value="Adverse drug reaction">Adverse drug reaction</option>
+                <option value="Inappropriate adherence">Inappropriate adherence</option>
+                <option value="Needs additional drug therapy">Needs additional drug therapy</option>
+              </select>
+            </div>
+            <div class="intervention dtp_structure">
+              <label for="dtp_intervention">
+               Dtp intervention
+              </label>
+              <textarea name="intervention" id="dtp_intervention" cols="25" rows="10" placeholder="Enter Text here"></textarea>
+               
+            </div>
+            <div class="submit_dtp_ctn">
+              <button class="submit_dtp">Submit</button>
+            </div>
+
+          </div>
+            </div>
+           
           
+          
+         </div>
           {{!-- Prescription Tab  --}}
           <div class="sale_ctn no_display">
             <div class="sale_tab">
@@ -76,7 +108,7 @@
               </div>
             </div>
             <div class="save_tab">
-              <input type="text" id="sale_receipt"  class="sale_receipt" placeholder="Enter Receipt Number" min="6">
+              <input type="text" id="sale_receipt"  class="sale_receipt" placeholder="Enter Receipt Number" maxlength="6" pattern="^[0-9]*$">
               <span >Input Last 6 digits in the Receipt</span>
               <button class="save_purchase">Save Purchase</button>
             </div>
@@ -92,6 +124,7 @@
             </div>
             <div class="patient_display_contact">
             </div>
+            <div class="patient_display_id no_display"></div>
           </div>
           {{!-- Patient Profile --}}
           <div class="patient_profile no_display">
@@ -137,7 +170,7 @@
               </div>
               <div class="patient_contact input_ctn">
                 <label for="contact">Contact </label>
-                <input class="add_input" id="contact" type="tel" name="contact" autocomplete="on" >
+                <input class="add_input" id="contact" type="tel" name="contact"pattern="^[0-9]*$" size="11" autocomplete="on" >
               </div>
               <div class="patient_sex input_ctn">
                 <label for="sex">Sex* </label>
@@ -158,8 +191,13 @@
           <div class="search__container">
             <input autofocus class="search__input" type="text" name="product" id="product" placeholder="search product name" autocomplete="on">
             <button class="patient_container">👤
-              <span class="patient_container_info">
-                Patient
+              <span class="patient_container_info container_info">
+                PATIENT
+              </span>
+            </button>
+            <button class="os_and_dtp_container">🗃️
+              <span class="os_and_dtp_container_info container_info">
+                O/S AND DTPs
               </span>
             </button>
             <div class="search_render_tab no_display">
@@ -211,6 +249,16 @@
               </div>
              
             </div>
+             <div class="drug_interaction_ctn">
+              
+              <h5>Potential Drug Interactions</h5>
+               <button class="check_interaction">Check Interaction</button>
+                <div class="interactions">
+                  <div class="interaction_item">No interaction Found Yet.</div>
+                  
+                </div>
+                 <div class="disclamier">DrugBank is intended for educational and scientific research purposes only and you expressly acknowledge and agree that use of DrugBank is at your sole risk. The accuracy of DrugBank information is not guaranteed and reliance on DrugBank shall be at your sole risk. DrugBank is not intended as a substitute for professional medical advice, diagnosis or treatment.</div>
+            </div>
             <div class="product_sales_information">
               <div class="product_sales_content">
                 <div class="number_products_sold_title">No of products sold</div>
@@ -224,11 +272,14 @@
                 <div class="products_total_title">Total</div>
                 <div class="products_total_amount">0</div>
               </div>
+             
               <div class="interaction_ctn">
               <button class="hold_sales">Held Sale</button>
               <button class="send_sales">Make Sale</button>
             </div>
+             
             </div>
+           
              
             
            

@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pharma App</title>
+   
+    <link rel="stylesheet" href="/css/drug_services/patient-counselling.css" />
+    <link rel="stylesheet" href="/css/shared/log-shared.css" />
+     <link rel="stylesheet" href="/css/shared/shared.css" />
+    
+    <script defer src="/client-side/styles/styles.js"></script>
+    <script defer type="module" src="/client-side/user/userShared.js"></script>
+    <script defer type="module" src="/client-side/user/patientCounselling.js"></script>
+  </head>
+  <body>
+    {{>log_header}}
+    <main>
+      <div class="backdrop"></div>
+      <div class="container">
+       {{>profile}}
+       {{>notification}}
+        <div class="prescription_container">
+          {{>site}}
+            <div class="search_container">
+                <input type="text" id="sales_search" placeholder="Search Patient Name or Receipt Number">
+            </div>
+            <h3 class="prescription_title">Prescription List</h3>
+            <div class="prescriptions">
+                {{!-- <div class="prescription">
+                    <div class="patient_detail">
+                        <div class="patient_name"> IJEHI SUZAN</div>
+                        <div class="patient_receipt_number">025863</div>
+                    </div>
+                    <div class="prescription_content">
+                      <div class="product_headings">
+                        <div class="product_name_heading">NAME</div>
+                        <div class="product_qty_heading">QTY</div>
+                      </div>
+                    <div class="products_detail ">
+                        <div class="product">
+                            <div class="name">TAB RISPERIDONE (RISPERDAL) 2MG</div>
+                            <div class="quantity">90</div>
+                        </div>
+                        
+                    </div>
+                    <div class="counselling_ctn">
+                      <h5 class="counselling_title">Interaction List</h5>
+                      <div class="potential_interaction">
+                        <div class="interaction">Risperidone has tendency to cause drowsiness</div>
+                    </div>
+                    <div class="status">
+                      <div class="status_ctn">
+                       <select name="status" id="status" class="status_select">
+                        <option value="">Status:</option>
+                        <option value="NOT_COUNSELLED">Not Counselled</option>
+                        <option value="COUNSELLED">Counselled</option>
+                       </select>
+                      </div>
+                     
+                       <button class="save_status">Save Changes</button>
+                    </div>
+                    </div>
+                    </div>
+                    
+                </div> --}}
+            </div>
+        </div>
+      </div>
+    </main>
+    {{>footer}}
+  </body>
+</html>

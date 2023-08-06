@@ -30,7 +30,7 @@ async function sendReq(
         messageEl.textContent = message400;
         break;
       case 401:
-        location.replace("/pharma_app/login");
+        location.replace("/pharma-app/login");
         break;
       case 500:
         messageEl.style.backgroundColor = "#c41a1a";
@@ -55,7 +55,7 @@ async function getDatabase(token, reqFunction, location, unit, messageEl) {
         break;
       case 401:
         messageEl.style.backgroundColor = "#c41a1a";
-        location.replace("/pharma_app/login");
+        location.replace("/pharma-app/login");
         break;
       case 404:
         messageEl.style.backgroundColor = "#c41a1a";
@@ -99,7 +99,7 @@ async function getSalesDatabase(
         break;
       case 401:
         messageEl.style.backgroundColor = "#c41a1a";
-        location.replace("/pharma_app/login");
+        location.replace("/pharma-app/login");
         break;
       case 404:
         messageEl.style.backgroundColor = "#c41a1a";
@@ -127,7 +127,7 @@ async function getPatientDatabase(token, reqFunction, messageEl) {
         break;
       case 401:
         messageEl.style.backgroundColor = "#c41a1a";
-        location.replace("/pharma_app/login");
+        location.replace("/pharma-app/login");
         break;
       case 404:
         messageEl.style.backgroundColor = "#c41a1a";
@@ -165,7 +165,7 @@ async function altSendReq(
         messageEl.textContent = message400;
         break;
       case 401:
-        location.replace("/pharma_app/admin/login");
+        location.replace("/pharma-app/login");
         break;
       case 500:
         messageEl.style.backgroundColor = "#c41a1a";
@@ -190,7 +190,7 @@ async function sendEditReq(token, reqFunction, id, data, messageEl) {
         messageEl.textContent = "Error, Fetching Database";
         break;
       case 401:
-        location.replace("/pharma_app/login");
+        location.replace("/pharma-app/login");
         break;
       case 404:
         messageEl.style.backgroundColor = "#c41a1a";
@@ -438,6 +438,19 @@ async function addSale(token, data) {
   });
   return response;
 }
+
+async function editSalesById(token, id, body) {
+  const response = await fetch(`/productsales/${id}`, {
+    method: "PATCH",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body,
+  });
+  return response;
+}
+
 async function getSales(
   token,
   location,
@@ -460,6 +473,92 @@ async function getSales(
   );
   return response;
 }
+// for Drug interactions
+async function getDrugIdentifier(drugName) {
+  try {
+    const response = await fetch(
+      ` https://rxnav.nlm.nih.gov/REST/rxcui.json?name=${drugName}`,
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  } catch (error) {
+    switch (error?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Error, Drug Identifier";
+        break;
+      case 401:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Unable to Connect";
+        break;
+      case 404:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Product does not exist";
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Unable to Connect";
+        break;
+    }
+  }
+}
+async function getDrugInteraction(drugNames) {
+  try {
+    const response = await fetch(
+      ` https://rxnav.nlm.nih.gov/REST/interaction/list.json?rxcuis=${drugNames}`,
+      {
+        method: "GET",
+      }
+    );
+    return response;
+  } catch (error) {
+    switch (error?.response?.status) {
+      case 400:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Error, No Interaction Found";
+        break;
+      case 401:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Unable to Connect";
+        break;
+      case 404:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "No Interaction Found";
+        break;
+      case 500:
+        messageEl.style.backgroundColor = "#c41a1a";
+        messageEl.textContent = "Unable to Connect";
+        break;
+    }
+  }
+}
+// os
+async function addOs(token, data) {
+  const response = await fetch("/add_os", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body: data,
+  });
+  return response;
+}
+// dtp
+async function addDtp(token, data) {
+  const response = await fetch("/add_dtp", {
+    method: "POST",
+    headers: {
+      Authorization: `Bearer ${token}`,
+      "Content-type": "application/json",
+    },
+    body: data,
+  });
+  return response;
+}
+
 export {
   registerUser,
   loginUser,
@@ -487,6 +586,11 @@ export {
   getPatientDatabase,
   addSale,
   getSales,
+  editSalesById,
   getSalesDatabase,
   getAdmin,
+  getDrugIdentifier,
+  getDrugInteraction,
+  addDtp,
+  addOs,
 };

@@ -41,3 +41,7 @@
     link.addEventListener("click", removetoggleNavbar);
   });
 })();
+
+console.log(
+  `edit ProductSales, implement fucc and inpatient, add interaction to database,change axios in app.js`
+);

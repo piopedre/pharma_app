@@ -20,8 +20,7 @@
 .search_render_tab {
   position: absolute;
   padding: 0.2rem;
-  /* margin: 0.3rem 0; */
-  height: 300px;
+  height: 500px;
   width: 100%;
   top: 110%;
   overflow: hidden;
@@ -29,7 +28,6 @@
   background-color: rgba(219, 219, 219, 0.557);
 }
 .render__container {
-  height: 77%;
   overflow: auto;
 }
 .render_structure {
@@ -46,6 +44,24 @@
 .render_list {
   height: 80%;
   overflow: auto;
+}
+.render_list::-webkit-scrollbar {
+  width: 10px;
+}
+.remove_list::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.render_list::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.remove_list::-webkit-scrollbar-thumb:hover {
+  background: #555;
 }
 .product_searched {
   background-color: white;
@@ -103,12 +119,38 @@
 .product_item:hover {
   border: 0.2px solid #0274c0;
 }
+/* Interaction checker */
+.interaction_checker {
+  margin: 0.5rem 0;
+  position: relative;
+}
+.interaction {
+  height: 20px;
+  width: 20px;
+  clip-path: circle(46% at 50% 50%);
+  cursor: pointer;
+  text-align: center;
+}
+.interaction:hover ~ .check_info {
+  display: block;
+}
+.interaction:checked {
+  accent-color: #04fa04;
+}
+.check_info {
+  position: absolute;
+  top: 0;
+  left: 10%;
+  display: none;
+  color: #0274c0;
+}
 .product_details {
   height: 12%;
   display: flex;
   padding: 10px;
   justify-content: space-between;
   font-variant: small-caps;
+  margin: 0.5rem 0;
 }
 .product_detail_structure {
   display: flex;
@@ -152,9 +194,8 @@
   border: 0.2px solid rgba(32, 32, 32, 0.557);
   display: flex;
   flex-direction: column;
-  padding: 1rem 0.4rem;
-  margin: 0 0.5rem;
-  height: 25%;
+  padding: 0.4rem;
+  margin: 0.4rem;
   align-items: flex-end;
   justify-content: space-between;
   background-color: rgba(219, 219, 219, 0.557);
@@ -400,23 +441,27 @@
 }
 /* patient display */
 /* button opening the ctn */
-.patient_container {
+.patient_container,
+.os_and_dtp_container {
   cursor: pointer;
   outline: none;
   position: relative;
 }
-.patient_container_info {
+.container_info {
   font-size: smaller;
   background-color: #0274c0;
   padding: 5px;
   border-radius: 5px;
   position: absolute;
   color: white;
-  bottom: -120%;
+  bottom: -180%;
   left: -10%;
   display: none;
 }
-.patient_container:hover .patient_container_info {
+.patient_container:hover .container_info {
+  display: block;
+}
+.os_and_dtp_container:hover .container_info {
   display: block;
 }
 /*  */
@@ -594,4 +639,199 @@
 }
 .held_sale:hover {
   background-color: #e4feff;
+}
+/* drug Interaction */
+.drug_interaction_ctn {
+  height: 250px;
+  padding: 0.4rem;
+  border: 1px solid rgba(0, 0, 0, 0.557);
+  box-shadow: 0 2px 3px 0 rgba(31, 38, 135, 0.37);
+  backdrop-filter: blur(15px);
+  margin: 0.5rem;
+  cursor: pointer;
+  position: relative;
+}
+.drug_interaction_ctn h5 {
+  text-align: center;
+  margin: 0;
+}
+.disclamier {
+  font-size: smaller;
+  color: #ff1212;
+  height: 40px;
+  overflow: auto;
+  padding: 0.5rem;
+}
+.interactions {
+  margin: 0.5rem 0;
+  height: 165px;
+  overflow: auto;
+}
+.interactions::-webkit-scrollbar {
+  width: 10px;
+}
+.interactions::-webkit-scrollbar-track {
+  box-shadow: inset 0 0 5px grey;
+  border-radius: 10px;
+}
+
+/* Handle */
+.interactions::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.interactions::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+.interaction_item {
+  font-size: small;
+  padding: 0.5rem;
+  margin: 0.5rem;
+}
+.check_interaction {
+  outline: none;
+  border: none;
+  padding: 5px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  cursor: pointer;
+  background-color: #0274c0;
+  color: white;
+}
+.check_interaction:hover,
+.check_interaction:active {
+  background-color: rgba(219, 219, 219, 0.557);
+  color: #0274c0;
+}
+/* OS DTPS */
+.os_dtps {
+  position: absolute;
+  z-index: 1;
+  background-color: #e4e4e4;
+  width: 90%;
+  right: 5%;
+  bottom: -10%;
+  padding: 10px;
+}
+.sub_os_dtps {
+  position: relative;
+  padding: 30px;
+}
+.os_dtps_title {
+  margin: 0.2rem 0;
+  text-align: center;
+}
+.os_ctn {
+  padding: 10px;
+  border: 0.2px dashed #0274c0;
+  display: grid;
+}
+.os_ctn_title {
+  margin: 0;
+  text-align: center;
+  font-size: small;
+}
+.os_sub_ctn {
+  display: grid;
+  text-align: center;
+  margin-top: 1rem;
+  width: 100%;
+  place-items: center;
+}
+#out_of_stock {
+  padding: 0.5rem;
+  outline: none;
+  width: 80%;
+  text-transform: capitalize;
+}
+.os_hint {
+  font-size: small;
+  margin-top: 10px;
+}
+.close_os_dtps {
+  position: absolute;
+  top: 0;
+  right: 0;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  padding: 10px;
+}
+.close_os_dtps span {
+  border: 1px solid #ff1212;
+}
+.submit_os_btn {
+  margin-top: 1rem;
+  width: 40%;
+  padding: 5px;
+  text-transform: uppercase;
+  background-color: white;
+  border: 1px solid #0274c0;
+  cursor: pointer;
+  color: #0274c0;
+}
+.submit_os_btn:hover,
+.submit_os_btn:active {
+  background-color: #0274c0;
+  color: white;
+}
+
+/* dtp ctn */
+.dtps_ctn {
+  padding: 10px;
+  display: grid;
+  row-gap: 10px;
+  font-size: small;
+  font-weight: bold;
+  overflow: auto;
+  text-align: center;
+  margin-top: 1rem;
+  border: 0.2px dashed #0274c0;
+}
+.dtps_ctn_title {
+  margin: 0;
+  font-size: small;
+  font-weight: bold;
+}
+.dtps_ctn label {
+  text-transform: uppercase;
+  text-align: left;
+}
+.dtp_structure {
+  display: grid;
+  grid-template-columns: 150px 1fr;
+  column-gap: 10px;
+}
+#dtp_patient_search {
+  padding: 10px;
+  outline: none;
+  border: 0.2px solid #0274c0;
+}
+#dtp_selected {
+  padding: 10px;
+  outline: none;
+  cursor: pointer;
+  border: 0.2px solid #0274c0;
+}
+#dtp_intervention {
+  outline: none;
+  border: 0.2px solid #0274c0;
+  text-transform: uppercase;
+}
+.submit_dtp {
+  padding: 10px;
+  text-transform: uppercase;
+  outline: none;
+  border: 0.2px solid #0274c0;
+  color: #0274c0;
+  background-color: white;
+  cursor: pointer;
+}
+.submit_dtp:hover,
+.submit_dtp:active {
+  color: white;
+  background-color: #0274c0;
 }

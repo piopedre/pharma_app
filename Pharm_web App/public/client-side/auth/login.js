@@ -29,7 +29,7 @@ import { ResponseError, loginUser } from "../utils/utils.js";
       sessionStorage.setItem("token", JSON.stringify(result.token));
       setTimeout(() => {
         $loader.classList.add("no_display");
-        location.replace("/pharma_app/dashboard");
+        location.replace("/pharma-app/dashboard");
       }, 900);
     } catch (err) {
       $loader.classList.add("no_display");

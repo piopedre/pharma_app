@@ -79,6 +79,16 @@ adminSchema.virtual("productLogs", {
 adminSchema.virtual("productSales", {
   ref: "ProductSale",
   localField: "_id",
+  foreignField: "counsellor",
+});
+adminSchema.virtual("productSales", {
+  ref: "ProductSale",
+  localField: "_id",
+  foreignField: "assessment",
+});
+adminSchema.virtual("dtps", {
+  ref: "Dtp",
+  localField: "_id",
   foreignField: "pharmacist",
 });
 adminSchema.methods.generateToken = async function () {

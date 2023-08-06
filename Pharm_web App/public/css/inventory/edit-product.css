@@ -132,9 +132,11 @@
   display: grid;
   grid-template-columns: auto auto auto;
   column-gap: 20px;
+  justify-items: center;
 }
 .manufacturer_info input {
   height: 40px;
+  width: 120px;
 }
 /* category container */
 .new_category {

@@ -1,3 +1,4 @@
+"use strict";
 import {
   getDatabase,
   getAllProducts,
@@ -9,12 +10,17 @@ import {
   addProductLogs,
   editProductQuantityById,
   sendEditReq,
+  getDrugIdentifier,
+  getDrugInteraction,
+  addOs,
+  addDtp,
 } from "../utils/utils.js";
 (async function () {
   // Variables
   const $location = JSON.parse(sessionStorage.getItem("location"));
   const $unit = JSON.parse(sessionStorage.getItem("unit"));
   const $backdrop = document.querySelector(".backdrop");
+  const $loader = document.querySelector(".loader_container");
   const token = JSON.parse(sessionStorage.getItem("token"));
   const $message = document.querySelector(".notification__message");
   const $notifyCtn = document.querySelector(".notification");
@@ -50,6 +56,7 @@ import {
   const $patientDisplayFileNumber = document.querySelector(
     ".patient_display_contact"
   );
+  const $patientDisplayId = document.querySelector(".patient_display_id");
   const $removeDisplayBtn = document.querySelector(".display_cancel_btn");
   // Pricing
   const $pricingSystem = document.querySelectorAll(".pricing_unit input");
@@ -61,6 +68,15 @@ import {
   // Hold Sales
   const $holdCtn = document.querySelector(".hold_container");
   const $removeHeldCtnBtn = document.querySelector(".remove_list");
+  // Drug Interaction
+  const $checkInteractionBtn = document.querySelector(".check_interaction");
+  // O/S AND DTPS
+  const $openOsDtpBtn = document.querySelector(".os_and_dtp_container");
+  const $closeOsDtpBtn = document.querySelector(".close_os_dtps");
+  const $osDtpCtn = document.querySelector(".os_dtps");
+  const $sendOs = document.querySelector(".submit_os_btn");
+  const $dtpPatient = document.querySelector(".dtp_patient");
+  const $submitDtp = document.querySelector(".submit_dtp");
 
   // Main Variables
   let productDatabase = null;
@@ -68,6 +84,8 @@ import {
   let pricing = "";
 
   let productList = [];
+  let drugInteractionList = [];
+
   await getProducts();
   await getPatients();
   renderProduct();
@@ -220,6 +238,10 @@ import {
                 <div class="quantity_price">${amount}</div>
                 <span class="no_display product_id">${product.get("id")}</span>
               </div>
+                <div class="interaction_checker">
+                <input type="checkbox" name="interaction" class="interaction">
+                <span class="check_info">check for interaction</span>
+               </div>
                 <div class="product_details">
                   <div class="onhand_quantity product_detail_structure">
                     <div class="quantity_title">On Hand Qty : </div>
@@ -288,7 +310,7 @@ import {
 
     $noProductsSoldT.textContent = noProductsSold;
     $qtyProductsSold.textContent = productsSold;
-    $totalSold.textContent = nf.format(total);
+    $totalSold.textContent = nf.format(Math.ceil(total / 100) * 100);
   }
   // Remove Sale Ctn
   function removeSaleCtn(e) {
@@ -617,7 +639,7 @@ import {
     patients = patientDatabase.filter((patient) => {
       return (
         patient.name.toLowerCase().includes(e.target.value) ||
-        patient.file_number.toLowerCase().includes(e.target.value)
+        patient.fileNumber.toLowerCase().includes(e.target.value)
       );
     });
 
@@ -641,14 +663,168 @@ import {
       product.addEventListener("click", productRender)
     );
   }
-
+  // Check Interactions
+  const checkInteraction = async (e) => {
+    const interactionList = [];
+    const idStrings = [];
+    const mainParent = e.target.closest(".render__container");
+    const parent = mainParent.querySelector(".product_list");
+    const productItems = parent.querySelectorAll(".product_item");
+    if (productItems.length) {
+      productItems.forEach((item) => {
+        const interactive = item.querySelector(".interaction");
+        if (interactive?.checked) {
+          interactionList.push(
+            item.querySelector(".product_name").textContent.split(" ")[1]
+          );
+        }
+      });
+    }
+    if (interactionList.length) {
+      $loader.classList.remove("no_display");
+      interactionList.forEach(async (drug) => {
+        const request = await getDrugIdentifier(drug);
+        if (request?.ok) {
+          const response = await request.json();
+          if (response?.idGroup?.rxnormId) {
+            const [drugId] = response?.idGroup?.rxnormId;
+            idStrings.push(drugId);
+          }
+        } else if (!request) {
+          $notifyCtn.classList.remove("no_display");
+          $message.style.backgroundColor = "#c41a1a";
+          $message.textContent = "unable to the internet";
+          setTimeout(() => {
+            $notifyCtn.classList.add("no_display");
+            $message.style.backgroundColor = "transparent";
+          }, 900);
+        }
+      });
+    } else {
+      $notifyCtn.classList.remove("no_display");
+      $message.style.backgroundColor = "#c41a1a";
+      $message.textContent = "No Product to be checked";
+      setTimeout(() => {
+        $notifyCtn.classList.add("no_display");
+        $message.style.backgroundColor = "transparent";
+      }, 900);
+    }
+    setTimeout(async () => {
+      if (!idStrings.length) {
+        renderInteractions([]);
+        $loader.classList.add("no_display");
+        return;
+      }
+      const request = await getDrugInteraction(idStrings.join(" "));
+      if (request?.ok) {
+        const response = await request.json();
+        if (response?.fullInteractionTypeGroup) {
+          const [interactionArray] = response.fullInteractionTypeGroup;
+          drugInteractionList = interactionArray.fullInteractionType;
+          renderInteractions(drugInteractionList);
+        } else {
+          renderInteractions([]);
+        }
+        $loader.classList.add("no_display");
+      }
+    }, 2000);
+  };
   //  core functions
+  const openOsDtpCtn = (e) => {
+    $backdrop.classList.add("show");
+    $osDtpCtn.classList.remove("no_display");
+  };
+  const closeOsDtpCtn = (e) => {
+    $backdrop.classList.remove("show");
+    $osDtpCtn.classList.add("no_display");
+  };
+  async function sendOs() {
+    const os = document.querySelector("#out_of_stock");
+    $notifyCtn.classList.remove("no_display");
+    if (!os.value || !os.value.trim()) {
+      $message.style.backgroundColor = "#c41a1a";
+      $message.textContent = "Please Add Product Name";
+      setTimeout(() => {
+        $notifyCtn.classList.add("no_display");
+        $message.style.backgroundColor = "transparent";
+      }, 900);
+      return;
+    }
+    const data = Object.create(null);
+    data.productName = os.value;
+    data.date = new Date();
+    const response = await sendReq(
+      token,
+      JSON.stringify(data),
+      addOs,
+      $message,
+      "Product Added",
+      "Failed to Add Product",
+      "Server Error, Failed to Add Product"
+    );
+
+    if (response?.ok) {
+      os.value = "";
+      delete data.productName;
+      delete data.date;
+    }
+    setTimeout(() => {
+      $notifyCtn.classList.add("no_display");
+      $message.style.backgroundColor = "transparent";
+    }, 900);
+  }
+  async function sendDtp() {
+    const $intervention = document.querySelector("#dtp_intervention");
+    const $dtpSelected = document.querySelector("#dtp_selected");
+    $notifyCtn.classList.remove("no_display");
+    if (
+      !$intervention.value ||
+      !$intervention.value.trim() ||
+      $dtpPatient.textContent === "UNREGISTERED"
+    ) {
+      $message.style.backgroundColor = "#c41a1a";
+      $message.textContent = "Please add a Patient and an Intervention";
+      setTimeout(() => {
+        $notifyCtn.classList.add("no_display");
+        $message.style.backgroundColor = "transparent";
+      }, 900);
+      return;
+    }
+    const data = Object.create(null);
+    data.dtp = $dtpSelected.value;
+    data.date = new Date();
+    data.intervention = $intervention.value;
+    data.patient = $patientDisplayId.textContent;
+    const response = await sendReq(
+      token,
+      JSON.stringify(data),
+      addDtp,
+      $message,
+      "DTP added",
+      "Failed to Add DTP",
+      "Server Error, Failed to Add DTP"
+    );
+    if (response?.ok) {
+      delete data.intervention;
+      delete data.date;
+      delete data.patient;
+      delete data.dtp;
+      $intervention.value = "";
+    }
+    setTimeout(() => {
+      $notifyCtn.classList.add("no_display");
+      $message.style.backgroundColor = "transparent";
+    }, 900);
+  }
   /////////////////////
   // Remove Patient Data from prescription
   const removeDisplay = (e) => {
     $patientDisplayCtn.classList.add("no_display");
     $patientDisplayName.textContent = "";
     $patientDisplayFileNumber.textContent = "";
+    $patientDisplayId.textContent = "";
+    // remove dtp patient info
+    $dtpPatient.textContent = "UNREGISTERED";
   };
   // function for Patient Functionality.
   function addPatientToPrescription(e) {
@@ -657,13 +833,16 @@ import {
     const patientFileNumber = parent.querySelector(
       ".searched_patient_file_number"
     );
+    const patientId = parent.querySelector(".searched_patient_id");
     // display the patient on the prescription.
     $mainPatientRenderCtn.classList.remove("show");
     $patientRenderCtn.innerHTML = "";
     $patientDisplayCtn.classList.remove("no_display");
     $patientDisplayName.textContent = patientName.textContent;
     $patientDisplayFileNumber.textContent = patientFileNumber.textContent;
-
+    $patientDisplayId.textContent = patientId.textContent;
+    // add dtp patient info
+    $dtpPatient.textContent = patientName.textContent;
     // resetting the prescription ish.
     $patientSearch.value = "";
     $patientCtn.classList.add("no_display");
@@ -740,6 +919,24 @@ import {
       $message.style.backgroundColor = "transparent";
     }, 900);
   }
+  function renderInteractions(interactions = []) {
+    const interactionCtn = document.querySelector(".interactions");
+    interactionCtn.innerHTML = "";
+    if (!interactions.length || !interactions) {
+      const interactionItem = `
+      <div class="interaction_item">No interaction Found Yet.</div>
+      `;
+      interactionCtn.insertAdjacentHTML("beforeend", interactionItem);
+      return;
+    }
+    interactions.map((interaction) => {
+      const [{ description }] = interaction.interactionPair;
+      const interactionItem = `
+      <div class="interaction_item">${description}</div>
+      `;
+      interactionCtn.insertAdjacentHTML("beforeend", interactionItem);
+    });
+  }
   // Rendering Patient Searched
   function searchPatientRender(patients = []) {
     $patientRenderCtn.innerHTML = "";
@@ -756,6 +953,7 @@ import {
        <div class="searched_patient">
                   <div class="searched_patient_name">${patient.name}</div>
                   <div class="searched_patient_file_number">${patient.fileNumber}</div>
+                  <div class="searched_patient_id no_display">${patient._id}</div>
        </div>
       `;
       $patientRenderCtn.insertAdjacentHTML("beforeend", searchedPatient);
@@ -817,4 +1015,9 @@ import {
   $confirmPurchaseBtn.addEventListener("click", confirmSale);
   $removeSaleCtn.addEventListener("click", removeSaleCtn);
   $removeHeldCtnBtn.addEventListener("click", removeHeldSaleCtn);
+  $checkInteractionBtn.addEventListener("click", checkInteraction);
+  $openOsDtpBtn.addEventListener("click", openOsDtpCtn);
+  $closeOsDtpBtn.addEventListener("click", closeOsDtpCtn);
+  $sendOs.addEventListener("click", sendOs);
+  $submitDtp.addEventListener("click", sendDtp);
 })();

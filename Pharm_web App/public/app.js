@@ -1,24 +1,24 @@
 const express = require("express");
 const router = new express.Router();
 const axios = require("axios");
-router.get("/pharma_app/register", (req, res) => {
+router.get("/pharma-app/register", (req, res) => {
   res.render("register");
 });
 
-router.get("/pharma_app/login", async (req, res) => {
+router.get("/pharma-app/login", async (req, res) => {
   res.render("login");
 });
 
-router.get("/pharma_app/dashboard", (req, res) => {
+router.get("/pharma-app/dashboard", (req, res) => {
   res.render("dashboard");
 });
-router.get("/pharma_app/profile", (req, res) => {
+router.get("/pharma-app/profile", (req, res) => {
   res.render("profile");
 });
-router.get("/pharma_app/prescription_validation", (req, res) => {
+router.get("/pharma-app/prescription-validation", (req, res) => {
   res.render("prescription-validation");
 });
-router.get("/pharma_app/add_stock", async (req, res) => {
+router.get("/pharma-app/add-stock", async (req, res) => {
   let categories;
   try {
     const request = await axios.get("http://localhost:3000/product/categories");
@@ -33,7 +33,7 @@ router.get("/pharma_app/add_stock", async (req, res) => {
   }
   res.render("add-product", { categories });
 });
-router.get("/pharma_app/edit_stock", async (req, res) => {
+router.get("/pharma-app/edit-stock", async (req, res) => {
   let categories;
   try {
     const request = await axios.get("http://localhost:3000/product/categories");
@@ -48,13 +48,19 @@ router.get("/pharma_app/edit_stock", async (req, res) => {
   }
   res.render("edit-product", { categories });
 });
-router.get("/pharma_app/delete_stock", (req, res) => {
+router.get("/pharma-app/delete-stock", (req, res) => {
   res.render("delete-product");
 });
-router.get("/pharma_app/requistion", (req, res) => {
+router.get("/pharma-app/requistion", (req, res) => {
   res.render("requistion.hbs");
 });
-router.get("/pharma_app/product_inventory", (req, res) => {
+router.get("/pharma-app/product-inventory", (req, res) => {
   res.render("product-inventory");
+});
+router.get("/pharma-app/patient-counselling", (req, res) => {
+  res.render("patient-counselling");
+});
+router.get("/pharma-app/edit-product-sales", (req, res) => {
+  res.render("edit-product-sales");
 });
 module.exports = router;

@@ -12,6 +12,8 @@ const productCategoryServer = require("./routers/productCategory");
 const productLogServer = require("./routers/productLog");
 const productSaleServer = require("./routers/productSale");
 const patientServer = require("./routers/patient");
+const outOfStockServer = require("./routers/outOfStock");
+const dtpServer = require("./routers/dtp");
 // define paths
 const publicDir = path.join(__dirname, "../public");
 const viewsPath = path.join(__dirname, "../templates/views");
@@ -34,6 +36,8 @@ app.use(productCategoryServer);
 app.use(productLogServer);
 app.use(productSaleServer);
 app.use(patientServer);
+app.use(outOfStockServer);
+app.use(dtpServer);
 app.use(express.static(publicDir));
 
 app.listen(port, () => {

@@ -73,7 +73,7 @@
                   <label for="pack_size">Pack size</label>
                   <label for="quantity">Quantity</label>
                   <label for="minimum Quantity">Minimum quantity</label>
-                  <input id="unit_issue" type="number" name="unitOfIssue" min="1" placeholder="Unit of issue" required>
+                  <input id="unit_issue" type="number" name="unitOfIssue" min="1" placeholder="Unit of issue"  required>
                   <input id="pack_size" type="number" name="packSize" min="1" placeholder="Pack size"  required>
                   <input  id="quantity" type="number" name="quantity"   placeholder="Quantity"  required>
                   <input id="minimum Quantity"  type="number" name="minimumQuantity"   placeholder="Quantity"  required>
@@ -85,8 +85,8 @@
               <label for="price">Product price</label>
               <label for="fg_price">Product Fg price</label>
               <label for="expiry_date">Expiry date</label>
-              <input id="price" type="text" name="costPrice" placeholder="Price" required >
-              <input id="fg_price" type="text" name="fgPrice" placeholder="Nhia Cost Price"  >
+              <input id="price" type="text" name="costPrice" placeholder="Price" pattern="^[0-9]\d*(\.\d+)?$" required >
+              <input id="fg_price" type="text" name="fgPrice" placeholder="Nhia Cost Price" pattern="^[0-9]\d*(\.\d+)?$"  >
                 <input id="expiry_date" type="month" name="expiryDate" placeholder="EXPIRY DATE" required >
             </div>
                 </div>

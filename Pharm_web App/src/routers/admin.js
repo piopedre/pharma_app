@@ -16,7 +16,7 @@ router.post("/admins/registration", async (req, res) => {
     await admin.save();
     res.status(201).send();
   } catch (e) {
-    res.status(400).send(e.message);
+    res.status(400).send();
   }
 });
 router.get("/admins/me", authenication, async (req, res) => {
@@ -31,7 +31,6 @@ router.post("/admins/login", async (req, res) => {
     const id = admin._id;
     res.status(200).send({ token, id });
   } catch (e) {
-    console.log(e.message);
     res.status(400).send();
   }
 });
@@ -99,7 +98,7 @@ router.post(
     res.status(200).send();
   },
   (error, req, res, next) => {
-    res.status(400).send(error.message);
+    res.status(400).send();
   }
 );
 

@@ -55,7 +55,6 @@
   height: 200px;
   overflow: auto;
   padding: 10px 20px;
-  /* animation: reveal 5s linear 2s alternate; */
 }
 
 .product_logs_headings {
@@ -83,24 +82,6 @@
   background-color: #2bf712;
 }
 .normal {
-  background-color: #5c5c5c;
+  background-color: yellowgreen;
 }
 /* product logs */
-
-/* @keyframes reveal {
-  0% {
-    height: 50px;
-  }
-  25% {
-    height: 100px;
-  }
-  50% {
-    height: 150px;
-  }
-  75% {
-    height: 180px;
-  }
-  100% {
-    height: 200px;
-  }
-} */

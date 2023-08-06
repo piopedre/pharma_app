@@ -1,0 +1,142 @@
+.prescription_container {
+  width: 100%;
+  height: 100%;
+}
+.search_container {
+  height: 4%;
+  margin: 1rem 0;
+  display: flex;
+  justify-content: center;
+}
+#sales_search {
+  padding: 0.3rem;
+  width: 70%;
+  outline: none;
+  border: 1px solid #248ff3;
+  border-radius: 5px;
+}
+.prescription_title {
+  text-transform: uppercase;
+  text-align: center;
+  font-size: medium;
+  font-weight: 100;
+}
+.prescriptions {
+  height: 635px;
+  overflow: auto;
+  padding: 0.5rem;
+  border: 0.2px solid #cccc;
+}
+.prescription {
+  border: 1px solid #ccc;
+  padding: 0.5rem;
+  cursor: pointer;
+  background-color: #dddddd;
+  margin: 0.5rem 0;
+  font-size: small;
+}
+.prescription:hover {
+  border: 1px solid #248ff3;
+}
+/* .prescription_content {
+  display: none;
+  /* animation: reveal 5s linear 2s alternate; */
+/* } */
+
+/* @keyframes reveal {
+  0% {
+    height: 50px;
+    display: none;
+  }
+  25% {
+    height: 100px;
+  }
+  50% {
+    height: 150px;
+  }
+  75% {
+    height: 180px;
+  }
+  100% {
+    height: 200px;
+  }
+} */
+.patient_detail {
+  width: 100%;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-weight: bold;
+}
+.product_headings {
+  margin-top: 1rem;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  font-weight: bold;
+}
+.products_detail {
+  height: 150px;
+  overflow: auto;
+}
+.product {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  margin: 0.5rem 0;
+  padding: 0.5rem;
+  column-gap: 10px;
+  background-color: #ccc;
+}
+.counselling_ctn {
+  height: 200px;
+}
+.counselling_title {
+  margin: 0;
+  text-align: center;
+  margin-bottom: 0.3rem;
+  font-size: small;
+  text-transform: uppercase;
+}
+.potential_interaction {
+  height: 70%;
+  overflow: auto;
+  background-color: white;
+  padding: 0 5px;
+}
+.interaction {
+  word-spacing: 2px;
+  font-size: small;
+  font-weight: bold;
+  color: #933b05;
+  margin: 5px 0;
+}
+.status {
+  display: flex;
+  justify-content: space-between;
+  margin: 10px 0;
+}
+.status_select {
+  cursor: pointer;
+  outline: none;
+  border: 1px solid dodgerblue;
+  padding: 0.3rem;
+  text-transform: uppercase;
+}
+.save_status {
+  color: #40f740;
+  background-color: white;
+  outline: none;
+  border: 1px solid white;
+  cursor: pointer;
+}
+.save_status:hover,
+.save_status:active {
+  background-color: #40f740;
+  color: white;
+}
+button:disabled {
+  background-color: #ccc;
+  color: white;
+}
+button:disabled:hover {
+  background-color: #ccc;
+  color: white;
+}

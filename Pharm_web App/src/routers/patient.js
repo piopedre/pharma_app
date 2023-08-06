@@ -7,7 +7,7 @@ router.post("/patients", authenication, async (req, res) => {
   try {
     const patient = new Patient(req.body);
     await patient.save();
-    res.status(200).send();
+    res.status(201).send();
   } catch (error) {
     res.status(400).send();
   }

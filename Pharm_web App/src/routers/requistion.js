@@ -12,8 +12,7 @@ router.post("/requistion", authenication, async (req, res) => {
     await requistion.save();
     res.status(201).send();
   } catch (e) {
-    console.log(e.message);
-    res.status(400).send(e.message);
+    res.status(400).send();
   }
 });
 router.get("/last_requistion", authenication, async (req, res) => {

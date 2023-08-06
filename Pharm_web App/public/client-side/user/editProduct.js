@@ -88,10 +88,12 @@ const edit = async () => {
     $editForm.classList.remove("no_display");
     const parsedDate = Intl.DateTimeFormat("en-US", {
       year: "numeric",
-      month: "numeric",
+      month: "2-digit",
     })
       .format(Date.parse(`${expiryDate}`))
       .replace("/", "-");
+
+    const mainDate = parsedDate.split("-")[1] + "-" + parsedDate.split("-")[0];
 
     $elementId.textContent = _id;
     $drugName.value = name;
@@ -101,7 +103,7 @@ const edit = async () => {
     $packSize.value = packSize;
     $minimumQuantity.value = minimumQuantity;
     $unitOfIssue.value = unitOfIssue;
-    $expiryDate.value = parsedDate;
+    $expiryDate.value = mainDate;
     $submitBtn.disabled = true;
   }
   const edited = (e) => {
